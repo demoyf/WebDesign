@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <!--牛逼-->
+    <?php
+       use think\Request;
+       $request = Request::instance();
+       $demo =  $request->param('demo');
+    ?>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery.js" type="application/javascript"></script>
+    <script src="js/jquery-form.js" type="application/javascript"></script>
+    <script type="application/javascript">
+            $(document).ready(function () {
+                $('#submit').click(function () {
+                    $.ajax({
+                        type:'post',
+                        url:"index/User/add",
+                        dataType:"json",
+                        data:$("#register").serialize(),
+                        success:function (data) {
+                            if (data.code==0) {
+                                alert('添加失败');
+                            }else if (data.code==2){
+                                alert('添加成功');
+                            }else if (data.code==1){
+                                alert('该手机号已被注册');
+                            }
+                        },
+                        error:function () {
+                        },
+                        async:true,
+                    });
+                    return false;
+                });
+            });
+    </script>
+</head>
+<span id="span">{$demo}</span>
+<body>
+    <form id="register">
+        用户名：<input type="text" name="phone"><br/>
+        密码： <input type="password" name="password"><br/>
+        <input type="button" id="submit" value="提交" name="submit">
+    </form>
+</body>
+</html>

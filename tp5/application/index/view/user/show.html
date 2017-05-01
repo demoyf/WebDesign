@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery.js" type="application/javascript"></script>
+    <script src="js/jquery-form.js" type="application/javascript"></script>
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $('#submit').click(function () {
+                $.ajax({
+                    type: 'post',
+                    url: 'index/User/read',
+                    data:$('#form').serialize(),
+                    dataType:"json",
+                    success:function (data) {
+                        var code = data.code;
+                        if (code ==-1){
+                            alert('输入手机号码');
+                        }else if (code==0){
+                            window.location.href = "register?demo=333";
+                        }else if (code==1){
+                            alert(data.update_time);
+                        }
+                    },
+                    async:false,
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<form id="form">
+    手机号:<input type="text" name="phone"><br/>
+    <input type="button" id="submit" value="11">
+</form>
+</body>
+</html>

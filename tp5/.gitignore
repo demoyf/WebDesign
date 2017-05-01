@@ -1,0 +1,10 @@
+.idea
+composer.lock
+*.log
+thinkphp
+*.png
+*.exe
+*.ico
+*.jpeg
+*.jpg
+*.gif
