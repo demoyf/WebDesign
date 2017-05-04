@@ -25,4 +25,5 @@ return [
     'showUpdateInfo' => 'index/Info/showUpdate',
     'showReadInfo' => 'index/Info/showReadInfo',
     'showUploadPage' => 'index/IconUpload/showUpload',
+    'showBlogType' => 'index/BlogSave/showType',
 ];

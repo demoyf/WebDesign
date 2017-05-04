@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="application/javascript" src="js/jquery.js"></script>
+    <link rel="stylesheet" href="css/editer/blog_editer_style.css" type="text/css">
+    <script type="application/javascript">
+        var temp = 1;
+        $(document).ready(function () {
+            $('#editer_content').click(function () {
+                if (temp == 1) {
+                    $(this).animate({
+                        width: "91%", height: "90%"
+                    });
+                    $('#editer_chooser').show('1000');
+                } else {
+                    $('#editer_content').unbind('click');
+                }
+                temp++;
+            });
+            $('#editer_content').bind('focus', function (e) {
+                if ($('.showChooseSize').is(':visible')) {
+                    $('.showChooseSize').animate({height: "0px"}, 300)
+                    $('.showChooseSize').hide(0);
+                }
+                if ($('.showChooseColor').is(':visible')) {
+                    $('.showChooseColor').animate({height: "0px"}, 300)
+                    $('.showChooseColor').hide(0);
+                }
+            });
+            $("#editer_chooser a").click(function (e) {
+                var type = this.getAttribute('data-role');
+                if (type == undefined) {
+                    return false;
+                }
+                switch (type) {
+                    case 'h1':
+                    case 'h2':
+                    case 'p':
+                        document.execCommand('FormatBlock', false, '<' + type + '>');
+                        break;
+                    case 'FontSize':
+                        showChooseSize(e);
+                        break;
+                    case 'FontColor':
+                        showChooseColor(e);
+                        break;
+                    default:
+                        document.execCommand(type, false, null);
+                        break;
+                }
+            });
+            $('.showChooseSize a').click(function (e) {
+                var type = this.getAttribute('data-role');
+                if (type == undefined) {
+                    return false;
+                }
+                document.execCommand('FontSize', false, type);
+            });
+
+            function showChooseSize(e) {
+                if ($('.showChooseSize').is(':visible')) {
+                    $('.showChooseSize').animate({height: "0px"}, 300)
+                    $('.showChooseSize').hide(0);
+                } else {
+                    $('.showChooseSize').animate({height: "155px"}, 300);
+                }
+            }
+
+            function showChooseColor(e) {
+                if ($('.showChooseColor').is(':visible')) {
+                    $('.showChooseColor').animate({height: "0px"}, 300)
+                    $('.showChooseColor').hide(0);
+                } else {
+                    $('.showChooseColor').animate({height: "88px"}, 300);
+                }
+            }
+
+            $('.showChooseColor a').click(function (e) {
+                var type = this.getAttribute('data-role');
+                if (type == undefined) {
+                    return false;
+                }
+                document.execCommand('ForeColor', false, type);
+            });
+//            以下是获取图片并且显示。注意路径是浏览器缓存临时路径，不是本地路径
+            var temp = 1;
+            $(".showUpload").change(function(){
+                var objUrl = getObjectURL(this.files[0]);
+                document.execCommand('insertImage', false, objUrl);
+                $('img').each(function (i) {
+                    if (this.getAttribute('class')==undefined) {
+                        $(this).addClass('demo'+temp);
+                        $('.demo' + temp).css({width: '30%'});
+                        temp++;
+                    }
+                });
+            });
+            // 获取图片的url。是临时文件
+            function getObjectURL(file) {
+                var url = null ;
+                if (window.createObjectURL!=undefined) { // basic
+                    url = window.createObjectURL(file) ;
+                } else if (window.URL!=undefined) { // mozilla(firefox)
+                    url = window.URL.createObjectURL(file) ;
+                } else if (window.webkitURL!=undefined) { // webkit or chrome
+                    url = window.webkitURL.createObjectURL(file) ;
+                }
+                return url ;
+            }
+            });
+
+    </script>
+</head>
+<body>
+<!--编辑器，包括选择器，和输入框-->
+<div class="editer">
+    <!--选择器-->
+    <div id="editer_chooser">
+        <div class="btn_group">
+            <!--设置a的data-role，在js获取判断并且执行即可-->
+            <span class="icon_undo"><a title="返回" class="btn" data-role="undo" href="#"></a></span>
+            <span class="fenge"></span>
+            <span class="icon_redo"><a title="前进" class="btn" data-role="redo" href="#"></a></span>
+        </div>
+        <div class="btn_group">
+            <span class="choose_font_size"><a class="btn" data-role="FontSize" href="#" title="选择字号"></a></span>
+            <span class="fenge"></span>
+            <span class="choose_font_color"><a class="btn" data-role="FontColor" href="#" title="字体颜色"></a></span>
+        </div>
+        <div class="btn_group">
+            <a class="btn" data-role="Bold" href="#" title="字体加粗"><b>Bold</b></a>
+            <span class="fenge"></span>
+            <a class="btn" data-role="Italic" href="#" title="字体倾斜"><em>Italic</em></a>
+            <span class="fenge"></span>
+            <a class="btn" data-role="underline" href="#" title="下划线"><u>U</u></a>
+            <span class="fenge"></span>
+            <a class="btn" data-role="strikeThrough" href="#" title="删除线"><strike>abc</strike></a>
+        </div>
+        <div class="btn_group">
+            <span class="justify_left"><a title="左对齐" class="btn" data-role="justifyLeft" href="#"> </a></span>
+            <span class="fenge"></span>
+            <span class="justify_center"><a title="居中" class="btn" data-role="justifyCenter" href="#"></a></span>
+            <span class="fenge"></span>
+            <span class="justify_right"><a title="右对齐" class="btn" data-role="justifyRight" href="#"></a></span>
+        </div>
+        <div class="btn_group">
+            <span class="icon_list_ul"><a title="无序列表" class="btn" data-role="insertUnorderedList" href="#"></a></span>
+            <span class="fenge"></span>
+            <span class="icon_list_ol"><a title="有序列表" class="btn" data-role="insertOrderedList" href="#"></a></span>
+            <span class="fenge"></span>
+            <a class="btn" data-role="h1" href="#" title="一级标题"><b>h1</b></a>
+            <span class="fenge"></span>
+            <a class="btn" data-role="h2" href="#" title="二级标题"><b>h2</b></a>
+            <span class="fenge"></span>
+            <a class="btn" data-role="p" href="#" title="段落"><b>p</b></a>
+        </div>
+        <!--选择图片并且预览，很关键-->
+        <div class="btn_group">
+            <div class="choose_image_icon">
+                <input type="file" class="showUpload" accept="image/png,image/jpeg">
+            </div>
+        </div>
+    </div>
+    <!--输入框，最重要的是contenteditable！！！-->
+    <div contenteditable="true" id="editer_content">
+        <p>
+            <br>
+        </p>
+    </div>
+    <!--注意要绝对位置，点击弹出来选择字号框-->
+    <div class="showChooseSize">
+        <li><a data-role="1" style="font-size: 12px" href="#">12px</a></li>
+        <li><a data-role="2" style="font-size: 14px" href="#">14px</a></li>
+        <li><a data-role="3" style="font-size: 16px" href="#">16px</a></li>
+        <li><a data-role="4" style="font-size: 18px" href="#">18px</a></li>
+        <li><a data-role="5" style="font-size: 19px" href="#">20px</a></li>
+        <li><a data-role="6" style="font-size: 20px" href="#">22px</a></li>
+        <li><a data-role="7" style="font-size: 21px" href="#">24px</a></li>
+    </div>
+    <!--颜色选择器...嵌套了一个可点击的a，然后把a的内容设置成相同的颜色，这样就看不到了@.@-->
+    <div class="showChooseColor">
+        <table>
+            <tr>
+                <td style="background-color: black"><a style="color:black" data-role="black" href="#">1</a></td>
+                <td style="background-color: coral"><a style="color:coral" data-role="coral" href="#">2</a></td>
+                <td style="background-color: deeppink"><a style="color:deeppink" data-role="deeppink" href="#">3</a>
+                </td>
+                <td style="background-color: darkblue"><a style="color:darkblue" data-role="darkblue" href="#">4</a>
+                </td>
+                <td style="background-color: white"><a style="color:white" data-role="white" href="#">5</a></td>
+                <td style="background-color: gray"><a style="color:gray" data-role="gray" href="#">6</a></td>
+            </tr>
+            <tr>
+                <td style="background-color: yellow"><a style="color:yellow" data-role="yellow" href="#">7</a></td>
+                <td style="background-color: aqua"><a style="color:aqua" data-role="aqua" href="#">8</a></td>
+                <td style="background-color: greenyellow"><a style="color:greenyellow" data-role="greenyellow" href="#">9</a>
+                </td>
+                <td style="background-color: forestgreen"><a style="color:forestgreen" data-role="forestgreen" href="#">10</a>
+                </td>
+                <td style="background-color: olive"><a style="color:olive" data-role="olive" href="#">11</a></td>
+                <td style="background-color: orchid"><a style="color:orchid" data-role="orchid" href="#">12</a></td>
+            </tr>
+            <tr>
+                <td style="background-color: palegreen"><a style="color:palegreen" data-role="palegreen" href="#">13</a>
+                </td>
+                <td style="background-color: brown"><a style="color:brown" data-role="brown" href="#">14</a></td>
+                <td style="background-color: cornflowerblue"><a style="color:cornflowerblue" data-role="cornflowerblue"
+                                                                href="#">15</a></td>
+                <td style="background-color: blue"><a style="color:blue" data-role="blue" href="#">16</a></td>
+                <td style="background-color: peru"><a style="color:peru" data-role="peru" href="#">18</a></td>
+                <td style="background-color: lawngreen"><a style="color:lawngreen" data-role="lawngreen" href="#">19</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -2,6 +2,8 @@
 composer.lock
 *.log
 thinkphp
+config.php
+database.php
 *.png
 *.exe
 *.ico
