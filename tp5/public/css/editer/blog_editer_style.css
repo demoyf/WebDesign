@@ -4,7 +4,6 @@ body {
 }
 
 input.showUpload {
-    position: absolute;
     width: 35px;
     height: 40px;
     opacity: 0;
@@ -31,45 +30,29 @@ div.choose_image_icon:hover {
     background-color: rgba(255, 255, 255, 0.15);;
     box-shadow: 0 0 12px #5ba1cf;
 }
-
 .editer {
     width: 60%;
-    height: 500px;
     margin: 100px auto;
-    position: absolute;
-    left: 20%;
+    display: flex;
+    flex-direction: column;
 }
-
-p {
-    margin-top: -15px;
-}
-
-p:first-child {
-    margin-top: 5px;
-}
-
 div#editer_chooser {
-    line-height: 2.2em;
-    margin: auto;
+    line-height: 2.5em;
     width: 100%;
     height: auto;
-    display: none;
-    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 div.btn_group {
     margin-top: 1%;
-    margin-bottom: 1%;
-    margin-left: 2%;
-    float: left;
+    margin-bottom: 20px;
+    margin-right: 2%;
     width: auto;
     height: auto;
     border-radius: 4px;
     background-color: white;
-}
-
-div#editer_chooser:first-child {
-    margin-left: 2%;
 }
 
 a.btn {
@@ -85,30 +68,23 @@ a.btn:hover {
 }
 
 #editer_content {
-    clear: left;
-    max-height: 90%;
-    min-height: 30%;
+    max-height: 500px;
+    min-height: 300px;
     resize: vertical;
-    width: 10%;
+    width: 91%;
     border-style: solid;
     border-radius: 8px;
     box-shadow: 0 0 10px white;
     border-width: 1px;
     border-color: silver;
     overflow: auto;
-    padding-left: 5px;
     font-size: 18px;
     background-color: rgba(255, 255, 255, 0.15);
-    padding-right: 10px;
-    position: absolute;
-    top: 10%;
-    left: 4%;
+    padding: 10px;
 }
 
 .showChooseSize {
-    top: -1.5%;
-    left: 12%;
-    position: relative;
+    position: absolute;
     background-color: white;
     border: 2px solid;
     border-color: #9ccff4;
@@ -116,9 +92,10 @@ a.btn:hover {
     display: none;
     text-decoration: none;
     list-style: none;
-    margin-left: 0px;
     padding-left: 5px;
     width: 60px;
+    left: 25%;
+    top: 145px;
 }
 
 .showChooseSize li a {
@@ -127,19 +104,17 @@ a.btn:hover {
 }
 
 .showChooseColor {
-    top: -1.5%;
-    left: 9%;
-    position: relative;
+    position: absolute;
     background-color: white;
     border: 2px solid;
     border-color: #9ccff4;
     text-decoration: none;
     list-style: none;
-    margin-left: 0px;
     padding-left: 5px;
     width: 180px;
-    height: 0px;
     display: none;
+    left: 23%;
+    top: 145px;
 }
 
 .showChooseColor table {
@@ -163,7 +138,6 @@ a.btn:hover {
 span.fenge {
     height: 100%;
     border: 1px solid silver;
-    margin-left: 1px;
     margin: 2px;
 }
 
@@ -231,5 +205,5 @@ span.icon_list_ul {
 }
 
 p {
-    text-indent: 2em;
+    text-indent: 0.5em;
 }

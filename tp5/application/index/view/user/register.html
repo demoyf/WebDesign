@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
 <head>
-    <!--牛逼-->
-    <?php
-       use think\Request;
-       $request = Request::instance();
-       $demo =  $request->param('demo');
-    ?>
     <meta charset="UTF-8">
+    <!--原来是这样写的-->
     <title>Title</title>
     <script src="js/jquery.js" type="application/javascript"></script>
     <script src="js/jquery-form.js" type="application/javascript"></script>
@@ -38,9 +32,25 @@
                 });
             });
     </script>
+    <style>
+        .gre {
+            color: #1dc116;
+        }
+        .red {
+            color: red;
+        }
+    </style>
 </head>
-<span id="span">{$demo}</span>
 <body>
+    <!--666666666666,name 变量名，user 子项临时名，key 循环次数-->
+    {volist name="users" id="user" key="i"}
+    {if($page==1)}
+    <div class="gre">{$user.phone},{$i}<a href="register?page=2">11111</a></div>
+    {else if($page==2)}
+    <div class="red">{$user.phone},{$i}<a href="register?page=1">11111</a></div>
+    <!--结束判断语句，不是关闭if-->
+    {/if}
+    {/volist}
     <form id="register">
         用户名：<input type="text" name="phone"><br/>
         密码： <input type="password" name="password"><br/>

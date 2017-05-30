@@ -22,7 +22,6 @@ class IconUpload extends Controller
     public function uploadIcon(Request $request)
     {
         $phone = $request->post('phone');
-        echo $phone;
         $image = $request->file("image");
         $path =  "upload" . DS . "userIcon";
         $icon = IconModel::get(['phone' => $phone]);
@@ -41,14 +40,14 @@ class IconUpload extends Controller
             $path .= "\\" . $message->getSaveName();
             $icon->path = $path;
             if ($icon->isUpdate($isUpdate)->save()) {
-                $array = array(['code' => 200, 'result' => '文件上传成功']);
+                $array = array('code' => 200, 'result' => '文件上传成功');
                 echo json_encode($array);
             } else {
-                $array = array(['code' => 500, 'result' => '文件上传失败']);
+                $array = array('code' => 500, 'result' => '文件上传失败');
                 echo json_encode($array);
             }
         } else {
-            $array = array(['code' => 500, 'result' => "文件上传失败"]);
+            $array = array('code' => 500, 'result' => "文件上传失败");
             echo json_encode($array);
         }
 }

@@ -5,20 +5,10 @@
     <title>Title</title>
     <script type="application/javascript" src="js/jquery.js"></script>
     <link rel="stylesheet" href="css/editer/blog_editer_style.css" type="text/css">
+    <script src="js/ajaxfileupload.js"></script>
     <script type="application/javascript">
         var temp = 1;
         $(document).ready(function () {
-            $('#editer_content').click(function () {
-                if (temp == 1) {
-                    $(this).animate({
-                        width: "91%", height: "90%"
-                    });
-                    $('#editer_chooser').show('1000');
-                } else {
-                    $('#editer_content').unbind('click');
-                }
-                temp++;
-            });
             $('#editer_content').bind('focus', function (e) {
                 if ($('.showChooseSize').is(':visible')) {
                     $('.showChooseSize').animate({height: "0px"}, 300)
@@ -85,32 +75,73 @@
                 document.execCommand('ForeColor', false, type);
             });
 //            以下是获取图片并且显示。注意路径是浏览器缓存临时路径，不是本地路径
-            var temp = 1;
-            $(".showUpload").change(function(){
-                var objUrl = getObjectURL(this.files[0]);
-                document.execCommand('insertImage', false, objUrl);
-                $('img').each(function (i) {
-                    if (this.getAttribute('class')==undefined) {
-                        $(this).addClass('demo'+temp);
-                        $('.demo' + temp).css({width: '30%'});
-                        temp++;
+            var temp_1 = 1;
+            bindChange();
+            function upload(imageClass) {
+//                        text！！！ 哦还有，关了一下后台的代码调试
+                $.ajaxFileUpload({
+                    url: 'index/BlogSave/getImageUpload',
+                    fileElementId: 'showUpload',
+                    secureuri: false,
+                    dataType: 'text',
+                    success: function (data, status) {
+                        var demo = jQuery.parseJSON(data);
+                        $(imageClass).attr("src", demo.path);
+                    },
+                    error: function (data, status, e) {
+                        alert(e);
+                    }
+                });
+                bindChange();
+            }
+            
+            function bindChange() {
+                $("#showUpload").change(function () {
+                    var objUrl = getObjectURL(this.files[0]);
+                    document.execCommand('insertImage', false, objUrl);
+                    $('#editer_content img').each(function (i) {
+                        if (this.getAttribute('class') == undefined) {
+                            $(this).addClass('demo' + temp_1);
+                            $('.demo' + temp_1).css({width: '30%'});
+                            var tem = '.demo' + temp_1;
+                            upload(tem);
+                            temp_1++;
+                        }
+                    });
+                });
+            }
+
+            // 获取图片的url。是临时文件
+            function getObjectURL(file) {
+                var url = null;
+                if (window.createObjectURL != undefined) { // basic
+                    url = window.createObjectURL(file);
+                } else if (window.URL != undefined) { // mozilla(firefox)
+                    url = window.URL.createObjectURL(file);
+                } else if (window.webkitURL != undefined) { // webkit or chrome
+                    url = window.webkitURL.createObjectURL(file);
+                }
+                return url;
+            }
+
+            $('.submit_button').click(function () {
+                var content = $('#editer_content').html();
+                alert(content);
+                $.ajax({
+                    url:'index/BlogSave/uploadBlogContent',
+                    async:true,
+                    type:'post',
+                    data:{content:content},
+                    dataType:'json',
+                    success:function (data) {
+                        alert(data.result);
+                    },
+                    error:function () {
+                        alert("error");
                     }
                 });
             });
-            // 获取图片的url。是临时文件
-            function getObjectURL(file) {
-                var url = null ;
-                if (window.createObjectURL!=undefined) { // basic
-                    url = window.createObjectURL(file) ;
-                } else if (window.URL!=undefined) { // mozilla(firefox)
-                    url = window.URL.createObjectURL(file) ;
-                } else if (window.webkitURL!=undefined) { // webkit or chrome
-                    url = window.webkitURL.createObjectURL(file) ;
-                }
-                return url ;
-            }
-            });
-
+        });
     </script>
 </head>
 <body>
@@ -146,6 +177,13 @@
             <span class="justify_right"><a title="右对齐" class="btn" data-role="justifyRight" href="#"></a></span>
         </div>
         <div class="btn_group">
+            <div class="choose_image_icon">
+                <!--选择图片并且预览，很关键-->
+                <input id="showUpload" name="image" type="file"
+                       class="showUpload" accept="image/png,image/jpeg">
+            </div>
+        </div>
+        <div class="btn_group">
             <span class="icon_list_ul"><a title="无序列表" class="btn" data-role="insertUnorderedList" href="#"></a></span>
             <span class="fenge"></span>
             <span class="icon_list_ol"><a title="有序列表" class="btn" data-role="insertOrderedList" href="#"></a></span>
@@ -155,12 +193,6 @@
             <a class="btn" data-role="h2" href="#" title="二级标题"><b>h2</b></a>
             <span class="fenge"></span>
             <a class="btn" data-role="p" href="#" title="段落"><b>p</b></a>
-        </div>
-        <!--选择图片并且预览，很关键-->
-        <div class="btn_group">
-            <div class="choose_image_icon">
-                <input type="file" class="showUpload" accept="image/png,image/jpeg">
-            </div>
         </div>
     </div>
     <!--输入框，最重要的是contenteditable！！！-->
@@ -216,5 +248,6 @@
         </table>
     </div>
 </div>
+<button class="submit_button">提交</button>
 </body>
 </html>

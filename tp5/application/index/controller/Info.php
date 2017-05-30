@@ -45,6 +45,7 @@ class Info extends Controller
     public function updateInfo(Request $request)
     {
         $phone = $request->post('phone');
+        $phone = "1111";
         $nickname = $request->post('nickname');
         $address = $request->post('address');
         $email = $request->post('email');

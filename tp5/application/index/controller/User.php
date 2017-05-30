@@ -15,9 +15,17 @@ use think\View;
 use app\index\model\Personal\Info as InfoModel;
 class User extends Controller
 {
-    public function register()
+    public function register(Request $request)
     {
+//        分页
+        $page = $request->get("page");
+        if (!$page > 0) {
+            $page = 1;
+        }
         $view = new View('user/register');
+        $userMode = UserModel::where('phone','>',1)->paginate(1,false,['page'=>$page]);
+        $view->users = $userMode;
+        $view->page = $userMode->currentPage();
         return $view->fetch();
     }
 
@@ -26,6 +34,7 @@ class User extends Controller
         $view = new View('user/show');
         return $view->fetch();
     }
+
     public function add(Request $request)
     {
 //        1
