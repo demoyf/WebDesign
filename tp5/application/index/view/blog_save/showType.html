@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script type="application/javascript" src="js/jquery.js"></script>
+    <script type="application/javascript" src="js/jquery-1.12.4.js"></script>
     <link rel="stylesheet" href="css/editer/blog_editer_style.css" type="text/css">
     <script src="js/ajaxfileupload.js"></script>
     <script type="application/javascript">
@@ -54,6 +54,7 @@
                     $('.showChooseSize').animate({height: "0px"}, 300)
                     $('.showChooseSize').hide(0);
                 } else {
+                    $('.showChooseSize').show(0);
                     $('.showChooseSize').animate({height: "155px"}, 300);
                 }
             }
@@ -63,6 +64,7 @@
                     $('.showChooseColor').animate({height: "0px"}, 300)
                     $('.showChooseColor').hide(0);
                 } else {
+                    $('.showChooseColor').show(0);
                     $('.showChooseColor').animate({height: "88px"}, 300);
                 }
             }

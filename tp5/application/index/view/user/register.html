@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <!--原来是这样写的-->
     <title>Title</title>
-    <script src="js/jquery.js" type="application/javascript"></script>
-    <script src="js/jquery-form.js" type="application/javascript"></script>
     <script type="application/javascript">
             $(document).ready(function () {
                 $('#submit').click(function () {
@@ -56,5 +54,46 @@
         密码： <input type="password" name="password"><br/>
         <input type="button" id="submit" value="提交" name="submit">
     </form>
+<!--    <div data-ng-app="" data-ng-init="firstName='123456',names=['Jani','Hege','Kai']">
+        <ul>
+            <li data-ng-repeat="x in names">
+                {{x}}
+            </li>
+        </ul>
+        <p>名字：<input type="text" ng-model="first"></p>
+        <h1>Hello{{first}}</h1>
+        <p>Next:<span data-ng-bind="firstName"></span>
+            <span>{{5+12456}}</span></p>
+    </div>-->
+    <div ng-app="myApp" ng-controller="myCtrl">
+        名字：<input ng-model="name">
+        <h1>你输入了{{name}}</h1>
+        <form ng-app="" name="myForm">
+            Email:<input type="email" name="myAddress" ng-model="text">
+            <span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span>
+        </form>
+        <ul>
+            <!--1111-->
+            <li ng-repeat="x in names">
+                {{x}}
+            </li>
+        </ul>
+    </div>
 </body>
+<script src="js/jquery.js" type="application/javascript"></script>
+<script src="js/jquery-form.js" type="application/javascript"></script>
+<script src="js/angular.min.js"></script>
+<script>
+    var app = angular.module('myApp',[]);
+    app.controller('myCtrl', function ($scope) {
+        $scope.name = 'John de';
+        $scope.names = ['demo', 'first', 'second'];
+    });
+//    自定义filter过滤器
+    app.filter('reverse', function () {
+        return function (text) {
+            return text.split("").reverse().join("");
+        };
+    });
+</script>
 </html>

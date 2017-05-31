@@ -9,6 +9,7 @@
 namespace app\index\controller;
 
 use think\Controller;
+use think\Exception;
 use think\Request;
 use app\index\model\Personal\UserIcon as IconModel;
 
@@ -32,12 +33,15 @@ class IconUpload extends Controller
         } else {
             $isUpdate = true;
             $delete = $icon->path;
-            unlink($delete);
+            try {
+                unlink($delete);
+            } catch (Exception $exception) {
+            }
         }
         $message = $image->validate(['size' => 1024 * 500, 'ext' => 'jpg,png,gif,ico,jpeg'])
             ->move(ROOT_PATH . "public" . DS .$path);
         if ($message) {
-            $path .= "\\" . $message->getSaveName();
+            $path .= "\\" . $message->getExtension();
             $icon->path = $path;
             if ($icon->isUpdate($isUpdate)->save()) {
                 $array = array('code' => 200, 'result' => '文件上传成功');
