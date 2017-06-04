@@ -1,0 +1,326 @@
+.content figure {
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+    text-align: center;
+    color: white;
+}
+
+figure.effect_1 {
+    -webkit-transition: background 0.35s ;
+    -moz-transition: background 0.35s ;
+    -ms-transition: background 0.35s ;
+    -o-transition: background 0.35s ;
+    transition: background 0.35s ;
+}
+figure.effect_1:hover {
+    cursor: pointer;
+    background: -webkit-linear-gradient(top, rgba(37, 141, 200, 1) 0%, rgba(104, 60, 19, 1) 100%);
+    background: linear-gradient(to bottom, rgba(37, 141, 200, 1) 0%, rgba(104, 60, 19, 1) 100%);
+}
+
+
+.content figure.effect_1 img {
+    -webkit-transition: opacity 0.35s, transform 0.35s;
+    -moz-transition: opacity 0.35s, transform 0.35s;
+    -ms-transition: opacity 0.35s, transform 0.35s;
+    -o-transition: opacity 0.35s, transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: translate3d(0, 0, 300px);
+    -moz-transform: translate3d(0, 0, 300px);
+    -ms-transform: translate3d(0, 0, 300px);
+    -o-transform: translate3d(0, 0, 300px);
+    transform: translate3d(0, 0, 300px);
+}
+
+.content figure.effect_1:hover img {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    opacity: 0.6;
+}
+
+/*tran -50% 保证居中*/
+figure.effect_1 figcaption::before,
+figure.effect_1 figcaption::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 1px;
+    background: #fff;
+    content: '';
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+}
+
+figure.effect_1:hover figcaption::before {
+    opacity: 0.5;
+    -webkit-transform: translate3d(-50%, -50%, 0) rotate(45deg);
+    transform: translate3d(-50%, -50%, 0) rotate(45deg);
+}
+
+figure.effect_1:hover figcaption::after {
+    opacity: 0.5;
+    -webkit-transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+    transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+}
+
+figure.effect_1 figcaption h2 {
+    width: 100%;
+    position: absolute;
+    top: 10%;
+    left: auto;
+    font-weight: 900;
+    -webkit-transition: transform 0.35s;
+    -moz-transition: transform 0.35s;
+    -ms-transition: transform 0.35s;
+    -o-transition: transform 0.35s;
+    transition: transform 0.35s;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+figure.effect_1:hover figcaption h2 {
+    -webkit-transform: translate3d(0, 50%, 0);
+    -moz-transform: translate3d(0, 50%, 0);
+    -ms-transform: translate3d(0, 50%, 0);
+    -o-transform: translate3d(0, 50%, 0);
+    transform: translate3d(0, 50%, 0);
+}
+
+figure.effect_1 figcaption p {
+    position: absolute;
+    top: 60%;
+    -webkit-transition: transform 0.35s;
+    -moz-transition: transform 0.35s;
+    -ms-transition: transform 0.35s;
+    -o-transition: transform 0.35s;
+    transition: transform 0.35s;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    padding: 0% 4%;
+    width: 90%;
+}
+
+figure.effect_1:hover figcaption p {
+    -webkit-transform: translate3d(0, -50%, 0);
+    -moz-transform: translate3d(0, -50%, 0);
+    -ms-transform: translate3d(0, -50%, 0);
+    -o-transform: translate3d(0, -50%, 0);
+    transform: translate3d(0, -50%, 0);
+}
+
+figure.effect_2 {
+    -webkit-transition: background 0.55s, opacity 0.35s;
+    -moz-transition: background 0.55s, opacity 0.35s;
+    -ms-transition: background 0.55s, opacity 0.35s;
+    -o-transition: background 0.55s, opacity 0.35s;
+    transition: background 0.55s, opacity 0.35s;
+}
+
+figure.effect_2:hover {
+    background: -webkit-linear-gradient(top, rgba(37, 141, 200, 1) 0%, rgba(104, 60, 19, 1) 100%);
+    background: linear-gradient(to bottom, rgba(37, 141, 200, 1) 0%, rgba(104, 60, 19, 1) 100%);
+}
+
+figure.effect_2:hover {
+    cursor: pointer;
+}
+
+figure.effect_2 p {
+    position: absolute;
+    top: 0%;
+    border: 5px solid white;
+    width: 84%;
+    margin: 3% 5%;
+    padding-top: 20%;
+    padding-bottom: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    color: transparent;
+    -webkit-transition: color 0.5s, transform 0.5s;
+    -moz-transition: color 0.5s, transform 0.5s;
+    -ms-transition: color 0.5s, transform 0.5s;
+    -o-transition: color 0.5s, transform 0.5s;
+    transition: color 0.5s, transform 0.5s;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+figure.effect_2:hover p {
+    color: white;
+    -webkit-transform: translate3d(0, 70%, 0);
+    -moz-transform: translate3d(0, 70%, 0);
+    -ms-transform: translate3d(0, 70%, 0);
+    -o-transform: translate3d(0, 70%, 0);
+    transform: translate3d(0, 70%, 0);
+}
+
+figure.effect_3 {
+    -webkit-transition: background 0.35s ;
+    -moz-transition: background 0.35s ;
+    -ms-transition: background 0.35s ;
+    -o-transition: background 0.35s ;
+    transition: background 0.35s ;
+}
+figure.effect_3:hover {
+    cursor: pointer;
+    background: -webkit-linear-gradient(top, rgba(37, 141, 200, 1) 0%, rgba(104, 60, 19, 1) 100%);
+    background: linear-gradient(to bottom, rgba(37, 141, 200, 1) 0%, rgba(104, 60, 19, 1) 100%);
+}
+
+figure.effect_3 img {
+    -webkit-transition: opacity 0.35s, transform 0.35s;
+    -moz-transition: opacity 0.35s, transform 0.35s;
+    -ms-transition: opacity 0.35s, transform 0.35s;
+    -o-transition: opacity 0.35s, transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: translate3d(0, 0, 200px);
+    -moz-transform: translate3d(0, 0, 200px);
+    -ms-transform: translate3d(0, 0, 200px);
+    -o-transform: translate3d(0, 0, 200px);
+    transform: translate3d(0, 0, 200px);
+}
+
+figure.effect_3:hover img {
+    opacity: 0.9;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+figure.effect_3 figcaption h2 {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    text-align: center;
+    -webkit-transition: transform 0.35s;
+    -moz-transition: transform 0.35s;
+    -ms-transition: transform 0.35s;
+    -o-transition: transform 0.35s;
+    transition: transform 0.35s;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+figure.effect_3 figcaption:hover h2 {
+    -webkit-transform: translate3d(0, -100%, 0);
+    -moz-transform: translate3d(0, -100%, 0);
+    -ms-transform: translate3d(0, -100%, 0);
+    -o-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+}
+
+figure.effect_3 figcaption p {
+    position: absolute;
+    padding: 5%;
+    margin: 5%;
+    border: 1px solid white;
+    top: 100%;
+    -webkit-transition: transform 0.5s;
+    -moz-transition: transform 0.5s;
+    -ms-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+figure.effect_3 figcaption:hover p {
+    -webkit-transform: translate3d(0, -180%, 0);
+    -moz-transform: translate3d(0, -180%, 0);
+    -ms-transform: translate3d(0, -180%, 0);
+    -o-transform: translate3d(0, -180%, 0);
+    transform: translate3d(0, -180%, 0);
+}
+figure.effect_4 figcaption h2 {
+    width: 100%;
+    position: absolute;
+    bottom: -30%;
+    text-align: left;
+    padding: 3%;
+    background-color: white;
+    color: rgba(0,0,0,0.6);
+    margin: 0%;
+    -webkit-transition: transform 0.5s;
+    -moz-transition: transform 0.5s ;
+    -ms-transition: transform 0.5s ;
+    -o-transition: transform 0.5s ;
+    transition: transform 0.5s ;
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    -o-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+figure.effect_4 {
+    -webkit-transition: background 0.35s ;
+    -moz-transition: background 0.35s ;
+    -ms-transition: background 0.35s ;
+    -o-transition: background 0.35s ;
+    transition: background 0.35s ;
+}
+figure.effect_4:hover {
+    cursor: pointer;
+    background: -webkit-linear-gradient(top, rgba(37, 141, 200, 1) 0%, rgba(104, 60, 19, 1) 100%);
+    background: linear-gradient(to bottom, rgba(37, 141, 200, 1) 0%, rgba(104, 60, 19, 1) 100%);
+}
+figure.effect_4 img {
+    -webkit-transition: opacity 0.35s;
+    -moz-transition: opacity 0.35s;
+    -ms-transition: opacity 0.35s;
+    -o-transition: opacity 0.35s;
+    transition: opacity 0.35s;
+}
+figure.effect_4:hover img {
+    opacity: 0.4;
+}
+figure.effect_4:hover figcaption h2 {
+    -webkit-transform: translate3d(0,-130%,0);
+    -moz-transform: translate3d(0,-130%,0);
+    -ms-transform: translate3d(0,-130%,0);
+    -o-transform: translate3d(0,-130%,0);
+    transform: translate3d(0,-130%,0);
+}
+figure.effect_4 figcaption p {
+    position: absolute;
+    top: 100%;
+    padding: 0% 15%;
+    -webkit-transition: transform 0.5s;
+    -moz-transition: transform 0.5s;
+    -ms-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    -o-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+figure.effect_4:hover figcaption p {
+    -webkit-transform: translate3d(0,-450%,0);
+    -moz-transform: translate3d(0,-450%,0);
+    -ms-transform: translate3d(0,-450%,0);
+    -o-transform: translate3d(0,-450%,0);
+    transform: translate3d(0,-450%,0);
+}

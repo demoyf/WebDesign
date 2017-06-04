@@ -66,18 +66,21 @@
             <span>{{5+12456}}</span></p>
     </div>-->
     <div ng-app="myApp" ng-controller="myCtrl">
-        名字：<input ng-model="name">
+<!--        名字：<input ng-model="name">
         <h1>你输入了{{name}}</h1>
         <form ng-app="" name="myForm">
             Email:<input type="email" name="myAddress" ng-model="text">
             <span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span>
         </form>
         <ul>
-            <!--1111-->
+            &lt;!&ndash;1111&ndash;&gt;
             <li ng-repeat="x in names">
                 {{x}}
             </li>
-        </ul>
+        </ul>-->
+        <!--如果将标签换下去，会有换行-->
+        <textarea rows="10" cols="20" ng-model="message" maxlength="30"></textarea>
+        <p>剩余字数:<span ng-bind="surplus()"></span></p>
     </div>
 </body>
 <script src="js/jquery.js" type="application/javascript"></script>
@@ -86,14 +89,18 @@
 <script>
     var app = angular.module('myApp',[]);
     app.controller('myCtrl', function ($scope) {
-        $scope.name = 'John de';
-        $scope.names = ['demo', 'first', 'second'];
+       /* $scope.name = 'John de';
+        $scope.names = ['demo', 'first', 'second'];*/
+        $scope.message = "";
+        $scope.surplus = function () {
+            return (30 - $scope.message.length);
+        };
     });
 //    自定义filter过滤器
-    app.filter('reverse', function () {
+/*    app.filter('reverse', function () {
         return function (text) {
             return text.split("").reverse().join("");
         };
-    });
+    });*/
 </script>
 </html>

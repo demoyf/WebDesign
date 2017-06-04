@@ -1,0 +1,147 @@
+/*大屏幕，>767*/
+@media only screen and (min-width: 767px) {
+    body {
+        padding: 0;
+        margin: 0;
+        /*background-color: #2aabd2;*/
+        background: linear-gradient(transparent, #a6e1ec);
+    }
+
+    h2{
+        font-size: 2vw;
+        color: white;
+    }
+    
+    p{
+        font-size: 1.1vw;
+        color: white;
+        font-weight: 500;
+    }
+    .timeline_content::before {
+        content: "";
+        width: 2px;
+        height: 100%;
+        color: green;
+    }
+
+    .timeline_content {
+        width: 80%;
+        height: auto;
+        margin-left: 10%;
+    }
+
+    .left_blog {
+        width: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+        -webkit-flex-direction: row-reverse;
+        padding-bottom: 3%;
+    }
+
+    .arrow-left {
+        width: 0;
+        height: 0;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-right: 15px solid silver;
+        margin-top: 12px;
+    }
+
+    .right_blog {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        -webkit-flex-direction: row;
+        margin-bottom: 3%;
+    }
+
+    .content {
+        background-color: transparent;
+        width: 40%;
+        height: auto;
+        display: block;
+        border-radius: 15px;
+        flex-shrink: 0;
+        -webkit-transition: all 1s;
+        -moz-transition: all 1s;
+        -ms-transition: all 1s;
+        -o-transition: all 1s;
+        transition: all 1s;
+        /*box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);*/
+        padding: 0;
+        vertical-align: middle;
+    }
+
+    .arrow-right {
+        width: 0;
+        height: 0;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-left: 15px solid rebeccapurple;
+        margin-top: 12px;
+    }
+
+    /*change*/
+    .time_content {
+        width: calc(20% - 30px);
+        height: auto;
+        text-align: center;
+        vertical-align: middle;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .time_content .time {
+        background-color: white;
+        color: slateblue;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+        width: 68px;
+        height: 68px;
+        padding: 3px;
+        border-radius: 50%;
+        border: 1px solid white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .time_content .line {
+        width: 2px;
+        height: 60%;
+        margin-top: 8%;
+        background-color: slateblue;
+    }
+
+    .content figure {
+        width: 100%;
+        padding: 0;
+        margin: 0.1%;
+        position: relative;
+        overflow: hidden;
+        display: block;
+        border-radius: 15px;
+    }
+
+    .content figure img {
+        width: 100%;
+        border-radius: 10px;
+        opacity: 0.8;
+    }
+
+    .content figure figcaption {
+        position: absolute;
+        top: 0%;
+        width: 100%;
+        height: 100%;
+    }
+     .my_pagination{
+        margin-left: 40%;
+        margin-top: 10%;
+        margin-bottom: 10%;
+        display: flex;
+        flex-direction: row;
+    }
+}

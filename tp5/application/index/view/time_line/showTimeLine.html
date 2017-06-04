@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Title</title>
+    <!--justify-content: 水平位置的摆放方式。align-items：垂直方向的摆放方式
+    flex 和position：absolute 同时使用，子元素的flex无效。flex可以嵌套使用
+    vw:viewport 百分比，1vw = 1%屏幕宽度，响应式字体
+    transaction：指定变换的属性和时间，平移或者旋转等需要指定的是transform。
+    注意需要在最外层选择一个容器充当‘舞台’，perspective属性。如果只是想显示占据容器大小的内容，
+    需要指定overflow为hidden。
+    -->
+    <script src="js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="css/time_line_blog/large_screen.css">
+    <link rel="stylesheet" href="css/time_line_blog/small_screen.css">
+    <link rel="stylesheet" href="css/time_line_blog/effect_details.css">
+    <link rel="stylesheet" href="css/time_line_blog/show_timeline_other.css">
+    <script src="js/layer.js"></script>
+    <script>
+        $(function () {
+            //            预加载，加载完毕显示主页面
+            //            判断所有的img都加载完成，必须是Deferred对象
+            initPage();
+            var defereds = [];
+            $("img").each(function() {
+                var dfd = $.Deferred();
+                $(this).load(dfd.resolve);
+                defereds.push(dfd);
+            });
+            $.when.apply(null, defereds).done(function() {
+                $('#loading-center-absolute').animate({left:"-20%", "opacity":0},3000,function () {
+                    $('.timeline_content').show(0);
+                    $('#loading').animate({opacity: 0}, 300,function (){
+                        $('#loading').hide(0);
+                    });
+                });
+            });
+//            滚动显示回到顶部按钮
+            var isMove = false;
+            $(window).scroll(function () {
+                if (isMove) {
+                    return false;
+                }
+                var height = $(window).height();
+                var scrollY = $(this).scrollTop();
+                if (scrollY<300||scrollY==0){
+                    isMove = true;
+                    var read = (height + 120) + "px";
+                    if (read==$('.to_top').css('top')) {
+                        isMove = false;
+                        return false;
+                    }
+                    $('.to_top').animate({top:read},600,function () {
+                        isMove = false;
+                    });
+                }
+                else if (scrollY>700) {
+                    isMove = true;
+                    var read = (height - 90) + "px";
+                    if (read==$('.to_top').css('top')) {
+                        isMove = false;
+                        return false;
+                    }
+                    $('.to_top').animate({top:read},600,function () {
+                        isMove = false;
+                    });
+                }
+            });
+
+            $('.to_top').click(function () {
+                $('body,html').animate({scrollTop: 0}, 1000);
+            });
+
+//            分页按钮jQ代码
+            bindPageClick();
+            function initPage() {
+                var total = parseInt($('.timeline_content').attr("id"));
+                var per_page = parseInt($('.timeline_content').attr("data-role"));
+                var pageSum = 1;
+                if (total==0) {
+                    pageSum = 1;
+                }else{
+                    if (total%per_page==0) {
+                        pageSum = total / per_page;
+                    }else {
+                        pageSum = parseInt(total / per_page) + 1;
+                    }
+                }
+                if (pageSum < 4) {
+                    var paginationHtml = "";
+                    for (i = 1; i <= pageSum; i++) {
+                        if (i == 1) {
+                            paginationHtml += "<div class='current'><span>"
+                                + i+ "</span></div>";
+                        }else {
+                            paginationHtml += "<div ><span>"
+                                +i+ "</span></div>";
+                        }
+                    }
+                    $('.pagination_page').html(paginationHtml);
+                    bindPageClick();
+                }
+                $('.left_turn').click(function () {
+                    var current = $('.current');
+                    var page = current.children("span").html();
+                    page = parseInt(page);
+                    var nextSum = current.nextAll().length;
+                    if (page == 1) {
+                        return false;
+                    }
+                    if (nextSum == 2) {
+                        if (page - 1 > 1) {
+                            $('.pagination_page').children(":last")
+                                .animate({width: "0px", opacity: 0}, 300, function () {
+                                    $(this).remove();
+                                });
+                            var html = "<div style='width: 0px;opacity: 0'><span>"
+                                + (page - 2) + "</span></div>";
+                            $('.pagination_page').children(":first").before(html);
+                            $('.pagination_page').children(":first")
+                                .animate({width: "60px", opacity: 1}, 300);
+                            bindPageClick();
+                        }
+                    }
+                    if (nextSum == 3) {
+                        $('.pagination_page').children(":last")
+                            .animate({width: "0px", opacity: 0}, 300, function () {
+                                $(this).remove();
+                            });
+                        var html = "<div style='width: 0px;opacity: 0'><span>"
+                            + (page - 1) + "</span></div>";
+                        $('.pagination_page').children(":first").before(html);
+                        $('.pagination_page').children(":first")
+                            .animate({width: "60px", opacity: 1}, 300);
+                        bindPageClick();
+                    }
+                    current.prev().addClass("current");
+                    current.removeClass("current");
+                    changeTimeLine();
+                });
+                $('.right_turn').click(function () {
+                    var current = $('.current');
+                    var page = current.children("span").html();
+                    page = parseInt(page);
+                    var nextSum = current.nextAll().length;
+                    if (page == pageSum) {
+                        return false;
+                    }
+                    if (nextSum == 1) {
+                        if (page + 1 < pageSum) {
+                            $('.pagination_page').children(":first")
+                                .animate({width: "0px", opacity: 0}, 400, function () {
+                                    $(this).remove();
+                                });
+                            var html = "<div style='width: 0px;opacity: 0'><span>"
+                                + (page + 2) + "</span></div>";
+                            $('.pagination_page').append(html);
+                            $('.pagination_page').children(":last")
+                                .animate({width: "60px", opacity: 1}, 400);
+                            bindPageClick();
+                        }
+                    }
+                    if (nextSum == 0) {
+                        if (page != pageSum) {
+                            $('.pagination_page').children(":first")
+                                .animate({width: "0px", opacity: 0}, 400, function () {
+                                    $(this).remove();
+                                });
+                            var html = "<div style='width: 0px;opacity: 0'><span>"
+                                + (page + 1) + "</span></div>";
+                            $('.pagination_page').append(html);
+                            $('.pagination_page').children(":last")
+                                .animate({width: "60px", opacity: 1}, 400);
+                            bindPageClick();
+                        }
+                    }
+                    current.next().addClass("current");
+                    current.removeClass("current");
+                    changeTimeLine();
+                });
+            }
+            function bindPageClick() {
+                $('.pagination_page div span').click(function () {
+                    $('.current').removeClass("current");
+                    $(this).parent().addClass("current");
+                    changeTimeLine();
+                });
+            }
+            function changeTimeLine() {
+                var load =  layer.load(3);
+                var page = parseInt($('.current').children("span").html());
+                $('.timeline_content').animate({opacity: 0.5}, 0);
+                $.ajax({
+                    url:'index/TimeLine/getPageById',
+                    type:'post',
+                    data:{page:page},
+                    dataType:'json',
+                    async:true,
+                    success:function (data) {
+                        var code = data.code;
+                        if(code==200) {
+                            var blogs = data.blogs.data;
+                            var myHtml = "";
+                            for (i=0;i<blogs.length;i++) {
+                                var blog = blogs[i];
+                                var whichTurn = "";
+                                var whichArrow = "";
+                                var whichEffect = (i % 4) + 1;
+                                if (i%2==0) {
+                                    whichTurn = "left_blog";
+                                    whichArrow = "arrow-left";
+                                }else {
+                                    whichTurn = "right_blog";
+                                    whichArrow = "arrow-right";
+                                }
+                                myHtml +=
+                                    "<div class="+whichTurn+"><div class='content'><figure class='effect_" +
+                                +whichEffect+"'><img src='img/blog_background/"+blog.background_id+".jpg'/> <figcaption><h2>" +
+                                blog.title+"</h2><p>"+blog.description+"</p></figcaption></figure></div><div class=" +
+                                whichArrow+"></div><div class='time_content'><div class='time'><span>" +
+                                    blog.day+"<sup>"+blog.sup+"</sup></span><span>" +
+                                    blog.month+"</span><span>" +
+                                    blog.year+"</span></div> <div class='line'></div> </div> </div>"
+                            }
+                            $('.timeline_content').html(myHtml);
+                            var height =  $('body').css('height');
+                            var realHeight = parseInt(height.substr(0, height.length - 2));
+                            $('body,html').animate({scrollTop: realHeight}, 500);
+                            $('.timeline_content').animate({opacity: 1}, 400,function () {
+                                layer.close(load);
+                            });
+                        }
+                    },
+                    error:function () {
+
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+<div id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+            <div class="object"></div>
+        </div>
+    </div>
+</div>
+<!--数据最好先在PHP那里处理完毕再传递过来，还想直接在这里处理，结果GG了，没有代码提示。-->
+<div class="timeline_content" style="display: none;" id={$total} data-role={$per_page}>
+    {volist name="blogs" id="blog" key="i"}
+    <div style="display: none">
+        {$effect = ("effect_".($i%4+1));$src = "img/blog_background/".($blog.background_id).".jpg"}
+    </div>
+    {if($i%2==0)}
+    <div class="left_blog">
+        <div class="content">
+            <figure class={$effect}>
+                <img src= {$src} />
+                <figcaption>
+                    <h2>{$blog.title}</h2>
+                    <p>{$blog.description}</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-left">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>{$blog.day}<sup>{$blog.sup}</sup></span>
+                <span>{$blog.month}</span>
+                <span>{$blog.year}</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    {else}
+    <div class="right_blog">
+        <div class="content">
+            <figure class={$effect}>
+                <img src= {$src} />
+                <figcaption>
+                    <h2>{$blog.title}</h2>
+                    <p>{$blog.description}</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-right">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>{$blog.day}<sup>{$blog.sup}</sup></span>
+                <span>{$blog.month}</span>
+                <span>{$blog.year}</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    {/if}
+    {/volist}
+    <!--<div class="left_blog">
+        <div class="content">
+            <figure class="effect_1">
+                <img src="img/blog_background/1.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-left">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="right_blog">
+        <div class="content">
+            <figure class="effect_2">
+                <img src="img/blog_background/12.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-right">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="left_blog">
+        <div class="content">
+            <figure class="effect_3">
+                <img src="img/blog_background/2.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-left">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="right_blog">
+        <div class="content">
+            <figure class="effect_4">
+                <img src="img/blog_background/3.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-right">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="left_blog">
+        <div class="content">
+            <figure class="effect_1">
+                <img src="img/blog_background/4.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-left">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="right_blog">
+        <div class="content">
+            <figure class="effect_2">
+                <img src="img/blog_background/5.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-right">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="left_blog">
+        <div class="content">
+            <figure class="effect_3">
+                <img src="img/blog_background/6.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-left">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="right_blog">
+        <div class="content">
+            <figure class="effect_4">
+                <img src="img/blog_background/7.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-right">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="left_blog">
+        <div class="content">
+            <figure class="effect_3">
+                <img src="img/blog_background/8.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-left">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="right_blog">
+        <div class="content">
+            <figure class="effect_2">
+                <img src="img/blog_background/9.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-right">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="left_blog">
+        <div class="content">
+            <figure class="effect_1">
+                <img src="img/blog_background/10.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-left">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="right_blog">
+        <div class="content">
+            <figure class="effect_2">
+                <img src="img/blog_background/11.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-right">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="left_blog">
+        <div class="content">
+            <figure class="effect_3">
+                <img src="img/blog_background/12.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-left">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="right_blog">
+        <div class="content">
+            <figure class="effect_4">
+                <img src="img/blog_background/13.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-right">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="left_blog">
+        <div class="content">
+            <figure class="effect_1">
+                <img src="img/blog_background/14.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-left">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>
+    <div class="right_blog">
+        <div class="content">
+            <figure class="effect_3">
+                <img src="img/blog_background/15.jpg">
+                <figcaption>
+                    <h2>这是一篇博客</h2>
+                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
+                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="arrow-right">
+        </div>
+        <div class="time_content">
+            <div class="time">
+                <span>12<sup>TH</sup></span>
+                <span>APR</span>
+                <span>2017</span>
+            </div>
+            <div class="line">
+            </div>
+        </div>
+    </div>-->
+</div>
+<div class="my_pagination">
+    <div class="left_turn"><span>&lt;</span></div>
+    <div class="pagination_page">
+        <div class="current"><span>1</span></div>
+        <div><span>2</span></div>
+        <div><span>3</span></div>
+        <div><span>4</span></div>
+    </div>
+    <div class="right_turn"><span>&gt;</span></div>
+</div>
+<div class="to_top">
+    <svg width="70" height="70" viewBox="0,0,70,70">
+        <path d="M 15,32 L 30,12 L 45,32 M 30,14 L 30,52"
+              stroke-linecap="round" stroke-width="5px" stroke="skyblue" fill="none"/>
+    </svg>
+</div>
+</body>
+</html>

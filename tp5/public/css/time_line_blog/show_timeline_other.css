@@ -1,0 +1,204 @@
+#loading{
+    background-color: #35203b;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    margin-top: 0px;
+    top: 0px;
+}
+#loading-center{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+#loading-center-absolute {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 50px;
+    width: 300px;
+    margin-top: -25px;
+    margin-left: -150px;
+}
+.object{
+    width: 18px;
+    height: 18px;
+    background-color: #FFF;
+    float: left;
+    margin-top: 15px;
+    margin-right: 15px;
+    -moz-border-radius: 50% 50% 50% 50%;
+    -webkit-border-radius: 50% 50% 50% 50%;
+    border-radius: 50% 50% 50% 50%;
+    -webkit-animation: object 1s infinite;
+    animation: object 1s infinite;
+}
+.object:last-child {
+    margin-right: 0px;
+}
+
+.object:nth-child(9){
+    -webkit-animation-delay: 0.9s;
+    animation-delay: 0.9s;
+}
+.object:nth-child(8){
+    -webkit-animation-delay: 0.8s;
+    animation-delay: 0.8s;
+}
+.object:nth-child(7){
+    -webkit-animation-delay: 0.7s;
+    animation-delay: 0.7s;
+}
+.object:nth-child(6){
+    -webkit-animation-delay: 0.6s;
+    animation-delay: 0.6s;
+}
+.object:nth-child(5){
+    -webkit-animation-delay: 0.5s;
+    animation-delay: 0.5s;
+}
+.object:nth-child(4){
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s;
+}
+.object:nth-child(3){
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+}
+.object:nth-child(2){
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+}
+
+@-webkit-keyframes object{
+    /*完整的就是这样啦*/
+    50% {
+        -ms-transform: translate(0,-50px);
+        -webkit-transform: translate(0,-50px);
+        transform: translate(0,-50px);
+    }
+    100%{
+        -ms-transform: translate(0,0px);
+        -webkit-transform: translate(0,0px);
+        transform: translate(0,0px);
+    }
+}
+@keyframes object{
+    50% {
+        -ms-transform: translate(0,-50px);
+        -webkit-transform: translate(0,-50px);
+        transform: translate(0,-50px);
+    }
+    100%{
+        -ms-transform: translate(0,0px);
+        -webkit-transform: translate(0,0px);
+        transform: translate(0,0px);
+
+    }
+}
+.to_top {
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    top: calc(100% + 70px);
+    left: calc(100% - 80px);
+    background-color: white;
+    z-index: 50;
+    border-radius: 50%;
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.1);
+}
+.to_top:hover {
+    cursor: pointer;
+}
+
+
+/*分页按钮*/
+.pagination_page {
+    display: flex;
+    flex-direction: row;
+}
+
+.left_turn, .right_turn {
+    font-size: large;
+    margin-top: 8px;
+    width: 25px;
+    height: 25px;
+    background-color:white;
+    border-radius: 50%;
+    text-align: center;
+    flex-shrink: 0;
+    color: #00b19e;
+    vertical-align: middle;
+}
+
+.left_turn span, .right_turn span {
+    font-size: 22px;
+}
+
+.pagination_page div {
+    font-size: large;
+    display: flex;
+    flex-direction: column-reverse;
+    width: 60px;
+    height: 60px;
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    text-align: center;
+    vertical-align: bottom;
+    color: white;
+    -webkit-transition: color 1s;
+    -moz-transition: color 1s;
+    -ms-transition: color 1s;
+    -o-transition: color 1s;
+    transition: color 1s;
+}
+.pagination_page div::before {
+    content: '';
+    position: relative;
+    width: 60px;
+    height: 1px;
+    top: -39px;
+    background-color: #bfbfbf;
+}
+.pagination_page div::after {
+    content: '';
+    position: relative;
+    width: 10px;
+    height: 10px;
+    top: -7.5px;
+    margin-left: 20px;
+    background-color: #bfbfbf;
+    border-radius: 50%;
+    border: 5px solid white;
+    -webkit-transition: background-color 1s;
+    -moz-transition: background-color 1s;
+    -ms-transition: background-color 1s;
+    -o-transition: background-color 1s;
+    transition: background-color 1s;
+}
+.pagination_page div span:hover {
+    cursor: pointer;
+}
+.pagination_page .current {
+    color: #00b19e;
+    -webkit-transition: color 1s;
+    -moz-transition: color 1s;
+    -ms-transition: color 1s;
+    -o-transition: color 1s;
+    transition: color 1s;
+}
+.pagination_page .current::after {
+    background-color: #00b19e;
+    -webkit-transition: background-color 1s;
+    -moz-transition: background-color 1s;
+    -ms-transition: background-color 1s;
+    -o-transition: background-color 1s;
+    transition: background-color 1s;
+}
+.left_turn:hover, .right_turn:hover {
+    cursor: pointer;
+    background-color: #00b19e;
+    color: white;
+}
