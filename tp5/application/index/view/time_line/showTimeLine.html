@@ -73,6 +73,7 @@
             });
 
 //            分页按钮jQ代码
+            bindTimeClick();
             bindPageClick();
             function initPage() {
                 var total = parseInt($('.timeline_content').attr("id"));
@@ -99,6 +100,12 @@
                         }
                     }
                     $('.pagination_page').html(paginationHtml);
+                    var width = $('body').css('width');
+                    var realWith = parseInt(width.substr(0, width.length - 2));
+                    if (realWith>767) {
+                        var tempP = 40 + (4 - pageSum) * 2.1;
+                        $('.my_pagination').css({"margin-left":tempP+"%"});
+                    }
                     bindPageClick();
                 }
                 $('.left_turn').click(function () {
@@ -187,6 +194,8 @@
                     changeTimeLine();
                 });
             }
+
+//            ajax刷新时间轴数据
             function changeTimeLine() {
                 var load =  layer.load(3);
                 var page = parseInt($('.current').children("span").html());
@@ -207,21 +216,26 @@
                                 var whichTurn = "";
                                 var whichArrow = "";
                                 var whichEffect = (i % 4) + 1;
+                                var whichTips = "left";
                                 if (i%2==0) {
                                     whichTurn = "left_blog";
                                     whichArrow = "arrow-left";
+                                    whichTips = "left";
                                 }else {
                                     whichTurn = "right_blog";
                                     whichArrow = "arrow-right";
+                                    whichTips = "right";
                                 }
                                 myHtml +=
-                                    "<div class="+whichTurn+"><div class='content'><figure class='effect_" +
-                                +whichEffect+"'><img src='img/blog_background/"+blog.background_id+".jpg'/> <figcaption><h2>" +
+                                    "<div class="+whichTurn+" data-role="+blog.id+">" +
+                                    "<div class='content'><figure class='effect_" +
+                                whichEffect+"'><img src='img/blog_background/"+blog.background_id+".jpg'/> <figcaption><h2>" +
                                 blog.title+"</h2><p>"+blog.description+"</p></figcaption></figure></div><div class=" +
-                                whichArrow+"></div><div class='time_content'><div class='time'><span>" +
+                                whichArrow+"></div><div class='time_content' data-role="+whichTips
+                                    +"><div class='time' data-role="+blog.detail_time+"><span>" +
                                     blog.day+"<sup>"+blog.sup+"</sup></span><span>" +
                                     blog.month+"</span><span>" +
-                                    blog.year+"</span></div> <div class='line'></div> </div> </div>"
+                                    blog.year+"</span></div> <div class='line'></div></div></div>"
                             }
                             $('.timeline_content').html(myHtml);
                             var height =  $('body').css('height');
@@ -230,10 +244,39 @@
                             $('.timeline_content').animate({opacity: 1}, 400,function () {
                                 layer.close(load);
                             });
+                            bindTimeClick();
+                        }else {
+                            layer.close(load);
+                            layer.msg('发生了不可知的错误', {icon: 5});
                         }
                     },
                     error:function () {
-
+                        layer.close(load);
+                        layer.msg('发生了不可知的错误', {icon: 5});
+                    }
+                });
+            }
+//            绑定时间的点击事件，弹出提示框显示具体时间
+            function bindTimeClick() {
+                $('.timeline_content .time').click(function () {
+                    var width = $('body').css('width');
+                    var realWith = parseInt(width.substr(0, width.length - 2));
+                    var detail = $(this).attr('data-role');
+                    var which = $(this).parent().attr('data-role');
+                    if (realWith>767) {
+                        if (which=='left'){
+                            $(this).click(function () {
+                                layer.tips(detail, $(this), {tips: [4, '#00b19e']});
+                            });
+                        }else {
+                            $(this).click(function () {
+                                layer.tips(detail, $(this), {tips: [2]});
+                            });
+                        }
+                    }else {
+                        $(this).click(function () {
+                            layer.tips(detail, $(this), {tips: [2]});
+                        });
                     }
                 });
             }
@@ -263,7 +306,7 @@
         {$effect = ("effect_".($i%4+1));$src = "img/blog_background/".($blog.background_id).".jpg"}
     </div>
     {if($i%2==0)}
-    <div class="left_blog">
+    <div class="left_blog" data-role ={$blog.id}>
         <div class="content">
             <figure class={$effect}>
                 <img src= {$src} />
@@ -275,8 +318,8 @@
         </div>
         <div class="arrow-left">
         </div>
-        <div class="time_content">
-            <div class="time">
+        <div class="time_content" data-role="left">
+            <div class="time" data-role= {$blog.detail_time}>
                 <span>{$blog.day}<sup>{$blog.sup}</sup></span>
                 <span>{$blog.month}</span>
                 <span>{$blog.year}</span>
@@ -286,7 +329,7 @@
         </div>
     </div>
     {else}
-    <div class="right_blog">
+    <div class="right_blog" data-role={$blog.id}>
         <div class="content">
             <figure class={$effect}>
                 <img src= {$src} />
@@ -298,8 +341,8 @@
         </div>
         <div class="arrow-right">
         </div>
-        <div class="time_content">
-            <div class="time">
+        <div class="time_content" data-role="right">
+            <div class="time" data-role={$blog.detail_time}>
                 <span>{$blog.day}<sup>{$blog.sup}</sup></span>
                 <span>{$blog.month}</span>
                 <span>{$blog.year}</span>

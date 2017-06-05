@@ -18,7 +18,7 @@ class TimeLine extends Controller
     {
         $monthShort = array("JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC");
         $view = new View("time_line/showTimeLine");
-        $blogs = MyBlog::where('id', '>', 0)->order("my_time")->paginate(6);
+        $blogs = MyBlog::where('id', '>', 0)->order("my_time")->paginate(8);
         $view->blogs = $blogs;
         $temp = json_encode($blogs);
         $view->total = json_decode($temp)->total;
@@ -30,6 +30,7 @@ class TimeLine extends Controller
             $blog['year'] = $arr[0];
             $blog['month'] = $monthShort[$arr[1]-1];
             $blog['day'] = (int)$arr[2];
+            $blog['detail_time'] = $result[1];
             if ($arr[2]==1){
                 $blog['sup'] = "st";
             }else if ($arr[2]==2){
@@ -51,7 +52,7 @@ class TimeLine extends Controller
         }
         $monthShort = array("JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC");
         try {
-            $blogs = MyBlog::where('id', '>', 0)->order("my_time")->paginate(6,false,['page' => $page]);
+            $blogs = MyBlog::where('id', '>', 0)->order("my_time")->paginate(8,false,['page' => $page]);
             foreach ($blogs as $blog) {
                 $time = $blog['my_time'];
                 $result = explode(" ", $time);
@@ -59,6 +60,7 @@ class TimeLine extends Controller
                 $blog['year'] = $arr[0];
                 $blog['month'] = $monthShort[$arr[1]-1];
                 $blog['day'] = (int)$arr[2];
+                $blog['detail_time'] = $result[1];
                 if ($arr[2]==1){
                     $blog['sup'] = "st";
                 }else if ($arr[2]==2){
