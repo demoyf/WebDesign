@@ -76,6 +76,6 @@ class TimeLine extends Controller
         } catch (Exception $exception) {
             $result = array('code' => 500);
             echo json_encode($result);
-        }
+        }/**/
     }
 }
