@@ -1,0 +1,454 @@
+.left_menu_click::before {
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -ms-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+    -webkit-transform: rotateZ(45deg) translate3d(4px, 0, 0) !important;
+    -moz-transform: rotateZ(45deg) translate3d(4px, 0, 0) !important;
+    -ms-transform: rotateZ(45deg) translate3d(4px, 0, 0) !important;
+    -o-transform: rotateZ(45deg) translate3d(4px, 0, 0) !important;
+    transform: rotateZ(45deg) translate3d(4px, 0, 0) !important;
+}
+
+.left_menu_click::after {
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -ms-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+    -webkit-transform: rotateZ(-45deg) translate3d(4px, 0, 0) !important;
+    -moz-transform: rotateZ(-45deg) translate3d(4px, 0, 0) !important;
+    -ms-transform: rotateZ(-45deg) translate3d(4px, 0, 0) !important;
+    -o-transform: rotateZ(-45deg) translate3d(4px, 0, 0) !important;
+    transform: rotateZ(-45deg) translate3d(4px, 0, 0) !important;
+}
+
+@media only screen and (min-width: 1100px) {
+    .blog_content {
+        width: 75%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    .a_blog {
+        padding: 10px;
+        width: 30%;
+        /*margin: 1.5%;*/
+        margin-bottom: 50px;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .blog_content .a_blog .blog_title_div .blog_title {
+        font-family: cursive,"FangSong";
+        color: #494949;
+        text-align: center;
+        font-weight: 400;
+        font-size: 1.6vw;
+    }
+    .tag_nav {
+        width: 18%;
+        font-size: 20px;
+        padding: 20px 1%;
+        position: fixed;
+        left: 78%;
+        top: 280px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        -webkit-transition: left 0.5s;
+        -moz-transition: left 0.5s;
+        -ms-transition: left 0.5s;
+        -o-transition: left 0.5s;
+        transition: left 0.5s;
+    }
+    .tag_content {
+        padding: 10px;
+        box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+    }
+    .a_blog .blog_background p {
+        font-size: 1.3vw;
+    }
+    .a_blog:hover .blog_background p {
+        font-size: 1.3vw;
+    }
+}
+
+@media only screen and (max-width: 1100px) and (min-width: 850px) {
+    .tag_nav {
+        width: 22%;
+        font-size: 20px;
+        padding: 20px 1%;
+        position: fixed;
+        left: 96% ;
+        top: 280px;
+        display: flex;
+        flex-direction: row;
+        z-index: 200;
+    }
+    .tag_content {
+        padding: 10px;
+    }
+    .left_menu_icon {
+        margin-top: 20px;
+        width: 44px;
+        height: 44px;
+        display: block;
+    }
+
+    .left_menu_icon:hover {
+        cursor: pointer;
+    }
+
+    .left_menu_icon::before {
+        position: relative;
+        width: 26px;
+        height: 3px;
+        content: '';
+        background-color: #00b19e;
+        display: block;
+        top: 10px;
+        left: 9px;
+        -webkit-transition: all ease 0.5s;
+        -moz-transition: all ease 0.5s;
+        -ms-transition: all ease 0.5s;
+        -o-transition: all ease 0.5s;
+        transition: all ease 0.5s;
+        transform: rotateZ(-45deg) translate3d(-4px, 0, 0);
+    }
+    .left_menu_icon::after {
+        position: relative;
+        width: 26px;
+        height: 3px;
+        content: '';
+        background-color: #00b19e;
+        display: block;
+        top: 30px;
+        left: 9px;
+        -webkit-transition: all ease 0.5s;
+        -moz-transition: all ease 0.5s;
+        -ms-transition: all ease 0.5s;
+        -o-transition: all ease 0.5s;
+        transition: all ease 0.5s;
+        -webkit-transform: rotateZ(45deg) translate3d(-4px, 0, 0);
+        -moz-transform: rotateZ(45deg) translate3d(-4px, 0, 0);
+        -ms-transform: rotateZ(45deg) translate3d(-4px, 0, 0);
+        -o-transform: rotateZ(45deg) translate3d(-4px, 0, 0);
+        transform: rotateZ(45deg) translate3d(-4px, 0, 0);
+    }
+    .blog_content {
+        width: 94%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    .a_blog {
+        padding: 10px;
+        width: 30%;
+        /*margin: 1.5%;*/
+        margin-bottom: 50px;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .blog_content .a_blog .blog_title_div .blog_title {
+        font-family: "FangSong";
+        color: #494949;
+        text-align: center;
+        font-weight: 400;
+        font-size: 2.2vw;
+    }
+    .a_blog .blog_background p {
+        font-size: 2.1vw;
+    }
+    .a_blog:hover .blog_background p {
+        font-size: 2.1vw;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .tag_nav {
+        width: 40%;
+        font-size: 20px;
+        padding: 20px 1%;
+        position: fixed;
+        left: 94% ;
+        top: 280px;
+        display: flex;
+        flex-direction: row;
+        z-index: 200;
+    }
+    .tag_content {
+        padding: 10px;
+    }
+    .left_menu_icon {
+        margin-top: 20px;
+        width: 44px;
+        height: 44px;
+        display: block;
+    }
+
+    .left_menu_icon:hover {
+        cursor: pointer;
+    }
+
+    .left_menu_icon::before {
+        position: relative;
+        width: 26px;
+        height: 3px;
+        content: '';
+        background-color: #00b19e;
+        display: block;
+        top: 10px;
+        left: 9px;
+        -webkit-transition: all ease 0.5s;
+        -moz-transition: all ease 0.5s;
+        -ms-transition: all ease 0.5s;
+        -o-transition: all ease 0.5s;
+        transition: all ease 0.5s;
+        transform: rotateZ(-45deg) translate3d(-4px, 0, 0);
+    }
+    .left_menu_icon::after {
+        position: relative;
+        width: 26px;
+        height: 3px;
+        content: '';
+        background-color: #00b19e;
+        display: block;
+        top: 30px;
+        left: 9px;
+        -webkit-transition: all ease 0.5s;
+        -moz-transition: all ease 0.5s;
+        -ms-transition: all ease 0.5s;
+        -o-transition: all ease 0.5s;
+        transition: all ease 0.5s;
+        -webkit-transform: rotateZ(45deg) translate3d(-4px, 0, 0);
+        -moz-transform: rotateZ(45deg) translate3d(-4px, 0, 0);
+        -ms-transform: rotateZ(45deg) translate3d(-4px, 0, 0);
+        -o-transform: rotateZ(45deg) translate3d(-4px, 0, 0);
+        transform: rotateZ(45deg) translate3d(-4px, 0, 0);
+    }
+    .blog_content {
+        width: 94%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    .a_blog {
+        padding: 10px;
+        width: 45%;
+        /*margin: 1.5%;*/
+        margin-bottom: 50px;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .blog_content .a_blog .blog_title_div .blog_title {
+        font-family: "FangSong";
+        color: #494949;
+        text-align: center;
+        font-weight: 400;
+        font-size: 3vw;
+    }
+    .a_blog .blog_background p {
+        font-size: 2.6vw;
+    }
+    .a_blog:hover .blog_background p {
+        font-size: 2.6vw;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .header_content .to_time_line_blog {
+        margin-top: 200px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .header_content .to_time_line_blog {
+        margin-top: 150px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .blog_content {
+        width: 92%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    .a_blog {
+        padding: 10px;
+        width: 85%;
+        /*margin: 1.5%;*/
+        margin-bottom: 50px;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .blog_content .a_blog .blog_title_div .blog_title {
+        font-family: "FangSong";
+        color: #494949;
+        text-align: center;
+        font-weight: 400;
+        font-size: 5vw;
+    }
+    .a_blog .blog_background p {
+        font-size: 4.7vw;
+    }
+    .a_blog:hover .blog_background p {
+        font-size: 4.7vw;
+    }
+    .tag_nav {
+        width: 60%;
+        font-size: 20px;
+        padding: 20px 1%;
+        position: fixed;
+        left: 94% ;
+        top: 280px;
+        display: flex;
+        flex-direction: row;
+        z-index: 200;
+    }
+}
+.blog_content .a_blog .blog_time {
+    text-align: right;
+    color: #494949;
+    font-family: cursive;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    font-weight: 400;
+}
+.blog_content .a_blog .blog_title_div {
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.tag_nav a {
+    font-size: 20px;
+    margin: 0 2%;
+    color: #494949;
+    font-family: cursive, "FangSong";
+}
+.header_content .to_time_line_blog li {
+    list-style: none;
+    margin: 0 30px;
+}
+.header_content .to_time_line_blog li a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: cursive, "FangSong";
+    font-size: 22px;
+}
+.header_content .to_time_line_blog li a::after {
+    content: '';
+    width: 0%;
+    height: 1px;
+    background: #00b19e;
+    display: block;
+    -webkit-transition: all ease 0.3s;
+    -moz-transition: all ease 0.3s;
+    -ms-transition: all ease 0.3s;
+    -o-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+}
+.header_content .to_time_line_blog li a:hover {
+    color: #00b19e;
+}
+.header_content .to_time_line_blog li:hover a::after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: #00b19e;
+    display: block;
+    -webkit-transition: all ease 0.3s;
+    -moz-transition: all ease 0.3s;
+    -ms-transition: all ease 0.3s;
+    -o-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+}
+.header_content .to_time_line_blog li a.current::after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: #00b19e;
+    display: block;
+}
+
+.a_blog:hover {
+    cursor: pointer;
+}
+.a_blog .blog_background {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+}
+.a_blog .blog_background p {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: inherit;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+    background-color: transparent;
+    color: white;
+    margin: 0;
+    opacity: 0;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -ms-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+    font-family: cursive, "FangSong";
+}
+.a_blog:hover .blog_background p {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: inherit;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), #3a342a);
+    color: white;
+    margin: 0;
+    opacity: 1;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -ms-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+    cursor: pointer;
+    font-family: cursive, "FangSong";
+}

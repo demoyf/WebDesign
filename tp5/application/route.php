@@ -27,4 +27,6 @@ return [
     'showUploadPage' => 'index/IconUpload/showUpload',
     'showBlogType' => 'index/BlogSave/showType',
     'showTimeLine' => 'index/TimeLine/showTimeLine',
+    'home' => 'index/Home/home',
+
 ];

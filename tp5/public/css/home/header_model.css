@@ -1,0 +1,407 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    -webkit-transition: background-color 0.5s;
+    -moz-transition: background-color 0.5s;
+    -ms-transition: background-color 0.5s;
+    -o-transition: background-color 0.5s;
+    transition: background-color 0.5s;
+}
+.header_content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.next_title_content .shuxian {
+    font-weight: 800;
+    opacity: 0;
+    -webkit-transition: opacity 0.2s;
+    -moz-transition: opacity 0.2s;
+    -ms-transition: opacity 0.2s;
+    -o-transition: opacity 0.2s;
+    transition: opacity 0.2s;
+}
+.next_title_content .menu {
+    margin-right: 10%;
+    width: 44px;
+    height: 44px;
+    display: inline-block;
+    text-align: center;
+}
+.next_title_content .menu .ham {
+    width: 25px;
+    height: 1.5px;
+    display: block;
+    position: relative;
+    left: 8.5px;
+    top: 16px;
+    background-color: #00b19e;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+}
+.next_title_content .menu::before {
+    content: '';
+    width: 25px;
+    left: 8.5px;
+    height: 2px;
+    top: 8px;
+    position: relative;
+    background-color: #00b19e;
+    display: block;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+}
+.next_title_content .menu::after {
+    content: '';
+    width: 25px;
+    top: 24px;
+    height: 2px;
+    position: relative;
+    left: 8.5px;
+    background-color: #00b19e;
+    display: block;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+}
+
+.final::before {
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+    height: 3px;
+    -webkit-transform: rotateZ(-45deg) translate3d(-9px, -3px, 0);
+    -moz-transform: rotateZ(-45deg) translate3d(-9px, -3px, 0);
+    -ms-transform: rotateZ(-45deg) translate3d(-9px, -3px, 0);
+    -o-transform: rotateZ(-45deg) translate3d(-9px, -3px, 0);
+    transform: rotateZ(-45deg) translate3d(-9px, -3px, 0);
+}
+
+.final::after {
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+    height: 3px;
+    -webkit-transform: rotateZ(45deg) translate3d(-5px, -16px, 0);
+    -moz-transform: rotateZ(45deg) translate3d(-5px, -16px, 0);
+    -ms-transform: rotateZ(45deg) translate3d(-5px, -16px, 0);
+    -o-transform: rotateZ(45deg) translate3d(-5px, -16px, 0);
+    transform: rotateZ(45deg) translate3d(-5px, -16px, 0);
+}
+.top_nav_content {
+    width: 99.5%;
+    height: 0px;
+    background-color: #494949;
+    display: none;
+    border: 2px solid #494949;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.top_nav_content .left_nav {
+    list-style: none;
+    width: 30%;
+    margin: 0% 9%;
+    padding-top: 4%;
+    text-align: center;
+    float: left;
+}
+
+.top_nav_content .left_nav li {
+    font-size: 26px;
+    color: white;
+    font-family: "FangSong";
+    padding-bottom: 2%;
+}
+
+.top_nav_content .left_nav li span:hover {
+    cursor: pointer;
+}
+
+.top_nav_content .left_nav li span::after {
+    content: '';
+    width: 0;
+    height: 1px;
+    display: block;
+    background: white;
+    margin: auto;
+    -webkit-transition: width 0.3s;
+    -moz-transition: width 0.3s;
+    -ms-transition: width 0.3s;
+    -o-transition: width 0.3s;
+    transition: width 0.3s;
+}
+
+.top_nav_content .left_nav li span:hover::after {
+    width: 1.8em;
+}
+
+.top_nav_content .right_nav {
+    float: left;
+    width: 30%;
+    height: 100%;
+    margin-left: 10%;
+    overflow: hidden;
+}
+
+.top_nav_content .background {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    -webkit-transition: transform 0.5s;
+    -moz-transition: transform 0.5s;
+    -ms-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transform: rotateZ(26deg);
+    -moz-transform: rotateZ(26deg);
+    -ms-transform: rotateZ(26deg);
+    -o-transform: rotateZ(26deg);
+    transform: rotateZ(26deg);
+    overflow: hidden;
+}
+
+.small_left_nav li {
+    list-style: none;
+    margin-top: 2.5%;
+    margin-bottom: 0.5%;
+    font-size: 23px;
+    text-align: left;
+    padding-left: 15%;
+}
+
+.small_left_nav li span:hover {
+    color: #00b19e;
+    cursor: pointer;
+}
+
+.small_left_nav li.to_li, .small_left_nav li.about_li {
+    width: 60%;
+    text-align: left;
+    padding-left: 5%;
+    color: #00b19e;
+    font-family: cursive;
+    font-size: 24px;
+}
+
+.small_left_nav .github_li a img {
+    width: 100px;
+}
+
+.small_left_nav .sina_li a img {
+    width: 59px;
+    padding-left: 10%;
+}
+
+.small_left_nav .github_li, .small_left_nav .sina_li {
+    padding-left: 5%;
+}
+@media only screen and (min-width: 1100px){
+    .right_nav .background .to_github img {
+        width: 100px;
+        margin-left: 12%;
+        margin-top: 19%
+    }
+    .right_nav .background .to_sina img {
+        width: 62px;
+        margin-left: 32%;
+        margin-top: 20%
+    }
+}
+@media only screen and (max-width: 1100px) and (min-width: 850px){
+    .right_nav .background .to_github img {
+        width: 100px;
+        margin-left: 5%;
+        margin-top: 28%
+    }
+    .right_nav .background .to_sina img {
+        width: 62px;
+        margin-left: 28%;
+        margin-top: 20%
+    }
+}
+@media only screen and (max-width: 850px){
+    .right_nav .background .to_github img {
+        width: 100px;
+        margin-left: 1%;
+        margin-top: 36%
+    }
+
+    .right_nav .background .to_sina img {
+        width: 62px;
+        margin-left: 20%;
+        margin-top: 20%
+    }
+}
+@media only screen and (min-width: 800px){
+    .show_blog_name {
+        padding-top: 25px;
+        padding-bottom: 25px;
+        text-align: center;
+        font-family: cursive, "FangSong";
+        font-size: 28px;
+        color: #494949;
+        opacity: 0.8;
+        -webkit-transition: all ease 0.8s;
+        -moz-transition: all ease 0.8s;
+        -ms-transition: all ease 0.8s;
+        -o-transition: all ease 0.8s;
+        transition: all ease 0.8s;
+        height: auto;
+    }
+
+    .next_title_content .small_screen_title {
+        font-size: 26px;
+        color: transparent;
+        font-family: cursive;
+        opacity: 0;
+        margin-left: 10%;
+        -webkit-transition: all ease 0.5s;
+        -moz-transition: all ease 0.5s;
+        -ms-transition: all ease 0.5s;
+        -o-transition: all ease 0.5s;
+        transition: all ease 0.5s;
+    }
+
+    .next_title_content .active_desc {
+        padding-top: 8px;
+        font-family: cursive, "FangSong";
+        font-size: 23px;
+        opacity: 1;
+        height: auto;
+    }
+
+    .next_title_content {
+        padding-top: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
+        padding-bottom: 20px;
+        vertical-align: middle;
+        position: fixed;
+        top: 90px;
+        width: 100%;
+        z-index: 100;
+        background-color: white;
+    }
+
+    .small_left_nav {
+        display: none;
+    }
+}
+@media only screen and (max-width: 800px){
+    .small_left_nav {
+        width: 40%;
+        height: 100%;
+        background-color: white;
+        position: fixed;
+        z-index: 3000;
+        top: 0;
+        left: -72%;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        font-family: cursive,"FangSong";
+        color: #494949;
+    }
+
+    .show_blog_name {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        text-align: center;
+        font-family: cursive, "FangSong";
+        font-size: 28px;
+        color: #494949;
+        opacity: 0 !important;
+        height: 0 !important;
+        -webkit-transition: all ease 0.8s;
+        -moz-transition: all ease 0.8s;
+        -ms-transition: all ease 0.8s;
+        -o-transition: all ease 0.8s;
+        transition: all ease 0.8s;
+    }
+
+    .next_title_content .small_screen_title {
+        font-size: 26px;
+        color: #00b19e;
+        font-family: cursive;
+        margin-left: 10%;
+        -webkit-transition: all ease 0.5s;
+        -moz-transition: all ease 0.5s;
+        -ms-transition: all ease 0.5s;
+        -o-transition: all ease 0.5s;
+        transition: all ease 0.5s;
+    }
+
+    .next_title_content .active_desc {
+        padding-top: 8px;
+        font-family: cursive, "FangSong";
+        font-size: 23px;
+        opacity: 0 !important;
+        -webkit-transition: opacity 0.5s;
+        -moz-transition: opacity 0.5s;
+        -ms-transition: opacity 0.5s;
+        -o-transition: opacity 0.5s;
+        transition: opacity 0.5s;
+        height: 0;
+    }
+
+    .next_title_content {
+        padding-top: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
+        padding-bottom: 20px;
+        vertical-align: middle;
+        width: 100%;
+        top: 0 !important;
+        z-index: 100;
+        position: fixed;
+        background-color: white;
+    }
+}
+@media only screen and (max-width: 600px){
+    .small_left_nav {
+        width: 50%;
+        height: 100%;
+        background-color: white;
+        position: fixed;
+        z-index: 3000;
+        top: 0;
+        left: -72%;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        font-family: "FangSong";
+        color: #494949;
+    }
+}
+@media only screen and (max-width: 430px) {
+    .small_left_nav {
+        width: 70%;
+        height: 100%;
+        background-color: white;
+        position: fixed;
+        z-index: 3000;
+        top: 0;
+        left: -72%;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        font-family: "FangSong";
+        color: #494949;
+    }
+}
