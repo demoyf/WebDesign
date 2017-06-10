@@ -10,6 +10,18 @@
     <script src="js/home/home.js"></script>
     <link href="css/home/header_model.css" rel="stylesheet">
     <link href="css/home/home_other.css" rel="stylesheet">
+    <style>
+        .next_title_content .menu_sign_div .menu:hover {
+            cursor: pointer;
+        }
+        .next_title_content .menu_sign_div {
+            display: flex;
+            flex-direction: row;
+        }
+        .menu_sign_div {
+            font-family: cursive, "FangSong";
+        }
+    </style>
 </head>
 <body>
 <div class="header_content">
@@ -36,13 +48,19 @@
     <div class="next_title_content">
         <span class="small_screen_title">xyf</span>
         <span class="active_desc"><span class="shuxian">|</span></span>
-        <a href="#" class="menu">
+        <div class="menu_sign_div">
+            <span class="menu">
             <span class="ham">
             </span>
-        </a>
+            </span>
+            <div class="regsiter_or_sign">
+                <a href="toLogin">Sign in</a>,
+                <a href="toLogin">Sign up</a>
+            </div>
+        </div>
     </div>
     <div class="to_time_line_blog">
-        <li><a href="#" class="current">博客</a></li>
+        <li><a href="home" class="current">博客</a></li>
         <li><a href="showTimeLine">时间轴</a></li>
     </div>
     <div class="blog_content" id={$total} data-role={$per_page}>
