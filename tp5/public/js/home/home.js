@@ -120,7 +120,7 @@ $(function () {
                     $('.top_nav_content').show(0);
                     $('.tag_nav').animate({top: 510}, 550);
                     $('.next_title_content').animate({top: 343}, 550);
-                    $('.top_nav_content').animate({height: "250px"},550);
+                    $('.top_nav_content').animate({height: "250px"}, 550);
                 });
             }
             $('body').css({"background-color": "white"});
@@ -312,10 +312,8 @@ $(function () {
     initPage();
     bindPageClick();
     function initPage() {
-        /*                var total = parseInt($('.timeline_content').attr("id"));
-         var per_page = parseInt($('.timeline_content').attr("data-role"));*/
-        var total = 100;
-        var per_page = 6;
+        var total = parseInt($('.blog_content').attr("id"));
+        var per_page = parseInt($('.blog_content').attr("data-role"));
         var pageSum = 1;
         if (total == 0) {
             pageSum = 1;
@@ -366,7 +364,7 @@ $(function () {
             }
             current.prev().addClass("current");
             current.removeClass("current");
-//                    changeTimeLine();
+            changeTimeLine();
         });
         $('.to_next').click(function () {
             var current = $('.pagination_div  .number_li_div .current');
@@ -396,7 +394,7 @@ $(function () {
             }
             current.next().addClass("current");
             current.removeClass("current");
-//                    changeTimeLine();
+            changeTimeLine();
         });
     }
 
@@ -404,7 +402,46 @@ $(function () {
         $('.pagination_div .number_li_div li').click(function () {
             $('.pagination_div .number_li_div li.current').removeClass("current");
             $(this).addClass("current");
-//                    changeTimeLine();
+            changeTimeLine();
+        });
+    }
+
+    function changeTimeLine() {
+        var load = layer.load(3);
+        $('body').animate({opacity: 0.5}, 0);
+        var page = parseInt($('.pagination_div .number_li_div li.current').html());
+        $.ajax({
+            url: "index/Home/getNextPage",
+            data: {page: page},
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                var code = data.code;
+                if (code == 200) {
+                    var blogs = data.blogs.data;
+                    var myHtml = "";
+                    for (i = 0; i < blogs.length; i++) {
+                        var blog = blogs[i];
+                        myHtml += "<div class='a_blog' data-role=" + blog.id + "><div class='blog_background'>"
+                            + "<img src='img/blog_background/" + blog.background_id + ".jpg' width='100%'>"
+                            + "<p>" + blog.description + "</p></div><div class='blog_title_div'>"
+                            + "<h2 class='blog_title'>" + blog.title + "</h2>"
+                            + "<h5 class='blog_time'>" + blog.my_time + "</h5></div> </div>";
+                    }
+                    $('.blog_content').html(myHtml);
+                    var height = parseInt($('body').css('height'));
+                    $('body').animate({scrollTop: height, opacity: 1}, 400, function () {
+                        layer.close(load);
+                    });
+                } else {
+                    layer.close(load);
+                    layer.msg('发生了不可知的错误', {icon: 5});
+                }
+            },
+            error: function () {
+                layer.close(load);
+                layer.msg('发生了不可知的错误', {icon: 5});
+            }
         });
     }
 });

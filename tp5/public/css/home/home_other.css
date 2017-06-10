@@ -452,3 +452,68 @@
     cursor: pointer;
     font-family: cursive, "FangSong";
 }
+.pagination_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 100px;
+}
+.pagination_div .number_li_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.pagination_div  li {
+    list-style: none;
+    font-size: 18px;
+    color: #494949;
+}
+.pagination_div  li {
+    margin: 0 1%;
+}
+.pagination_div .number_li_div li{
+    margin: 0 6px;
+}
+.pagination_div  li::after {
+    content: '';
+    width: 0%;
+    height: 1px;
+    display: block;
+    background-color: #00b19e;
+    -webkit-transition: width ease 0.3s;
+    -moz-transition: width ease 0.3s;
+    -ms-transition: width ease 0.3s;
+    -o-transition: width ease 0.3s;
+    transition: width ease 0.3s;
+}
+.pagination_div  li:hover::after {
+    content: '';
+    width: 120%;
+    height: 1px;
+    display: block;
+    background-color: #00b19e;
+    -webkit-transition: width ease 0.3s;
+    -moz-transition: width ease 0.3s;
+    -ms-transition: width ease 0.3s;
+    -o-transition: width ease 0.3s;
+    transition: width ease 0.3s;
+}
+.pagination_div .number_li_div li:hover {
+    color: #00b19e;
+    cursor: pointer;
+}
+.pagination_div .number_li_div .current {
+    color: #00b19e;
+}
+.pagination_div .number_li_div .current::after {
+    content: '';
+    width: 110%;
+    height: 1px;
+    display: block;
+    background-color: #00b19e;
+}
+.pagination_div .to_next:hover, .pagination_div .to_prev:hover{
+    color: #00b19e;
+    cursor: pointer;
+}
