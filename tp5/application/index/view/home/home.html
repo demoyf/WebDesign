@@ -10,6 +10,7 @@
     <script src="js/home/home.js"></script>
     <link href="css/home/header_model.css" rel="stylesheet">
     <link href="css/home/home_other.css" rel="stylesheet">
+    <link rel="icon" href="img/page_icon.png">
     <style>
         .next_title_content .menu_sign_div .menu:hover {
             cursor: pointer;
@@ -96,15 +97,10 @@
     <div class="left_menu_icon">
     </div>
     <div class="tag_content">
-        <a>first</a>
-        <a>first</a>
-        <a>first</a>
-        <a>first</a>
-        <a>first</a>
-        <a>first</a>
-        <a>first</a>
-        <a>first</a>
-        <a>first</a>
+        <a class="all">All</a>
+        {volist name="tags" id = "tag"}
+        <a data-role={$tag.id}>{$tag.tag}</a>
+        {/volist}
     </div>
 </div>
 <div class="small_left_nav">

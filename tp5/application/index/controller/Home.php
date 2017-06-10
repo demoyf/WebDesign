@@ -12,6 +12,7 @@ use think\Exception;
 use think\Request;
 use think\View;
 use app\index\model\Blog\MyBlog;
+use app\index\model\Blog\Tag as TagModel;
 class Home extends Controller
 {
     public function home()
@@ -22,6 +23,8 @@ class Home extends Controller
         $temp = json_encode($blogs);
         $view->total = json_decode($temp)->total;
         $view->per_page = json_decode($temp)->per_page;
+        $tag = TagModel::all();
+        $view->tags = $tag;
         return $view->fetch();
     }
 
