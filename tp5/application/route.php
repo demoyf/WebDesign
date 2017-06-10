@@ -28,5 +28,5 @@ return [
     'showBlogType' => 'index/BlogSave/showType',
     'showTimeLine' => 'index/TimeLine/showTimeLine',
     'home' => 'index/Home/home',
-
+    'toLogin'=>'index/Login/TologinPage'
 ];
