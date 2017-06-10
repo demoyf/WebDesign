@@ -6,7 +6,7 @@ $(function () {
     //            判断所有的img都加载完成，必须是Deferred对象
     initPage();
     var defereds = [];
-    $("img").each(function() {
+    $(".timeline_content img").each(function() {
         var dfd = $.Deferred();
         $(this).load(dfd.resolve);
         defereds.push(dfd);
