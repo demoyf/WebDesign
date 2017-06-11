@@ -21,11 +21,11 @@
     .timeline_content {
         width: 100%;
         height: auto;
-        margin-top: 160px;
+        margin-top: 100px;
     }
 
     .left_blog, .right_blog {
-        width: 96%;
+        width: 80%;
         display: flex;
         flex-direction: row-reverse;
         -webkit-flex-direction: row-reverse;
@@ -35,7 +35,7 @@
 
     .content {
         /*box-shadow: 1px 1px 10px rgba(0,0,0,0.3);*/
-        width: 80%;
+        width: 90%;
         height: auto;
         background-color: white;
         border-radius: 15px;
@@ -124,5 +124,37 @@
          width: 100%;
          justify-content: center;
          margin-bottom: 120px;
+    }
+    .header_content .to_time_line_blog {
+        margin-top: 150px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+@media only screen and (max-width:400px){
+    .left_blog, .right_blog {
+        width: 96%;
+        display: flex;
+        flex-direction: row-reverse;
+        -webkit-flex-direction: row-reverse;
+        margin-right: 3%;
+        margin-bottom: 3%;
+    }
+}
+@media only screen and (max-width:500px){
+    .time_content .time {
+        color: slateblue;
+        font-size: 2.5vw;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+        width: 45px;
+        height: 45px;
+        padding: 3px;
+        border-radius: 50%;
+        border: 1px solid white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 }

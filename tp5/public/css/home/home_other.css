@@ -461,7 +461,9 @@
     background: #00b19e;
     display: block;
 }
-
+.header_content .to_time_line_blog li a.current {
+    color: #00b19e;
+}
 .a_blog:hover {
     cursor: pointer;
 }

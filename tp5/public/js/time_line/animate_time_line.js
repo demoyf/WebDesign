@@ -4,6 +4,7 @@
 $(function () {
     //            预加载，加载完毕显示主页面
     //            判断所有的img都加载完成，必须是Deferred对象
+    var isFail = true;
     initPage();
     var defereds = [];
     $("img").each(function () {
@@ -12,7 +13,8 @@ $(function () {
         defereds.push(dfd);
     });
     $.when.apply(null, defereds).done(function () {
-        $('#loading-center-absolute').animate({left: "-20%", "opacity": 0}, 3000, function () {
+        isFail = false;
+        $('#loading-center-absolute').animate({left: "-20%", "opacity": 0}, 2000, function () {
             $('.header_content').show(0);
             $('#loading').animate({opacity: 0}, 300, function () {
                 $('#loading').hide(0);
@@ -20,6 +22,15 @@ $(function () {
         });
     });
 
+    var loadTime = setTimeout(function () {
+        if (isFail) {
+            $('.header_content').show(0);
+            $('#loading').animate({opacity: 0}, 300, function () {
+                $('#loading').hide(0);
+                clearTimeout(loadTime);
+            });
+        }
+    }, 4000);
 //            滚动显示回到顶部按钮
     var isMove = false;
     $(window).scroll(function () {
