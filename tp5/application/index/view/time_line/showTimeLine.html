@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="css/home/header_model.css">
     <link rel="icon" href="img/page_icon.png">
     <script src="js/layer.js"></script>
-    <script src="js/time_line/header.js"></script>
     <script src="js/time_line/animate_time_line.js"></script>
+    <script src="js/time_line/header.js"></script>
 </head>
 <body>
 <div id="loading">
@@ -73,7 +73,10 @@
             </div>
         </div>
     </div>
-
+    <div class="to_time_line_blog">
+        <li><a href="home" >博客</a></li>
+        <li><a href="showTimeLine" class="current">时间轴</a></li>
+    </div>
     <!--数据最好先在PHP那里处理完毕再传递过来，还想直接在这里处理，结果GG了，没有代码提示。-->
     <div class="timeline_content" id={$total} data-role={$per_page}>
         {volist name="blogs" id="blog" key="i"}

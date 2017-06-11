@@ -205,3 +205,55 @@
     background-color: #00b19e;
     color: white;
 }
+.header_content .to_time_line_blog li {
+    list-style: none;
+    margin: 0 30px;
+}
+
+.header_content .to_time_line_blog li a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: cursive, "FangSong";
+    font-size: 22px;
+}
+
+.header_content .to_time_line_blog li a::after {
+    content: '';
+    width: 0%;
+    height: 1px;
+    background: #00b19e;
+    display: block;
+    -webkit-transition: all ease 0.3s;
+    -moz-transition: all ease 0.3s;
+    -ms-transition: all ease 0.3s;
+    -o-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+}
+
+.header_content .to_time_line_blog li a:hover {
+    color: #00b19e;
+}
+
+.header_content .to_time_line_blog li:hover a::after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: #00b19e;
+    display: block;
+    -webkit-transition: all ease 0.3s;
+    -moz-transition: all ease 0.3s;
+    -ms-transition: all ease 0.3s;
+    -o-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+}
+
+.header_content .to_time_line_blog li a.current::after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: #00b19e;
+    display: block;
+}
+.header_content .to_time_line_blog li a.current {
+    color: #00b19e;
+}
