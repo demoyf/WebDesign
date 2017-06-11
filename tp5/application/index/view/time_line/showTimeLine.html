@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <title>Title</title>
+    <title>时间轴</title>
     <!--justify-content: 水平位置的摆放方式。align-items：垂直方向的摆放方式
     flex 和position：absolute 同时使用，子元素的flex无效。flex可以嵌套使用
     vw:viewport 百分比，1vw = 1%屏幕宽度，响应式字体
@@ -16,7 +16,10 @@
     <link rel="stylesheet" href="css/time_line_blog/small_screen.css">
     <link rel="stylesheet" href="css/time_line_blog/effect_details.css">
     <link rel="stylesheet" href="css/time_line_blog/show_timeline_other.css">
+    <link rel="stylesheet" href="css/home/header_model.css">
+    <link rel="icon" href="img/page_icon.png">
     <script src="js/layer.js"></script>
+    <script src="js/time_line/header.js"></script>
     <script src="js/time_line/animate_time_line.js"></script>
 </head>
 <body>
@@ -35,444 +38,133 @@
         </div>
     </div>
 </div>
-<!--数据最好先在PHP那里处理完毕再传递过来，还想直接在这里处理，结果GG了，没有代码提示。-->
-<div class="timeline_content" style="display: none;" id={$total} data-role={$per_page}>
-    {volist name="blogs" id="blog" key="i"}
-    <div style="display: none">
-        {$effect = ("effect_".($i%4+1));$src = "img/blog_background/".($blog.background_id).".jpg"}
-    </div>
-    {if($i%2==0)}
-    <div class="left_blog" data-role ={$blog.id}>
-        <div class="content">
-            <figure class={$effect}>
-                <img src= {$src} />
-                <figcaption>
-                    <h2>{$blog.title}</h2>
-                    <p>{$blog.description}</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-left">
-        </div>
-        <div class="time_content" data-role="left">
-            <div class="time" data-role= {$blog.detail_time}>
-                <span>{$blog.day}<sup>{$blog.sup}</sup></span>
-                <span>{$blog.month}</span>
-                <span>{$blog.year}</span>
-            </div>
-            <div class="line">
+<div class="header_content" style="display: none;">
+    <div class="top_nav_content">
+        <nav class="left_nav">
+            <li><span class="to_blog_link">博客</span></li>
+            <li><span class="to_image_link">图片</span></li>
+            <li><span class="to_music_link">音乐</span></li>
+            <li><span class="to_collection_link">收藏</span></li>
+        </nav>
+        <div class="right_nav">
+            <div class="background">
+                <a class="to_github" href="https://github.com/demoyf/" target="_blank"><img
+                        src="img/link/github_icon.jpg" width="100%"></a>
+                <a class="to_sina" href="http://weibo.com/2545689252/profile?rightmod=1&wvr=6&mod=personinfo"
+                   target="_blank">
+                    <img src="img/link/weibo.png" width="100%"></a>
             </div>
         </div>
     </div>
-    {else}
-    <div class="right_blog" data-role={$blog.id}>
-        <div class="content">
-            <figure class={$effect}>
-                <img src= {$src} />
-                <figcaption>
-                    <h2>{$blog.title}</h2>
-                    <p>{$blog.description}</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-right">
-        </div>
-        <div class="time_content" data-role="right">
-            <div class="time" data-role={$blog.detail_time}>
-                <span>{$blog.day}<sup>{$blog.sup}</sup></span>
-                <span>{$blog.month}</span>
-                <span>{$blog.year}</span>
-            </div>
-            <div class="line">
+    <div class="show_blog_name">
+        <span>XYF的个人主页</span>
+    </div>
+    <div class="next_title_content">
+        <span class="small_screen_title">xyf</span>
+        <span class="active_desc"><span class="shuxian">|</span></span>
+        <div class="menu_sign_div">
+            <span class="menu">
+            <span class="ham">
+            </span>
+            </span>
+            <div class="regsiter_or_sign">
+                <a href="toLogin">Sign in</a>,
+                <a href="toLogin">Sign up</a>
             </div>
         </div>
     </div>
-    {/if}
-    {/volist}
-    <!--<div class="left_blog">
-        <div class="content">
-            <figure class="effect_1">
-                <img src="img/blog_background/1.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
+
+    <!--数据最好先在PHP那里处理完毕再传递过来，还想直接在这里处理，结果GG了，没有代码提示。-->
+    <div class="timeline_content" id={$total} data-role={$per_page}>
+        {volist name="blogs" id="blog" key="i"}
+        <div style="display: none">
+            {$effect = ("effect_".($i%4+1));$src = "img/blog_background/".($blog.background_id).".jpg"}
         </div>
-        <div class="arrow-left">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
+        {if($i%2==0)}
+        <div class="left_blog" data-role ={$blog.id}>
+            <div class="content">
+                <figure class={$effect}>
+                    <img src= {$src} />
+                    <figcaption>
+                        <h2>{$blog.title}</h2>
+                        <p>{$blog.description}</p>
+                    </figcaption>
+                </figure>
             </div>
-            <div class="line">
+            <div class="arrow-left">
+            </div>
+            <div class="time_content" data-role="left">
+                <div class="time" data-role= {$blog.detail_time}>
+                    <span>{$blog.day}<sup>{$blog.sup}</sup></span>
+                    <span>{$blog.month}</span>
+                    <span>{$blog.year}</span>
+                </div>
+                <div class="line">
+                </div>
             </div>
         </div>
+        {else}
+        <div class="right_blog" data-role={$blog.id}>
+            <div class="content">
+                <figure class={$effect}>
+                    <img src= {$src} />
+                    <figcaption>
+                        <h2>{$blog.title}</h2>
+                        <p>{$blog.description}</p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="arrow-right">
+            </div>
+            <div class="time_content" data-role="right">
+                <div class="time" data-role={$blog.detail_time}>
+                    <span>{$blog.day}<sup>{$blog.sup}</sup></span>
+                    <span>{$blog.month}</span>
+                    <span>{$blog.year}</span>
+                </div>
+                <div class="line">
+                </div>
+            </div>
+        </div>
+        {/if}
+        {/volist}
     </div>
-    <div class="right_blog">
-        <div class="content">
-            <figure class="effect_2">
-                <img src="img/blog_background/12.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
+    <div class="my_pagination">
+        <div class="left_turn"><span>&lt;</span></div>
+        <div class="pagination_page">
+            <div class="current"><span>1</span></div>
+            <div><span>2</span></div>
+            <div><span>3</span></div>
+            <div><span>4</span></div>
         </div>
-        <div class="arrow-right">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
+        <div class="right_turn"><span>&gt;</span></div>
     </div>
-    <div class="left_blog">
-        <div class="content">
-            <figure class="effect_3">
-                <img src="img/blog_background/2.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-left">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
-    </div>
-    <div class="right_blog">
-        <div class="content">
-            <figure class="effect_4">
-                <img src="img/blog_background/3.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-right">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
-    </div>
-    <div class="left_blog">
-        <div class="content">
-            <figure class="effect_1">
-                <img src="img/blog_background/4.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-left">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
-    </div>
-    <div class="right_blog">
-        <div class="content">
-            <figure class="effect_2">
-                <img src="img/blog_background/5.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-right">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
-    </div>
-    <div class="left_blog">
-        <div class="content">
-            <figure class="effect_3">
-                <img src="img/blog_background/6.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-left">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
-    </div>
-    <div class="right_blog">
-        <div class="content">
-            <figure class="effect_4">
-                <img src="img/blog_background/7.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-right">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
-    </div>
-    <div class="left_blog">
-        <div class="content">
-            <figure class="effect_3">
-                <img src="img/blog_background/8.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-left">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
-    </div>
-    <div class="right_blog">
-        <div class="content">
-            <figure class="effect_2">
-                <img src="img/blog_background/9.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-right">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
-    </div>
-    <div class="left_blog">
-        <div class="content">
-            <figure class="effect_1">
-                <img src="img/blog_background/10.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-left">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
-    </div>
-    <div class="right_blog">
-        <div class="content">
-            <figure class="effect_2">
-                <img src="img/blog_background/11.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-right">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
-    </div>
-    <div class="left_blog">
-        <div class="content">
-            <figure class="effect_3">
-                <img src="img/blog_background/12.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-left">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
-    </div>
-    <div class="right_blog">
-        <div class="content">
-            <figure class="effect_4">
-                <img src="img/blog_background/13.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-right">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
-    </div>
-    <div class="left_blog">
-        <div class="content">
-            <figure class="effect_1">
-                <img src="img/blog_background/14.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-left">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
-    </div>
-    <div class="right_blog">
-        <div class="content">
-            <figure class="effect_3">
-                <img src="img/blog_background/15.jpg">
-                <figcaption>
-                    <h2>这是一篇博客</h2>
-                    <p>这是博客的详细描述，哈哈哈哈哈，要看清楚这个描述说，才能点击，
-                        好的，哈哈哈电视卡好的开始的撒环保健康喝多少啊</p>
-                </figcaption>
-            </figure>
-        </div>
-        <div class="arrow-right">
-        </div>
-        <div class="time_content">
-            <div class="time">
-                <span>12<sup>TH</sup></span>
-                <span>APR</span>
-                <span>2017</span>
-            </div>
-            <div class="line">
-            </div>
-        </div>
-    </div>-->
-</div>
-<div class="my_pagination">
-    <div class="left_turn"><span>&lt;</span></div>
-    <div class="pagination_page">
-        <div class="current"><span>1</span></div>
-        <div><span>2</span></div>
-        <div><span>3</span></div>
-        <div><span>4</span></div>
-    </div>
-    <div class="right_turn"><span>&gt;</span></div>
 </div>
 <div class="to_top">
     <svg width="70" height="70" viewBox="0,0,70,70">
         <path d="M 15,32 L 30,12 L 45,32 M 30,14 L 30,52"
               stroke-linecap="round" stroke-width="5px" stroke="skyblue" fill="none"/>
     </svg>
+</div>
+<div class="small_left_nav">
+    <li class="to_li">To</li>
+    <li><span>博客</span></li>
+    <li><span>图片</span></li>
+    <li><span>音乐</span></li>
+    <li><span>收藏</span></li>
+    <li class="to_sign_in">Sign in,up</li>
+    <li><a href="toLogin">Sign in</a></li>
+    <li><a href="toLogin">Sign up</a></li>
+    <li class="about_li">About</li>
+    <li class="github_li">
+        <a class="to_github" href="https://github.com/demoyf/" target="_blank"><img
+                src="img/link/github_icon.jpg" width="100%"></a>
+    </li>
+    <li class="sina_li">
+        <a class="to_sina" href="http://weibo.com/2545689252/profile?rightmod=1&wvr=6&mod=personinfo"
+           target="_blank">
+            <img src="img/link/weibo.png" width="100%"></a>
+    </li>
 </div>
 </body>
 </html>

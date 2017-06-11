@@ -10,18 +10,7 @@
     <script src="js/home/home.js"></script>
     <link href="css/home/header_model.css" rel="stylesheet">
     <link href="css/home/home_other.css" rel="stylesheet">
-    <style>
-        .next_title_content .menu_sign_div .menu:hover {
-            cursor: pointer;
-        }
-        .next_title_content .menu_sign_div {
-            display: flex;
-            flex-direction: row;
-        }
-        .menu_sign_div {
-            font-family: cursive, "FangSong";
-        }
-    </style>
+    <link rel="icon" href="img/page_icon.png">
 </head>
 <body>
 <div class="header_content">
@@ -96,23 +85,20 @@
     <div class="left_menu_icon">
     </div>
     <div class="tag_content">
-        <a>first</a>
-        <a>first</a>
-        <a>first</a>
-        <a>first</a>
-        <a>first</a>
-        <a>first</a>
-        <a>first</a>
-        <a>first</a>
-        <a>first</a>
+        <a class="all">All</a>
+        {volist name="tags" id = "tag"}
+        <a data-role={$tag.id}>{$tag.tag}</a>
+        {/volist}
     </div>
-</div>
-<div class="small_left_nav">
+</div><div class="small_left_nav">
     <li class="to_li">To</li>
     <li><span>博客</span></li>
     <li><span>图片</span></li>
     <li><span>音乐</span></li>
     <li><span>收藏</span></li>
+    <li class="to_sign_in">Sign in,up</li>
+    <li><a href="toLogin">Sign in</a></li>
+    <li><a href="toLogin">Sign up</a></li>
     <li class="about_li">About</li>
     <li class="github_li">
         <a class="to_github" href="https://github.com/demoyf/" target="_blank"><img
@@ -124,5 +110,6 @@
             <img src="img/link/weibo.png" width="100%"></a>
     </li>
 </div>
+
 </body>
 </html>

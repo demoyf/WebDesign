@@ -14,8 +14,6 @@ body {
     .content {
         width: 300px;
         height: 550px;
-        left: 40%;
-        top: 15%;
         position: absolute;
         -webkit-transform-style:preserve-3d;
         transform-style: preserve-3d;
@@ -32,8 +30,6 @@ body {
     .content {
         width: 270px;
         height: 495px;
-        left: 40%;
-        top: 5%;
         position: absolute;
         -webkit-transform-style:preserve-3d;
         transform-style: preserve-3d;
@@ -50,8 +46,6 @@ body {
     .content {
         width: 240px;
         height: 440px;
-        left: 40%;
-        top: 5%;
         position: absolute;
         -webkit-transform-style:preserve-3d;
         transform-style: preserve-3d;
@@ -68,8 +62,6 @@ body {
     .content {
         width: 270px;
         height: 495px;
-        left: 40%;
-        top: 5%;
         position: absolute;
         -webkit-transform-style:preserve-3d;
         transform-style: preserve-3d;
@@ -86,8 +78,6 @@ body {
     .content {
         width: 240px;
         height: 440px;
-        left: 40%;
-        top: 5%;
         position: absolute;
         -webkit-transform-style:preserve-3d;
         transform-style: preserve-3d;
@@ -104,8 +94,6 @@ body {
     .content {
         width: 210px;
         height: 385px;
-        left: 40%;
-        top: 5%;
         position: absolute;
         -webkit-transform-style:preserve-3d;
         transform-style: preserve-3d;
@@ -119,6 +107,9 @@ body {
 }
 .stage {
     perspective: 80000px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 /*注意，要实现3D翻转，需要指定绝对位置，然后将几张图片都叠在一起，之后再进行相应的翻转和移动*/
 .login {
@@ -272,7 +263,7 @@ a.go_to_forget{
     text-align: center;
     margin-top: 8%;
     font-size: 16px;
-    color: gray;
+    color: rgba(255,255,255,0.6);
 }
 
 .register_info a {
@@ -292,14 +283,14 @@ button:hover {
     cursor: pointer;
 }
 ::-moz-placeholder {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.65);
 }
 ::-webkit-input-placeholder {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.65);
 }
 :-ms-input-placeholder {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.65);
 }
 :-moz-placeholder {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.65);
 }

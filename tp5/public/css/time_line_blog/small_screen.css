@@ -21,6 +21,7 @@
     .timeline_content {
         width: 100%;
         height: auto;
+        margin-top: 160px;
     }
 
     .left_blog, .right_blog {
@@ -118,10 +119,10 @@
         height: 100%;
     }
      .my_pagination {
-        margin-left: 10%;
-        margin-top: 10%;
-        margin-bottom: 40%;
-        display: flex;
-        flex-direction: row;
+         display: flex;
+         flex-direction: row;
+         width: 100%;
+         justify-content: center;
+         margin-bottom: 120px;
     }
 }
