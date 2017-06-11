@@ -315,25 +315,6 @@
         flex-direction: row;
         justify-content: center;
     }
-
-    .menu_sign_div .regsiter_or_sign {
-        vertical-align: middle;
-        padding-top: 5px;
-        margin-left: 10px;
-        margin-right: 20px;
-        color: #494949;
-    }
-
-    .menu_sign_div .regsiter_or_sign a {
-        text-decoration: none;
-        color: #494949;
-    }
-
-    .menu_sign_div .regsiter_or_sign a:hover {
-        color: #00b19e;
-        cursor: pointer;
-        text-decoration: none;
-    }
 }
 
 @media only screen and (max-width: 800px) {
@@ -342,14 +323,6 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
-    }
-
-    .menu_sign_div .regsiter_or_sign {
-        display: none;
-    }
-
-    .menu_sign_div .menu .ham {
-        margin-right: 20px;
     }
 }
 

@@ -70,6 +70,9 @@ body {
     -o-transition: all ease 0.5s;
     transition: all ease 0.5s;
 }
+.next_title_content .menu:hover {
+    cursor: pointer;
+}
 
 .final::before {
     -webkit-transition: all ease 0.5s;
@@ -172,7 +175,7 @@ body {
     list-style: none;
     margin-top: 2.5%;
     margin-bottom: 0.5%;
-    font-size: 23px;
+    font-size: 21px;
     text-align: left;
     padding-left: 15%;
 }
@@ -182,13 +185,13 @@ body {
     cursor: pointer;
 }
 
-.small_left_nav li.to_li, .small_left_nav li.about_li {
+.small_left_nav li.to_li, .small_left_nav li.about_li,.small_left_nav li.to_sign_in {
     width: 60%;
     text-align: left;
     padding-left: 5%;
     color: #00b19e;
     font-family: cursive;
-    font-size: 24px;
+    font-size: 22px;
 }
 
 .small_left_nav .github_li a img {
@@ -200,7 +203,7 @@ body {
     padding-left: 10%;
 }
 
-.small_left_nav .github_li, .small_left_nav .sina_li {
+.small_left_nav .github_li, .small_left_nav .sina_li,.small_left_nav .to_sign_in{
     padding-left: 5%;
 }
 @media only screen and (min-width: 1100px){
@@ -279,6 +282,7 @@ body {
         height: auto;
     }
 
+
     .next_title_content {
         padding-top: 20px;
         display: flex;
@@ -295,6 +299,29 @@ body {
     }
     .small_left_nav {
         display: none;
+    }
+    .menu_sign_div {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .menu_sign_div .regsiter_or_sign {
+        vertical-align: middle;
+        padding-top: 7px;
+        margin-left: 10px;
+        margin-right: 20px;
+        color: #494949;
+    }
+
+    .menu_sign_div .regsiter_or_sign a {
+        text-decoration: none;
+        color: #494949;
+    }
+
+    .menu_sign_div .regsiter_or_sign a:hover {
+        color: #00b19e;
+        cursor: pointer;
+        text-decoration: none;
     }
 }
 @media only screen and (max-width: 800px){
@@ -369,6 +396,13 @@ body {
         position: fixed;
         background-color: white;
     }
+    .menu_sign_div .regsiter_or_sign {
+        display: none;
+    }
+
+    .menu_sign_div .menu .ham {
+        margin-right: 20px;
+    }
 }
 @media only screen and (max-width: 600px){
     .small_left_nav {
@@ -403,4 +437,12 @@ body {
         font-family: "FangSong";
         color: #494949;
     }
+}
+.small_left_nav li a {
+    text-decoration: none;
+    color: #494949;
+    font-size: 20px;
+}
+.small_left_nav li a:hover {
+    color: #00b19e;
 }
