@@ -70,9 +70,6 @@ body {
     -o-transition: all ease 0.5s;
     transition: all ease 0.5s;
 }
-.next_title_content .menu:hover {
-    cursor: pointer;
-}
 
 .final::before {
     -webkit-transition: all ease 0.5s;
@@ -446,3 +443,14 @@ body {
 .small_left_nav li a:hover {
     color: #00b19e;
 }
+.next_title_content .menu_sign_div .menu:hover {
+    cursor: pointer;
+}
+.next_title_content .menu_sign_div {
+    display: flex;
+    flex-direction: row;
+}
+.menu_sign_div {
+    font-family: cursive, "FangSong";
+}
+
