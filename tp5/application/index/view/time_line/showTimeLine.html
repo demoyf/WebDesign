@@ -38,7 +38,7 @@
         </div>
     </div>
 </div>
-<div class="header_content" style="display: none;">
+<div class="header_content" style="display: none;" data-role={$phone}>
     <div class="top_nav_content">
         <nav class="left_nav">
             <li><span class="to_blog_link">博客</span></li>
@@ -68,8 +68,12 @@
             </span>
             </span>
             <div class="regsiter_or_sign">
+                {if($phone=="404")}
                 <a href="toLogin">Sign in</a>,
                 <a href="toLogin">Sign up</a>
+                {else}
+                <a class="user_name_a">{$nickname}</a>
+                {/if}
             </div>
         </div>
     </div>
@@ -155,9 +159,14 @@
     <li><span>图片</span></li>
     <li><span>音乐</span></li>
     <li><span>收藏</span></li>
+    {if($phone=="404")}
     <li class="to_sign_in">Sign in,up</li>
     <li><a href="toLogin">Sign in</a></li>
     <li><a href="toLogin">Sign up</a></li>
+    {else}
+    <li class="to_sign_in">Personal</li>
+    <li class="user_name_small_left"><a>{$nickname}</a></li>
+    {/if}
     <li class="about_li">About</li>
     <li class="github_li">
         <a class="to_github" href="https://github.com/demoyf/" target="_blank"><img

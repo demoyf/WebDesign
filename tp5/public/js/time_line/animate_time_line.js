@@ -98,7 +98,7 @@ $(function () {
             bindPageClick();
         }
         $('.left_turn').click(function () {
-            var current = $('.current');
+            var current = $('.pagination_page .current');
             var page = current.children("span").html();
             page = parseInt(page);
             var nextSum = current.nextAll().length;
@@ -136,7 +136,7 @@ $(function () {
             changeTimeLine();
         });
         $('.right_turn').click(function () {
-            var current = $('.current');
+            var current = $('.pagination_page .current');
             var page = current.children("span").html();
             page = parseInt(page);
             var nextSum = current.nextAll().length;
@@ -179,7 +179,7 @@ $(function () {
 
     function bindPageClick() {
         $('.pagination_page div span').click(function () {
-            $('.current').removeClass("current");
+            $('.pagination_page .current').removeClass("current");
             $(this).parent().addClass("current");
             changeTimeLine();
         });
@@ -188,7 +188,7 @@ $(function () {
 //            ajax刷新时间轴数据
     function changeTimeLine() {
         var load = layer.load(3);
-        var page = parseInt($('.current').children("span").html());
+        var page = parseInt($('.pagination_page .current').children("span").html());
         $('.timeline_content').animate({opacity: 0.5}, 0);
         $.ajax({
             url: 'index/TimeLine/getPageById',

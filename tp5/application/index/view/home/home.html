@@ -13,7 +13,7 @@
     <link rel="icon" href="img/page_icon.png">
 </head>
 <body>
-<div class="header_content">
+<div class="header_content" data-role={$phone}>
     <div class="top_nav_content">
         <nav class="left_nav">
             <li><span class="to_blog_link">博客</span></li>
@@ -43,8 +43,12 @@
             </span>
             </span>
             <div class="regsiter_or_sign">
+                {if($phone=="404")}
                 <a href="toLogin">Sign in</a>,
                 <a href="toLogin">Sign up</a>
+                {else}
+                <a class="user_name_a">{$nickname}</a>
+                {/if}
             </div>
         </div>
     </div>
@@ -97,8 +101,12 @@
     <li><span>音乐</span></li>
     <li><span>收藏</span></li>
     <li class="to_sign_in">Sign in,up</li>
+    {if($phone=="404")}
     <li><a href="toLogin">Sign in</a></li>
     <li><a href="toLogin">Sign up</a></li>
+    {else}
+    <li class="user_name_small_left"><a>{$nickname}</a></li>
+    {/if}
     <li class="about_li">About</li>
     <li class="github_li">
         <a class="to_github" href="https://github.com/demoyf/" target="_blank"><img
@@ -110,6 +118,5 @@
             <img src="img/link/weibo.png" width="100%"></a>
     </li>
 </div>
-
 </body>
 </html>

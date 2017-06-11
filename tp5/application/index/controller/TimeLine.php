@@ -2,10 +2,11 @@
 namespace app\index\controller;
 use app\index\model\Blog\MyBlog;
 use think\Controller;
+use think\Cookie;
 use think\Exception;
 use think\Request;
 use think\View;
-
+use app\index\model\Personal\Info as InfoModel;
 /**
  * Created by PhpStorm.
  * User: alone
@@ -16,6 +17,7 @@ class TimeLine extends Controller
 {
     public function showTimeLine()
     {
+
         $monthShort = array("JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC");
         $view = new View("time_line/showTimeLine");
         $blogs = MyBlog::where('id', '>', 0)->order("my_time")->paginate(8);
@@ -40,6 +42,24 @@ class TimeLine extends Controller
             }else{
                 $blog['sup'] = "th";
             }
+        }
+        $isHas = false;
+        $phone = "";
+        $info = "";
+        if (Cookie::has('phone', 'xyf_')) {
+            $isHas = true;
+            $phone = Cookie::get('phone', 'xyf_');
+            $info = InfoModel::get(['phone'=>$phone]);
+            if ($info ==null) {
+                $isHas = false;
+            }
+        }
+        if ($isHas) {
+            $view->phone = $phone;
+            $view->nickname = $info['nickname'];
+        }else{
+            $view->phone = "404";
+            $view->nickname = "404";
         }
         return $view->fetch();
     }
