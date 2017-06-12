@@ -50,6 +50,8 @@ class SendEmail extends Controller
         $mail->Password=Config::get('MAIL_PASSWORD');
         // 发送邮件。
         $info = InfoModel::get(['phone'=>$email]);
+/*        $arr = array('code'=>200,"ver"=>$vercode);
+        echo json_encode($arr);*/
         if ($info == null) {
             if ($mail->send()) {
                 $arr = array('code'=>200,"ver"=>$vercode);
