@@ -12,125 +12,6 @@
     <link rel="stylesheet" href="css/login_and_register/register_page.css">
     <link rel="stylesheet" href="css/login_and_register/confirm_password.css">
     <link rel="stylesheet" href="css/login_and_register/forget_password.css">
-    <script>
-        $(function () {
-            $('.login_button_div .login_button').click(function () {
-                var user_input = $('.login .login_form .input_username');
-                var user_name = user_input.val();
-                var user_password = $('.login .login_form .input_password');
-                var password = user_password.val();
-                if (!user_name.match(/^1[34578]\d{9}$/)) {
-                    layer.alert('请输入正确的手机号码', {
-                        skin: 'layui-layer-lan'
-                        ,closeBtn: 0
-                        ,anim: 4 //动画类型
-                        ,icon:5
-                    });
-                    return false;
-                }
-                if(password==null||password==""||password.length<6) {
-                    layer.alert('密码长度不正确', {
-                        skin: 'layui-layer-lan'
-                        ,closeBtn: 0
-                        ,anim: 2 //动画类型
-                        ,icon:5
-                    });
-                    return false;
-                }
-//                alert(user_name);
-                $.ajax({
-                    url:"index/Login/checkUser",
-                    type:"post",
-                    data:{userName:user_name,password:password},
-                    success:function (data) {
-                        if (data==200) {
-//                          登录之后禁止后退！！！
-                           window.location.replace("home");
-                        }else {
-                            layer.alert('账号或密码错误', {
-                                skin: 'layui-layer-lan'
-                                ,closeBtn: 0
-                                ,icon:5
-                            });
-                        }
-                    },
-                    error:function () {
-                        layer.alert('未知的错误发生了', {
-                            skin: 'layui-layer-lan'
-                            ,closeBtn: 0
-                            ,icon:5
-                        });
-                    }
-                });
-            });
-            $('.get_vcode .go_enter_password_button').attr("disabled", true);
-            $('.get_vcode .go_enter_password_button').css({opacity: 0.5});
-            var verCode = "";
-            $('.get_vcode  .register_vcode_div .get_vcode_button').click(function () {
-                var email_input = $('.register_phone_div .register_input_phone').val();
-                var nickname = $('.get_vcode .nickname_div .input_nickname').val();
-                if (email_input==null||email_input==""){
-                    layer.alert('请输入邮箱', {
-                        skin: 'layui-layer-lan'
-                        ,closeBtn: 0
-                        ,anim: 4 //动画类型
-                        ,icon:5
-                    });
-                    return false;
-                }
-                $.ajax({
-                    url:"index/SendEmail/send",
-                    data:{email:email_input},
-                    type:"post",
-                    dataType:"json",
-                    success:function (data) {
-                        if (data.code==200) {
-                            $('.get_vcode .go_enter_password_button').attr("disabled", false);
-                            $('.get_vcode .go_enter_password_button').css({opacity: 1});
-                            verCode = data.ver;
-                        }else {
-                            layer.alert('邮件发送失败', {
-                                skin: 'layui-layer-lan'
-                                ,closeBtn: 0
-                                ,icon:5
-                            });
-                            return false;
-                        }
-                    },
-                    error:function () {
-                        layer.alert('未知的错误发生了', {
-                            skin: 'layui-layer-lan'
-                            ,closeBtn: 0
-                            ,icon:5
-                        });
-                        return false;
-                    }
-                });
-            });
-            $('.get_vcode .nickname_div .input_nickname').bind("blur", function () {
-                var nickname = $(this).val();
-                if (nickname==""||nickname==null) {
-                    return false;
-                }else {
-                    $.ajax({
-                        url:"index/Login/checkNickName",
-                        data:{nickname:nickname},
-                        type:"post",
-                        dataType:"json",
-                        success:function (data) {
-                            if (data!=200) {
-                                layer.alert('该用户名已经被注册', {
-                                    skin: 'layui-layer-lan'
-                                    ,closeBtn: 0
-                                    ,icon:5
-                                });
-                            }
-                        }
-                    });
-                }
-            });
-        });
-    </script>
 </head>
 <body>
 <!--顶级的content是用来充当3D旋转的容器-->
@@ -159,13 +40,13 @@
                     <input type="password" placeholder="Password" class="input_password">
                 </div>
                 <div class="go_forget_password">
-                    <a class="go_to_forget" href="#">忘记密码?</a>
+                    <a class="go_to_forget">忘记密码?</a>
                 </div>
                 <div class="login_button_div">
                     <button class="login_button">登录</button>
                 </div>
                 <div class="register_info">
-                    <span>还没有账号 ? <a class="flip_to_register" href="#">注册</a></span>
+                    <span>还没有账号 ? <a class="flip_to_register" >注册</a></span>
                 </div>
             </div>
         </div>
@@ -194,7 +75,7 @@
                 </div>
                 <button class="go_enter_password_button">下一步</button>
                 <div class="go_back_login_div">
-                    <a class="go_back_login" href="#">返回</a>
+                    <a class="go_back_login">返回</a>
                 </div>
             </div>
             <!--<p>12345679</p>-->
@@ -224,10 +105,10 @@
                     <input type="password" placeholder="Confirm" class="confirm_password_input">
                 </div>
                 <div class="login_button_div">
-                    <button class="confirm_register_button" onclick="return false;">Register</button>
+                    <button class="confirm_register_button">Register</button>
                 </div>
                 <div class="go_back_up_div">
-                    <a class="go_back_up" href="#">上一步</a>
+                    <a class="go_back_up">上一步</a>
                 </div>
             </div>
         </div>
@@ -252,7 +133,7 @@
                 </div>
                 <button class="forget_password_button">下一步</button>
                 <div class="go_back_login_div">
-                    <a class="go_back_login_from_forget" href="#">返回</a>
+                    <a class="go_back_login_from_forget">返回</a>
                 </div>
             </div>
         </div>

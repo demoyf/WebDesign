@@ -10,6 +10,7 @@ namespace app\index\controller;
 use think\Controller;
 use think\Request;
 use think\Config as Config;
+use app\index\model\Personal\Info as InfoModel;
 class SendEmail extends Controller
 {
     public function Load()
@@ -28,10 +29,10 @@ class SendEmail extends Controller
         // 添加收件人地址，可以多次使用来添加多个收件人
         $mail->AddAddress($email);
         $vercode = "";
-        $vercode .= random_int(0, 9);
-        $vercode .= random_int(0, 9);
-        $vercode .= random_int(0, 9);
-        $vercode .= random_int(0, 9);
+        $vercode .= rand(0, 9);
+        $vercode .= rand(0, 9);
+        $vercode .= rand(0, 9);
+        $vercode .= rand(0, 9);
         $mail->Body="这是来自Xyf博客的验证信息，
         以下是您的验证码，请输入此验证码完成验证。".$vercode;
         // 设置邮件头的From字段。
@@ -48,11 +49,17 @@ class SendEmail extends Controller
         $mail->Username=Config::get('MAIL_USERNAME');
         $mail->Password=Config::get('MAIL_PASSWORD');
         // 发送邮件。
-        if ($mail->send()) {
-            $arr = array('code'=>200,"ver"=>$vercode);
-            echo json_encode($arr);
+        $info = InfoModel::get(['phone'=>$email]);
+        if ($info == null) {
+            if ($mail->send()) {
+                $arr = array('code'=>200,"ver"=>$vercode);
+                echo json_encode($arr);
+            } else {
+                $arr = array('code'=>500);
+                echo json_encode($arr);
+            }
         } else {
-            $arr = array('code'=>500);
+            $arr = array('code'=>404);
             echo json_encode($arr);
         }
     }
