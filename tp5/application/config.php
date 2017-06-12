@@ -14,20 +14,20 @@ return [
     // | 应用设置
     // +----------------------------------------------------------------------
 //    配置Email
-    'MAIL_HOST' => 'smtp.139.com',
+    'MAIL_HOST' => 'smtp.163.com',
     'MAIL_SMTPAUTH' =>TRUE, //启用smtp认证
-    'MAIL_USERNAME' =>'18814143901@139.com',//发件人的邮箱名
-    'MAIL_PASSWORD' =>'xyf960412',//163邮箱发件人授权密码
-    'MAIL_FROM' =>'18814143901@139.com',//发件人邮箱地址
-    'MAIL_FROMNAME'=>'Blog',//发件人姓名
+    'MAIL_USERNAME' =>'weirdo0412@163.com',//发件人的邮箱名
+    'MAIL_PASSWORD' =>'cgw0517',//163邮箱发件人授权密码
+    'MAIL_FROM' =>'weirdo0412@163.com',//发件人邮箱地址
+    'MAIL_FROMNAME'=>'Xyf',//发件人姓名
     'MAIL_CHARSET' =>'utf-8',//设置邮件编码
     'MAIL_ISHTML' =>TRUE, // 是否HTML格式邮件
     // 应用命名空间
     'app_namespace'          => 'app',
     // 应用调试模式
-    'app_debug'              => false,
+    'app_debug'              => true,
     // 应用Trace
-    'app_trace'              => false,
+    'app_trace'              => true,
     // 应用模式状态
     'app_status'             => '',
     // 是否支持多模块
@@ -225,7 +225,7 @@ return [
     // +----------------------------------------------------------------------
     'cookie'                 => [
         // cookie 名称前缀
-        'prefix'    => '',
+        'prefix'    => 'xyf_',
         // cookie 保存时间
         'expire'    => 0,
         // cookie 保存路径

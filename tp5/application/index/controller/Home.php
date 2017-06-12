@@ -8,15 +8,29 @@
 
 namespace app\index\controller;
 use think\Controller;
+use think\Cookie;
 use think\Exception;
 use think\Request;
+use think\Session;
 use think\View;
 use app\index\model\Blog\MyBlog;
 use app\index\model\Blog\Tag as TagModel;
+use app\index\model\Personal\Info as InfoModel;
 class Home extends Controller
 {
     public function home()
     {
+        $isHas = false;
+        $phone = "";
+        $info = "";
+        if (Cookie::has('phone', 'xyf_')) {
+            $isHas = true;
+            $phone = Cookie::get('phone', 'xyf_');
+            $info = InfoModel::get(['phone'=>$phone]);
+            if ($info ==null) {
+                $isHas = false;
+            }
+        }
         $view = new View("home/home");
         $blogs = MyBlog::where('id', '>', 0)->paginate(9);
         $view->blogs = $blogs;
@@ -25,6 +39,13 @@ class Home extends Controller
         $view->per_page = json_decode($temp)->per_page;
         $tag = TagModel::all();
         $view->tags = $tag;
+        if ($isHas) {
+            $view->phone = $phone;
+            $view->nickname = $info['nickname'];
+        }else{
+            $view->phone = "404";
+            $view->nickname = "404";
+        }
         return $view->fetch();
     }
 
