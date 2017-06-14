@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客详情</title>
+    <link rel="stylesheet" href="css/blog_detail/blog_detail_header_model.css" type="text/css">
+    <link rel="stylesheet" href="css/blog_detail/blog_detail.css" type="text/css">
+    <link rel="icon" href="img/page_icon.png">
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/layer.js"></script>
+    <script src="js/blog_detail/blog_detail_header.js"></script>
+    <script src="js/blog_detail/blog_detail.js"></script>
+    <script>
+        $(function () {
+/*            */
+            $('.comment_content .a_comment .reply_button').click(function () {
+                var dialog_user_id  = $(this).siblings(".comment_detail").attr("data-role");
+                var dialog_comment_id = $(this).parent().parent().attr("data-role");
+                var dialog_nickname = $(this).siblings(".comment_detail").
+                children(".who_reply").children().html();
+                $('.dialog_content form .hidden_comment_id').val(dialog_comment_id);
+                $('.dialog_content form .hidden_reply_to').val(dialog_user_id);
+                $('.dialog_content .reply_info span').html(dialog_nickname);
+                $('.dialog_content form').attr("action", "index/BlogDetail/replyComment");
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-demo', //样式类名//不显示关闭按钮
+                    anim: 2,
+                    title:"回复",
+                    shadeClose: true, //开启遮罩关闭
+                    content: $('.dialog_content')
+                });
+            });
+            $('.comment_content .publish_comment').click(function () {
+                $('.dialog_content .reply_info span').html("");
+                $('.dialog_content form').attr("action", "index/BlogDetail/publicComment");
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-demo', //样式类名//不显示关闭按钮
+                    anim: 2,
+                    title:"评论",
+                    shadeClose: true, //开启遮罩关闭
+                    content: $('.dialog_content')
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="dialog_content" style="display: none">
+    <form action="index/BlogDetail/replyComment" method="post">
+        <input type="hidden" name="blog_id" value={$blog.id}>
+        <input class="hidden_comment_id" type="hidden" name="comment_id">
+        <input class="hidden_reply_to" type="hidden" name="reply_to">
+        <div class="input_div"><div>NickName:</div><input type="text" name="nickname" placeholder="昵称" class="nickname_input" required></div>
+        <div class="input_div"><div>Email:</div><input type="email" name="email" placeholder="邮箱"
+                                                       class="email_input" required></div>
+        <div class="input_div"><div>Link:</div><input type="text" name="link" placeholder="个人链接"
+                                                      class="link_input"></div>
+        <div class="reply_info">回复：<span>XYF</span></div>
+        <div class="text_area">
+            <textarea maxlength="60" name="reply_content"></textarea>
+        </div>
+        <div class="submit_div"><input type="submit" onsubmit="return false;" value="发表"></div>
+    </form>
+</div>
+<div class="header_content">
+    <div class="top_nav_content">
+        <nav class="left_nav">
+            <li><span class="to_blog_link">博客</span></li>
+            <li><span class="to_image_link">图片</span></li>
+            <li><span class="to_music_link">音乐</span></li>
+            <li><span class="to_collection_link">收藏</span></li>
+        </nav>
+        <div class="right_nav">
+            <div class="background">
+                <a class="to_github" href="https://github.com/demoyf/" target="_blank"><img
+                        src="img/link/github_icon.jpg" width="100%"></a>
+                <a class="to_sina" href="http://weibo.com/2545689252/profile?rightmod=1&wvr=6&mod=personinfo"
+                   target="_blank">
+                    <img src="img/link/weibo.png" width="100%"></a>
+            </div>
+        </div>
+    </div>
+    <div class="show_blog_name">
+        <span>XYF的个人主页</span>
+    </div>
+    <div class="next_title_content">
+        <span class="small_screen_title">xyf</span>
+        <span class="active_desc"><span class="shuxian">|</span></span>
+        <div class="menu_sign_div">
+            <span class="menu">
+            <span class="ham">
+            </span>
+            </span>
+            <div class="regsiter_or_sign">
+                <a href="toLogin">Sign in</a>,
+                <a href="toLogin">Sign up</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="blog_detail_content">
+    <div class="blog_title">
+        <span>{$blog.title}</span>
+    </div>
+    <div class="blog_content_and_nav">
+        <div class="blog_info">
+            <div class="a_li">
+                <li class="li_title">Date Time</li>
+                <li>{$blog.date}</li>
+                <li>{$blog.time}</li>
+            </div>
+            <div class="a_li">
+                <li class="li_title">Author</li>
+                <li>XYF</li>
+            </div>
+            <div class="a_li">
+                <li class="li_title">Category</li>
+                <li>技术博客</li>
+            </div>
+            <div class="a_li">
+                <li class="li_title">TAG</li>
+                <div style="display: inline-block">
+                    {volist name="$blog.tags" id="tag"}
+                    <span>{$tag}</span>
+                    {/volist}
+                </div>
+            </div>
+            <div class="a_li">
+                <li class="li_title">Comments</li>
+                <li>{$blog.comment_length}</li>
+            </div>
+        </div>
+        <div class="blog_content">
+            {$blog.content}
+        </div>
+        <div class="blog_list">
+        </div>
+    </div>
+    <div class="blog_comment_div">
+        <div class="comment_div">
+            {volist name="$blog.comments" id="comment"}
+            <div class="blog_comment_time_content">
+                <div class="comment_time">
+                    <span>{$comment.comment_time}</span>
+                </div>
+                <div class="comment_content" data-role={$comment.id}>
+                    <div class="a_comment root_comment">
+                        <div>
+                            <img src="img/page_icon.png" width="60px">
+                        </div>
+                        <div class="comment_detail" data-role={$comment.user_id}>
+                            <div class="who_reply">
+                                {if($comment.youke.link=="")}
+                                <a>{$comment.youke.nickname}</a>
+                                {else}
+                                <a href={$comment.youke.link}>{$comment.youke.nickname}</a> 留言：
+                                {/if}
+                            </div>
+                            <div class="replay_content">
+                                <p>{$comment.comment_content}</p>
+                            </div>
+                        </div>
+                        <button class="reply_button">回复</button>
+                    </div>
+                    {volist name="$comment.replys" id="reply"}
+                    <div class="a_comment">
+                        <div><img src="img/page_icon.png" width="60px"></div>
+                        <div class="comment_detail" data-role={$reply.user_id}>
+                            <div class="who_reply">
+                                {if($reply.who.link=="")}
+                                <a>{$reply.who.nickname}</a>
+                                {else}
+                                <a href={$reply.who.link}>{$reply.who.nickname}</a>
+                                {/if}
+                                回复：
+                                {if($reply.reply_to.link=="")}
+                                <a>{$reply.reply_to.nickname}</a>
+                                {else}
+                                <a href={$reply.reply_to.link}>{$reply.reply_to.nickname}</a>
+                                {/if}
+                            </div>
+                            <div class="reply_time">
+                                {$reply.reply_time}
+                            </div>
+                            <div class="replay_content">
+                                <p>{$reply.reply_content}</p>
+                            </div>
+                        </div>
+                        <button class="reply_button">回复</button>
+                    </div>
+                    {/volist}
+                    <!--<div class="a_comment">-->
+                        <!--<img src="page_icon.png" width="60px">-->
+                        <!--<div class="comment_detail">-->
+                            <!--<div class="who_reply">-->
+                                <!--<a href="">XYF</a> 回复：<a href="">DDD</a>-->
+                            <!--</div>-->
+                            <!--<div class="reply_time">-->
+                                <!--2017-04-07 22:22:22-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<button class="reply_button">回复</button>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            {/volist}
+<!--            <div class="blog_comment_time_content">
+                <div class="comment_time">
+                    <span>2016-04-12</span>
+                    <span>22:22:22</span>
+                </div>
+                <div class="comment_content">
+                    <div class="a_comment root_comment">
+                        <img src="page_icon.png" width="60px">
+                        <div class="comment_detail">
+                            <div class="who_reply">
+                                <a href="">XYF</a> 回复：<a href="">DDD</a>
+                            </div>
+                            <div class="reply_time">
+                                2017-04-07 22:22:22
+                            </div>
+                        </div>
+                        <button class="reply_button">回复</button>
+                    </div>
+                    <div class="a_comment">
+                        <img src="page_icon.png" width="60px">
+                        <div class="comment_detail">
+                            <div class="who_reply">
+                                <a href="">XYF</a> 回复：<a href="">DDD</a>
+                            </div>
+                            <div class="reply_time">
+                                2017-04-07 22:22:22
+                            </div>
+                        </div>
+                        <button class="reply_button">回复</button>
+                    </div>
+                    <div class="a_comment">
+                        <img src="page_icon.png" width="60px">
+                        <div class="comment_detail">
+                            <div class="who_reply">
+                                <a href="">XYF</a> 回复：<a href="">DDD</a>
+                            </div>
+                            <div class="reply_time">
+                                2017-04-07 22:22:22
+                            </div>
+                        </div>
+                        <button class="reply_button">回复</button>
+                    </div>
+                </div>
+            </div>
+            <div class="blog_comment_time_content">
+                <div class="comment_time">
+                    <span>2016-04-12</span>
+                    <span>22:22:22</span>
+                </div>
+                <div class="comment_content">
+                    <div class="a_comment">
+                        <img src="page_icon.png" width="60px">
+                        <div class="comment_detail">
+                            <div class="who_reply">
+                                <a href="">XYF</a> 回复：<a href="">DDD</a>
+                            </div>
+                            <div class="reply_time">
+                                2017-04-07 22:22:22
+                            </div>
+                        </div>
+                        <button class="reply_button">回复</button>
+                    </div>
+                    <div class="a_comment">
+                        <img src="page_icon.png" width="60px">
+                        <div class="comment_detail">
+                            <div class="who_reply">
+                                <a href="">XYF</a> 回复：<a href="">DDD</a>
+                            </div>
+                            <div class="reply_time">
+                                2017-04-07 22:22:22
+                            </div>
+                        </div>
+                        <button class="reply_button">回复</button>
+                    </div>
+                    <div class="a_comment">
+                        <img src="page_icon.png" width="60px">
+                        <div class="comment_detail">
+                            <div class="who_reply">
+                                <a href="">XYF</a> 回复：<a href="">DDD</a>
+                            </div>
+                            <div class="reply_time">
+                                2017-04-07 22:22:22
+                            </div>
+                        </div>
+                        <button class="reply_button">回复</button>
+                    </div>
+                </div>
+            </div>
+            <div class="blog_comment_time_content">
+                <div class="comment_time">
+                    <span>2016-04-12</span>
+                    <span>22:22:22</span>
+                </div>
+                <div class="comment_content">
+                    <div class="a_comment root_comment">
+                        <img src="page_icon.png" width="60px">
+                        <div class="comment_detail">
+                            <div class="who_reply">
+                                <a href="">XYF</a> 回复：<a href="">DDD</a>
+                            </div>
+                            <div class="reply_time">
+                                2017-04-07 22:22:22
+                            </div>
+                        </div>
+                        <button class="reply_button">回复</button>
+                    </div>
+                    <div class="a_comment">
+                        <img src="page_icon.png" width="60px">
+                        <div class="comment_detail">
+                            <div class="who_reply">
+                                <a href="">XYF</a> 回复：<a href="">DDD</a>
+                            </div>
+                            <div class="reply_time">
+                                2017-04-07 22:22:22
+                            </div>
+                        </div>
+                        <button class="reply_button">回复</button>
+                    </div>
+                    <div class="a_comment">
+                        <img src="page_icon.png" width="60px">
+                        <div class="comment_detail">
+                            <div class="who_reply">
+                                <a href="">XYF</a> 回复：<a href="">DDD</a>
+                            </div>
+                            <div class="reply_time">
+                                2017-04-07 22:22:22
+                            </div>
+                        </div>
+                        <button class="reply_button">回复</button>
+                    </div>
+                </div>
+            </div>-->
+
+            <div class="blog_comment_time_content">
+                <div class="comment_time">
+                </div>
+                <div class="comment_content">
+                    <button class="publish_comment">发表评论</button>
+                </div>
+            </div>
+        </div>
+        <div class="lastest_comment_and_blog">
+            <div style="font-size: 25px;text-align: center;color: #00b19e">最新评论</div>
+            {volist name="$blog.lastests" id="lastest"}
+            <div class="a_lastest_comment">
+                {if($lastest.youke.link=="")}
+                <a >{$lastest.youke.nickname}</a>
+                {else}
+                <a href={$lastest.youke.link}>{$lastest.youke.nickname}</a>
+                {/if}发表于《
+                <a href='showBlogDetail?blog_id={$lastest.blog_id}'>{$lastest.blog_title}</a>
+                》
+            </div>
+            {/volist}
+        </div>
+    </div>
+</div>
+<div class="small_left_nav">
+    <li class="to_li">To</li>
+    <li><span>博客</span></li>
+    <li><span>图片</span></li>
+    <li><span>音乐</span></li>
+    <li><span>收藏</span></li>
+    <li class="to_sign_in">Sign in,up</li>
+    <li><a href="toLogin">Sign in</a></li>
+    <li><a href="toLogin">Sign up</a></li>
+    <li class="about_li">About</li>
+    <li class="github_li">
+        <a class="to_github" href="https://github.com/demoyf/" target="_blank"><img
+                src="img/link/github_icon.jpg" width="100%"></a>
+    </li>
+    <li class="sina_li">
+        <a class="to_sina" href="http://weib.com/2545689252/profile?rightmod=1&wvr=6&mod=personinfo"
+           target="_blank">
+            <img src="img/link/weibo.png" width="100%"></a>
+    </li>
+</div>
+</body>
+</html>

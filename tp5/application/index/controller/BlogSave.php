@@ -46,7 +46,7 @@ class BlogSave extends Controller
         $myBlog = new MyBlogModel();
         $myBlog->title = "12465";
         $myBlog->path = $path;
-        $myBlog->create_time = date("Y-m-d H:i:s",time());
+        $myBlog->my_time = date("Y-m-d H:i:s",time());
         if ($myBlog->save()) {
             $array = array('code' => 200, 'result' => '文件上传成功');
             echo json_encode($array);
