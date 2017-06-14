@@ -163,6 +163,9 @@ $(function () {
                 $('.menu').addClass("final");
                 $('body').css({"background-color": "rgba(0,0,0,0.2)"});
                 $('.next_title_content').css({"background-color": "rgba(0,0,0,0.01)", opacity: 0.4});
+                $('.blog_comment_time_content .comment_content .a_comment')
+                    .css({"background-color": "rgba(0,0,0,0.5)", opacity: 0.4});
+
             } else {
 //                        这里用处不大，因为监听了整个html
                 $('.menu .ham').css({
@@ -178,6 +181,8 @@ $(function () {
                 });
                 $('body').css({"background-color": "white"});
                 $('.next_title_content').css({"background-color": "white", opacity: 1});
+                $('.blog_comment_time_content .comment_content .a_comment')
+                    .css({"background-color": "transparent", opacity: 1});
             }
         }
     });
@@ -199,6 +204,8 @@ $(function () {
                 });
                 $('body').css({"background-color": "white"});
                 $('.next_title_content').css({"background-color": "white", opacity: 1});
+                $('.blog_comment_time_content .comment_content .a_comment')
+                    .css({"background-color": "transparent", opacity: 1});
                 isShow = false;
             }
         }
