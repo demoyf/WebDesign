@@ -123,7 +123,9 @@ class BlogDetail extends Controller
             } else {
                 $isNotMySelf = true;
             }
-         }
+         }else{
+            $isNotMySelf = true;
+        }
         if ($youke == null) {
             $newYouke = new YoukeModel();
             $newYouke->link = $youke_link;
@@ -135,13 +137,12 @@ class BlogDetail extends Controller
             } else {
                 $isSuccess = false;
             }
+            $isNotMySelf = true;
         } else {
             $isSuccess = true;
             $youke_id = $youke['id'];
-            if ($youke_id == 1) {
-                if ($isNotMySelf) {
-                    $isNotMySelf = true;
-                }
+            if ($youke_id != 1) {
+                $isNotMySelf = false;
             }
         }
         if ($isSuccess&&!$isNotMySelf) {
@@ -185,6 +186,8 @@ class BlogDetail extends Controller
             } else {
                 $isNotMySelf = true;
             }
+        }else{
+            $isNotMySelf = true;
         }
         if ($youke == null) {
             $youke = new YoukeModel();
@@ -201,10 +204,8 @@ class BlogDetail extends Controller
             $isSuccess = true;
             $user_id = $youke['id'];
 //            没登录却用的是我的邮箱
-            if ($user_id == 1) {
-                if ($isNotMySelf) {
-                    $isNotMySelf = true;
-                }
+            if ($user_id != 1) {
+                $isNotMySelf = false;
             }
             if ($user_id == $reply_user) {
                 $isSuccess = false;
@@ -216,7 +217,7 @@ class BlogDetail extends Controller
         $replyModel->user_id = $user_id;
         $replyModel->reply_to = $reply_user;
         $replyModel->reply_time = date("Y-m-d H:i:s", time());
-        if ($isSuccess&&$isNotMySelf) {
+        if ($isSuccess&&!$isNotMySelf) {
             if ($replyModel->save()) {
                echo "<script>window.location.href='../../showBlogDetail?blog_id=".$blog_id."'</script>";
             } else {
