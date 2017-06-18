@@ -327,11 +327,14 @@
 
 .blog_list li {
     list-style: none;
+    overflow: hidden;
+    height: 25px;
+    margin-bottom: 2px;
 }
 
 .blog_list li.h2_list {
     margin-left: 10%;
-    font-size: 20px;
+    font-size: 18px;
 }
 .blog_list li.h3_list {
     margin-left: 15%;
@@ -347,11 +350,12 @@
 .blog_list .block_move {
     content: '';
     display: block;
-    height: 20px;
+    height: 23px;
     width: 5px;
     background-color: #00b19e;
     position: fixed;
     left: 78%;
+    margin-top: 2px;
 }
 .dialog_content {
     display: flex;

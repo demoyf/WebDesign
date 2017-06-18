@@ -32,7 +32,7 @@ div.choose_image_icon:hover {
 }
 .editer {
     width: 60%;
-    margin: 100px auto;
+    margin: 20px auto;
     display: flex;
     flex-direction: column;
 }
