@@ -274,12 +274,12 @@ $(function () {
         });
     }
     function bindBlogClick() {
-        $('.timeline_content .left_blog').click(function () {
-            var id = $(this).attr("data-role");
+        $('.timeline_content .left_blog .content').click(function () {
+            var id = $(this).parent().attr("data-role");
             window.location.href = "showBlogDetail?blog_id=" + id;
         });
-        $('.timeline_content .right_blog').click(function () {
-            var id = $(this).attr("data-role");
+        $('.timeline_content .right_blog .content').click(function () {
+            var id = $(this).parent().attr("data-role");
             window.location.href = "showBlogDetail?blog_id=" + id;
         });
     }

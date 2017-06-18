@@ -44,12 +44,14 @@ class BlogSave extends Controller
         $content = trim($content);
         $title = $request->post('title');
         $description = $request->post('description');
+        $background_id = $request->post('background_id');
         fwrite($file,$content);
         $myBlog = new MyBlogModel();
         $myBlog->title = $title;
         $myBlog->path = $path;
         $myBlog->my_time = date("Y-m-d H:i:s",time());
         $myBlog->description = $description;
+        $myBlog->background_id = $background_id;
         if ($myBlog->save()) {
             fclose($file);
             $array = array('code' => 200, 'result' => '文件上传成功');

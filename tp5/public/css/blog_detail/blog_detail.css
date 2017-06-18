@@ -338,7 +338,7 @@
 }
 .blog_list li.h3_list {
     margin-left: 15%;
-    font-size: 18px;
+    font-size: 17px;
 }
 .blog_list li a {
     text-decoration: none;
@@ -350,7 +350,7 @@
 .blog_list .block_move {
     content: '';
     display: block;
-    height: 23px;
+    height: 25px;
     width: 5px;
     background-color: #00b19e;
     position: fixed;

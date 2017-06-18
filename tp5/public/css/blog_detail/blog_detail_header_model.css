@@ -123,11 +123,16 @@ body {
     padding-bottom: 2%;
 }
 
-.top_nav_content .left_nav li span:hover {
+.top_nav_content .left_nav li a:hover {
     cursor: pointer;
 }
 
-.top_nav_content .left_nav li span::after {
+.top_nav_content .left_nav li a {
+    color: white;
+    text-decoration: none;
+}
+
+.top_nav_content .left_nav li a::after {
     content: '';
     width: 0;
     height: 1px;
@@ -141,8 +146,13 @@ body {
     transition: width 0.3s;
 }
 
-.top_nav_content .left_nav li span:hover::after {
+.top_nav_content .left_nav li a:hover::after {
     width: 1.8em;
+    -webkit-transition: width 0.3s;
+    -moz-transition: width 0.3s;
+    -ms-transition: width 0.3s;
+    -o-transition: width 0.3s;
+    transition: width 0.3s;
 }
 
 .top_nav_content .right_nav {

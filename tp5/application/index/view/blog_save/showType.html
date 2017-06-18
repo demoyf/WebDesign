@@ -11,6 +11,7 @@
     <script src="js/layer.js"></script>
     <script type="application/javascript">
         $(document).ready(function () {
+            var which_background = 1;
             $('#editer_content').bind('focus', function (e) {
                 if ($('.showChooseSize').is(':visible')) {
                     $('.showChooseSize').animate({height: "0px"}, 300)
@@ -127,6 +128,7 @@
                 }
                 return url;
             }
+
             $('.submit_button').click(function () {
                 var content = $('#editer_content').html();
                 var getText = $('#editer_content').text();
@@ -156,7 +158,8 @@
                     url:'index/BlogSave/uploadBlogContent',
                     async:true,
                     type:'post',
-                    data:{title:title,description:description,content:content},
+                    data:{title:title,description:description,content:content,
+                        background_id:which_background},
                     dataType:'json',
                     success:function (data) {
                         if (data.code==200) {
@@ -167,6 +170,28 @@
                     },
                     error:function () {
                         layer.msg('发表失败');
+                    }
+                });
+            });
+            $('.choose_background_button').on("click", function () {
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-demo', //样式类名//不显示关闭按钮
+                    anim: 2,
+                    shadeClose: true, //开启遮罩关闭
+                    area:['620px','580px'],
+                    title: "选择背景图",
+                    content: $('.background_img_div'),
+                    btn:['确认','取消'],
+                });
+            });
+            $('.background_img_div img').on("click", function () {
+                $(this).css({border: "4px solid slateblue"});
+                which_background = $(this).attr('class');
+//                alert(which_background);
+                $('.background_img_div img').each(function () {
+                    if ($(this).attr('class')!=which_background) {
+                        $(this).css({border: "none"});
                     }
                 });
             });
@@ -278,6 +303,17 @@
             cursor: pointer;
             box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
             z-index: 300;
+        }
+        .background_img_div {
+            width: 600px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .background_img_div img {
+            margin: 2px;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -407,6 +443,20 @@
 </div>
 <div class="submit_button_div">
     <button class="submit_button">发表</button>
+</div>
+<div class="background_img_div" style="display: none">
+    <img src="img/blog_background/1.jpg" class="1" width="30%">
+    <img src="img/blog_background/2.jpg" class="2" width="30%">
+    <img src="img/blog_background/3.jpg" class="3" width="30%">
+    <img src="img/blog_background/4.jpg" class="4" width="30%">
+    <img src="img/blog_background/5.jpg" class="5" width="30%">
+    <img src="img/blog_background/6.jpg" class="6" width="30%">
+    <img src="img/blog_background/7.jpg" class="7" width="30%">
+    <img src="img/blog_background/8.jpg" class="8" width="30%">
+    <img src="img/blog_background/9.jpg" class="9" width="30%">
+    <img src="img/blog_background/10.jpg" class="10" width="30%">
+    <img src="img/blog_background/11.jpg" class="11" width="30%">
+    <img src="img/blog_background/12.jpg" class="12" width="30%">
 </div>
 </body>
 </html>

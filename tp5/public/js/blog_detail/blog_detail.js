@@ -27,7 +27,7 @@ $(function () {
             var data_role = $(this).attr('data-role');
             var result = parseInt(data_role) * h2_height;
             $('.blog_list .block_move').animate(
-                {top: (margin_top + result + 30)}, 300);
+                {top: (margin_top + result + 32)}, 300);
             for(i=0;i<$('.blog_list li').length;i++) {
                 if (i==(data_role-1)) {
                     $('.blog_list li').eq(i).children("a").css({"color":"#00b19e"});
@@ -87,7 +87,7 @@ $(function () {
                         $('.blog_list li').eq(i).children("a").css({"color":"#494949"});
                     }
                 }
-                $('.blog_list .block_move').animate({top: (margin_top + result + 35)}, 100
+                $('.blog_list .block_move').animate({top: (margin_top + result + 33)}, 100
                     , function () {
                         isMove = false;
                     });
