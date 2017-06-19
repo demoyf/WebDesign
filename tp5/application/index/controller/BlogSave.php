@@ -23,6 +23,22 @@ class BlogSave extends Controller
         return $view->fetch();
     }
 
+    public function addTag(Request $request)
+    {
+        $tag_info = $request->post("tag");
+        $tag = new Tag();
+        $tag->tag = $tag_info;
+        $hasTag = Tag::get(['tag' => $tag_info]);
+        if ($hasTag != null) {
+            echo "ex";
+        }else{
+            if ($tag->save()) {
+                echo $tag->getLastInsID();
+            } else {
+                echo "error";
+            }
+        }
+    }
     public function getImageUpload(Request $request)
     {
         $image = $request->file("image");
@@ -51,6 +67,7 @@ class BlogSave extends Controller
         $title = $request->post('title');
         $description = $request->post('description');
         $background_id = $request->post('background_id');
+        $tags = $request->post("tags");
         fwrite($file,$content);
         $myBlog = new MyBlogModel();
         $myBlog->title = $title;
@@ -58,6 +75,7 @@ class BlogSave extends Controller
         $myBlog->my_time = date("Y-m-d H:i:s",time());
         $myBlog->description = $description;
         $myBlog->background_id = $background_id;
+        $myBlog->tag = $tags;
         if ($myBlog->save()) {
             fclose($file);
             $array = array('code' => 200, 'result' => '文件上传成功');

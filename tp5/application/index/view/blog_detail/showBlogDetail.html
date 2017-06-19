@@ -12,7 +12,7 @@
     <script src="js/blog_detail/blog_detail.js"></script>
     <script>
         $(function () {
-            /*            */
+            /**/
             $('.comment_content .a_comment .reply_button').click(function () {
                 var dialog_user_id = $(this).siblings(".comment_detail").attr("data-role");
                 var dialog_comment_id = $(this).parent().parent().attr("data-role");
@@ -21,6 +21,14 @@
                 $('.dialog_content form .hidden_reply_to').val(dialog_user_id);
                 $('.dialog_content .reply_info span').html(dialog_nickname);
                 $('.dialog_content form').attr("action", "index/BlogDetail/replyComment");
+                var isLogin = $('.header_content').attr("data-role");
+                if (isLogin==1) {
+                    var nickname =
+                        $('.next_title_content .menu_sign_div .regsiter_or_sign .user_name_a').html();
+                    $('.dialog_content form .input_div .nickname_input').val(nickname);
+                    var email = $('.header_content .next_title_content').attr("data-role");
+                    $('.dialog_content form .input_div .email_input').val(email);
+                }
                 layer.open({
                     type: 1,
                     skin: 'layui-layer-demo', //样式类名//不显示关闭按钮
@@ -31,6 +39,14 @@
                 });
             });
             $('.comment_content .publish_comment').click(function () {
+                var isLogin = $('.header_content').attr("data-role");
+                if (isLogin==1) {
+                    var nickname =
+                        $('.next_title_content .menu_sign_div .regsiter_or_sign .user_name_a').html();
+                    $('.dialog_content form .input_div .nickname_input').val(nickname);
+                    var email = $('.header_content .next_title_content').attr("data-role");
+                    $('.dialog_content form .input_div .email_input').val(email);
+                }
                 $('.dialog_content .reply_info span').html("");
                 $('.dialog_content form').attr("action", "index/BlogDetail/publicComment");
                 layer.open({
@@ -126,7 +142,7 @@
     <div class="show_blog_name">
         <span>XYF的个人主页</span>
     </div>
-    <div class="next_title_content">
+    <div class="next_title_content" data-role="{$phone}">
         <span class="small_screen_title">xyf</span>
         <span class="active_desc"><span class="shuxian">|</span></span>
         <div class="menu_sign_div">

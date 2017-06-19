@@ -20,7 +20,7 @@ class TimeLine extends Controller
 
         $monthShort = array("JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC");
         $view = new View("time_line/showTimeLine");
-        $blogs = MyBlog::where('id', '>', 0)->order("my_time")->paginate(8);
+        $blogs = MyBlog::where('id', '>', 0)->order("my_time",'desc')->paginate(8);
         $view->blogs = $blogs;
         $temp = json_encode($blogs);
         $view->total = json_decode($temp)->total;
