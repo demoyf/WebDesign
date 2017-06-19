@@ -7,9 +7,12 @@
     <link rel="icon" href="img/page_icon.png">
     <link rel="stylesheet" href="css/editer/blog_editer_style.css" type="text/css">
     <script src="js/ajaxfileupload.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="js/layer.js"></script>
     <script type="application/javascript">
-        var temp = 1;
         $(document).ready(function () {
+            var which_background = 1;
+            var current_tag = "";
             $('#editer_content').bind('focus', function (e) {
                 if ($('.showChooseSize').is(':visible')) {
                     $('.showChooseSize').animate({height: "0px"}, 300)
@@ -26,8 +29,8 @@
                     return false;
                 }
                 switch (type) {
-                    case 'h1':
                     case 'h2':
+                    case 'h3':
                     case 'p':
                         document.execCommand('FormatBlock', false, '<' + type + '>');
                         break;
@@ -81,7 +84,7 @@
             var temp_1 = 1;
             bindChange();
             function upload(imageClass) {
-//                        text！！！ 哦还有，关了一下后台的代码调试
+//                        dataType text！！！ 哦还有，关了一下后台的代码调试
                 $.ajaxFileUpload({
                     url: 'index/BlogSave/getImageUpload',
                     fileElementId: 'showUpload',
@@ -129,26 +132,307 @@
 
             $('.submit_button').click(function () {
                 var content = $('#editer_content').html();
-                alert(content);
+                var getText = $('#editer_content').text();
+                var title = $('.one_enter_content .blog_title_input').val();
+                var description = $('.one_enter_content .blog_description_input').val();
+                if (title==""){
+                    layer.tips('博客标题不能为空',
+                        $('.one_enter_content .blog_title_input'), {
+                            tips: [2, '#494949'],
+                            time: 3000
+                        });
+                    return false;
+                }
+//                先去除空格和换行符判断字符串 是否为空，空的话就禁止发表
+                getText=getText.replace(/[\r\n]/g,"");
+                getText = getText.replace(/[ ]/g,"");
+                if (getText==""||getText==null){
+                    layer.tips('博客内容总不能为空吧',
+                        $('#editer_content'), {
+                        tips: [1, '#3595CC'],
+                        time: 3000
+                    });
+                    return false;
+                }
                 $.ajax({
                     url:'index/BlogSave/uploadBlogContent',
                     async:true,
                     type:'post',
-                    data:{content:content},
+                    data:{title:title,description:description,content:content,
+                        background_id:which_background},
                     dataType:'json',
                     success:function (data) {
-                        alert(data.result);
+                        if (data.code==200) {
+                            window.location.href = "home";
+                        }else {
+                            layer.msg('发表失败');
+                        }
                     },
                     error:function () {
-                        alert("error");
+                        layer.msg('发表失败');
                     }
                 });
             });
+            $('.choose_background_button').on("click", function () {
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-demo', //样式类名//不显示关闭按钮
+                    anim: 2,
+                    shadeClose: true, //开启遮罩关闭
+                    area:['620px','580px'],
+                    title: "选择背景图",
+                    content: $('.background_img_div'),
+                    btn:['确认','取消'],
+                });
+            });
+            $('.background_img_div img').on("click", function () {
+                $(this).css({border: "4px solid slateblue"});
+                which_background = $(this).attr('class');
+//                alert(which_background);
+                $('.background_img_div img').each(function () {
+                    if ($(this).attr('class')!=which_background) {
+                        $(this).css({border: "none"});
+                    }
+                });
+            });
+            $('.choose_tag_button').on("click", function () {
+                current_tag = "";
+                $('.blog_tag_div span').each(function () {
+                    if ($(this).hasClass("has_click")) {
+                        current_tag += $(this).attr("data-role") + ",";
+                    }
+                });
+                var tag_layer = layer.open({
+                    type: 1,
+                    skin: 'layui-layer-demo', //样式类名//不显示关闭按钮
+                    anim: 2,
+                    shadeClose: true, //开启遮罩关闭
+                    title: "选择标签",
+                    content: $('.blog_tag_div'),
+                    btn:['确认','取消'],
+                    btn1:function () {
+                        var result = "";
+                        $('.blog_tag_div span').each(function () {
+                            if ($(this).hasClass("has_click")) {
+                                result += $(this).text() + ",";
+                            }
+                        });
+                        $('.one_enter_content .tag_result').html(result);
+                        layer.close(tag_layer);
+                    }
+                    ,
+                    btn2:function () {
+                        var arr = current_tag.split(",");
+                        var temp = 0;
+                        $('.blog_tag_div span').each(function () {
+                            var data = $(this).attr("data-role");
+                            if (data==arr[temp]){
+                                $(this).addClass("has_clcik");
+                                temp++;
+                            }else {
+                                $(this).removeClass("has_click");
+                            }
+                        });
+                    },cancel: function(){
+                        var arr = current_tag.split(",");
+                        var temp = 0;
+                        $('.blog_tag_div span').each(function () {
+                            var data = $(this).attr("data-role");
+                            if (data==arr[temp]){
+                                $(this).addClass("has_clcik");
+                                temp++;
+                            }else {
+                                $(this).removeClass("has_click");
+                            }
+                        });
+                    }
+                });
+            });
+            $('.blog_tag_div span').click(function () {
+                if ($(this).hasClass("has_click")) {
+                    $(this).removeClass("has_click");
+                }else {
+                    $(this).addClass("has_click");
+                }
+            });
+        });
+        var app = angular.module("myNoteApp", []);
+        app.controller("blogDesrc", function($scope) {
+            $scope.message = "";
+            $scope.inputMessage = "";
+            $scope.left  = function() {return 60 - $scope.message.length;
+            };
+            $scope.inputModel = function () {
+                return 15 - $scope.inputMessage.length;
+            };
         });
     </script>
+    <style>
+        body{
+            background: linear-gradient(90deg,transparent 0%,rgba(0,0,0,0.1) 40%,rgba(0,177,169,0.3) 100%);
+        }
+        .enter_info_div {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding-left: 20%;
+            box-sizing: border-box;
+        }
+        .enter_info_div .one_enter_content {
+            display: flex;
+            flex-direction: row;
+            font-family: cursive, "FangSong";
+            margin-bottom: 10px;
+        }
+        .enter_info_div .one_enter_content span {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #494949;
+        }
+        .enter_info_div .one_enter_content input {
+            width: 275px;
+            border-radius: 10px;
+            padding: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: 1px solid slateblue;
+            margin: 10px 0;
+            color: #494949;
+        }
+        .enter_info_div .one_enter_content .blog_description_input {
+            height: 110px;
+            width: 275px;
+            resize: none;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #494949;
+            padding: 6px;
+            border-radius: 5px;
+            border: 1px solid slateblue;
+        }
+        .enter_info_div .one_enter_content span.small_span {
+            font-size: 14px;
+            margin-top: 85px;
+            flex-shrink: 0;
+        }
+        .enter_info_div .one_enter_content span.first_small_span {
+            margin-left: 10px;
+            flex-shrink: 0;
+        }
+        .enter_info_div .one_enter_content  .input_small_span {
+            margin-top: 18px;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .enter_info_div .one_enter_content span.input_first_small_span {
+            margin-left: 10px;
+            flex-shrink: 0;
+        }
+        .one_enter_content .choose_background_button {
+            background-color: rgba(0, 177, 169, 0.6);
+            margin-left: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
+        .one_enter_content .choose_tag_button {
+            background-color: rgba(0, 177, 169, 0.6);
+            margin-left: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
+        .submit_button_div {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .submit_button_div .submit_button {
+            background-color: #00b19e;
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            border: none;
+            font-size: 20px;
+            padding: 4px 10px;
+        }
+        .submit_button_div .submit_button:hover,.one_enter_content .choose_tag_button:hover,
+        .one_enter_content .choose_background_button:hover
+        {
+            cursor: pointer;
+            box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+            z-index: 300;
+        }
+        .background_img_div {
+            width: 600px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .background_img_div img {
+            margin: 2px;
+            box-sizing: border-box;
+        }
+        .blog_tag_div {
+            display: flex;
+            width: 300px;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .blog_tag_div span {
+            display: inline-block;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid rgba(0,0,0,0.3);
+        }
+        .blog_tag_div span:hover {
+            cursor: pointer;
+        }
+        .blog_tag_div span.has_click{
+            background-color: #00b19e;
+            color: rgba(255,255,255,0.8);
+            border: 1px solid transparent;
+        }
+        .blog_tag_div .add_tag_and_cancel {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-top: 30px;
+        }
+        .blog_tag_div .add_tag_and_cancel button {
+            text-align: center;
+            margin: auto;
+        }
+    </style>
 </head>
-<body>
+<body ng-app="myNoteApp">
 <!--编辑器，包括选择器，和输入框-->
+<div class="enter_info_div">
+    <div class="one_enter_content" ng-controller="blogDesrc"><span>标题：</span>
+        <input class="blog_title_input" type="text" maxlength="15" ng-model="inputMessage">
+        <span class="input_small_span input_first_small_span">剩余字数:</span>
+        <span class="input_small_span" ng-bind="inputModel()">15</span>
+    </div>
+    <div class="one_enter_content" ng-controller="blogDesrc"><span>描述：</span>
+        <textarea class="blog_description_input" ng-model="message" maxlength="60"></textarea>
+        <span class="small_span first_small_span">剩余字数:</span>
+        <span class="small_span" ng-bind="left()">60</span>
+    </div>
+    <div class="one_enter_content">
+        <span>背景图:</span>
+        <button class="choose_background_button">点击选择图片</button>
+    </div>
+    <div class="one_enter_content">
+        <span>标签：</span>
+        <button class="choose_tag_button">点击选择标签</button>
+        <span style="margin-left: 20px;font-size: 15px"
+              class="tag_result">JavaScript,CSS</span>
+    </div>
+</div>
 <div class="editer">
     <!--选择器-->
     <div id="editer_chooser">
@@ -191,9 +475,9 @@
             <span class="fenge"></span>
             <span class="icon_list_ol"><a title="有序列表" class="btn" data-role="insertOrderedList" href="#"></a></span>
             <span class="fenge"></span>
-            <a class="btn" data-role="h1" href="#" title="一级标题"><b>h1</b></a>
+            <a class="btn" data-role="h2" href="#" title="一级标题"><b>h2</b></a>
             <span class="fenge"></span>
-            <a class="btn" data-role="h2" href="#" title="二级标题"><b>h2</b></a>
+            <a class="btn" data-role="h3" href="#" title="二级标题"><b>h3</b></a>
             <span class="fenge"></span>
             <a class="btn" data-role="p" href="#" title="段落"><b>p</b></a>
         </div>
@@ -251,6 +535,34 @@
         </table>
     </div>
 </div>
-<button class="submit_button">提交</button>
+<div class="submit_button_div">
+    <button class="submit_button">发表</button>
+</div>
+<div class="background_img_div" style="display: none">
+    <img src="img/blog_background/1.jpg" class="1" width="30%">
+    <img src="img/blog_background/2.jpg" class="2" width="30%">
+    <img src="img/blog_background/3.jpg" class="3" width="30%">
+    <img src="img/blog_background/4.jpg" class="4" width="30%">
+    <img src="img/blog_background/5.jpg" class="5" width="30%">
+    <img src="img/blog_background/6.jpg" class="6" width="30%">
+    <img src="img/blog_background/7.jpg" class="7" width="30%">
+    <img src="img/blog_background/8.jpg" class="8" width="30%">
+    <img src="img/blog_background/9.jpg" class="9" width="30%">
+    <img src="img/blog_background/10.jpg" class="10" width="30%">
+    <img src="img/blog_background/11.jpg" class="11" width="30%">
+    <img src="img/blog_background/12.jpg" class="12" width="30%">
+</div>
+<div class="blog_tag_div" style="display: none">
+    {volist name="tags" id="tag"}
+    <span data-role={$tag.id}>{$tag.tag}</span>
+    {/volist}
+    <div class="add_tag_and_cancel">
+        <div class="add_tag_div">
+            <button class="add_tag_button">添加标签</button>
+            <input class="tag_content" type="text">
+        </div>
+        <button class="cancel_choose_tag">取消全选</button>
+    </div>
+</div>
 </body>
 </html>

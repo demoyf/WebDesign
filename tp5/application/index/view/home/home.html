@@ -11,15 +11,17 @@
     <link href="css/home/header_model.css" rel="stylesheet">
     <link href="css/home/home_other.css" rel="stylesheet">
     <link rel="icon" href="img/page_icon.png">
+    <script>
+    </script>
 </head>
 <body>
 <div class="header_content" data-role={$phone}>
     <div class="top_nav_content">
         <nav class="left_nav">
-            <li><span class="to_blog_link">博客</span></li>
-            <li><span class="to_image_link">图片</span></li>
-            <li><span class="to_music_link">音乐</span></li>
-            <li><span class="to_collection_link">收藏</span></li>
+            <li><a class="to_blog_link" href="home">博客</a></li>
+            <li><a class="to_image_link">图片</a></li>
+            <li><a class="to_music_link">音乐</a></li>
+            <li><a class="to_collection_link">收藏</a></li>
         </nav>
         <div class="right_nav">
             <div class="background">
@@ -47,7 +49,7 @@
                 <a href="toLogin">Sign in</a>,
                 <a href="toLogin">Sign up</a>
                 {else}
-                <a class="user_name_a">{$nickname}</a>
+                <a class="user_name_a" href="personalPage">{$nickname}</a>
                 {/if}
             </div>
         </div>
@@ -94,7 +96,8 @@
         <a data-role={$tag.id}>{$tag.tag}</a>
         {/volist}
     </div>
-</div><div class="small_left_nav">
+</div>
+<div class="small_left_nav">
     <li class="to_li">To</li>
     <li><span>博客</span></li>
     <li><span>图片</span></li>
@@ -105,7 +108,7 @@
     <li><a href="toLogin">Sign in</a></li>
     <li><a href="toLogin">Sign up</a></li>
     {else}
-    <li class="user_name_small_left"><a>{$nickname}</a></li>
+    <li class="user_name_small_left"><a href="personalPage">{$nickname}</a></li>
     {/if}
     <li class="about_li">About</li>
     <li class="github_li">

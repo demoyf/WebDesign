@@ -27,14 +27,19 @@ class Login extends Controller
     {
         $user_name = $request->post("userName");
         $password = $request->post("password");
-        $md_pas = md5($password);
+        $md_pas = sha1($password);
         $checkUser = UserModel::get(['phone' => $user_name]);
-        if ($checkUser['password'] == $md_pas) {
-            Cookie::set("phone", $user_name,7*24*3600);
-            echo 200;
-        } else {
-            echo 500;
+        if ($checkUser == null) {
+            echo 404;
+        }else{
+            if ($checkUser['password'] == $md_pas) {
+                Cookie::set("phone", $user_name,7*24*3600);
+                echo 200;
+            } else {
+                echo $md_pas;
+            }
         }
+
     }
 
     public function checkNickName(Request $request)
@@ -55,7 +60,7 @@ class Login extends Controller
         $password = $request->post('password');
         $user = new UserModel();
         $user->phone = $email;
-        $user->password = md5($password);
+        $user->password = sha1($password);
         $info = new InfoModel();
         $info->phone = $email;
         $info->nickname = $nickname;

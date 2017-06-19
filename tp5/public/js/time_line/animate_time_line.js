@@ -70,6 +70,7 @@ $(function () {
 //            分页按钮jQ代码
     bindTimeClick();
     bindPageClick();
+    bindBlogClick();
     function initPage() {
         var total = parseInt($('.timeline_content').attr("id"));
         var per_page = parseInt($('.timeline_content').attr("data-role"));
@@ -235,6 +236,7 @@ $(function () {
                     var realHeight = parseInt(height.substr(0, height.length - 2));
                     $('body,html').animate({scrollTop: realHeight}, 400);
                     bindTimeClick();
+                    bindBlogClick();
                 } else {
                     layer.close(load);
                     layer.msg('发生了不可知的错误', {icon: 5});
@@ -269,6 +271,16 @@ $(function () {
                     layer.tips(detail, $(this), {tips: [2]});
                 });
             }
+        });
+    }
+    function bindBlogClick() {
+        $('.timeline_content .left_blog .content').click(function () {
+            var id = $(this).parent().attr("data-role");
+            window.location.href = "showBlogDetail?blog_id=" + id;
+        });
+        $('.timeline_content .right_blog .content').click(function () {
+            var id = $(this).parent().attr("data-role");
+            window.location.href = "showBlogDetail?blog_id=" + id;
         });
     }
 });

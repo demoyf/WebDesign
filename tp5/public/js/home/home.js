@@ -167,6 +167,7 @@ $(function () {
         }
     });
 
+    bindABlogClick();
 //            点击之后，显示侧边栏的标签选项
     $('.left_menu_icon').click(function () {
         var bodyWidth = getBodyWidth();
@@ -433,6 +434,7 @@ $(function () {
                     $('body').animate({scrollTop: height, opacity: 1}, 400, function () {
                         layer.close(load);
                     });
+                    bindABlogClick();
                 } else {
                     layer.close(load);
                     layer.msg('发生了不可知的错误', {icon: 5});
@@ -442,6 +444,12 @@ $(function () {
                 layer.close(load);
                 layer.msg('发生了不可知的错误', {icon: 5});
             }
+        });
+    }
+    function bindABlogClick() {
+        $('.blog_content .a_blog').click(function () {
+            var id = $(this).attr("data-role");
+            window.location.href = "showBlogDetail?blog_id=" + id;
         });
     }
 });

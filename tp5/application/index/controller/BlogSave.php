@@ -7,14 +7,20 @@
  */
 
 namespace app\index\controller;
+use app\index\model\Blog\Tag;
 use think\Controller;
 use think\Request;
 use app\index\model\Blog\MyBlog as MyBlogModel;
+use think\View;
+
 class BlogSave extends Controller
 {
     public function showType()
     {
-        return $this->fetch();
+        $view = new View("blog_save/showType");
+        $tag = Tag::all();
+        $view->tags = $tag;
+        return $view->fetch();
     }
 
     public function getImageUpload(Request $request)
@@ -42,15 +48,22 @@ class BlogSave extends Controller
         $file = fopen($path, 'w');
         $content = $request->post('content');
         $content = trim($content);
+        $title = $request->post('title');
+        $description = $request->post('description');
+        $background_id = $request->post('background_id');
         fwrite($file,$content);
         $myBlog = new MyBlogModel();
-        $myBlog->title = "12465";
+        $myBlog->title = $title;
         $myBlog->path = $path;
-        $myBlog->create_time = date("Y-m-d H:i:s",time());
+        $myBlog->my_time = date("Y-m-d H:i:s",time());
+        $myBlog->description = $description;
+        $myBlog->background_id = $background_id;
         if ($myBlog->save()) {
+            fclose($file);
             $array = array('code' => 200, 'result' => '文件上传成功');
             echo json_encode($array);
         }else{
+            fclose($file);
             $array = array('code' => 500, 'result' => '发生了未知的错误');
             echo json_encode($array);
         }
