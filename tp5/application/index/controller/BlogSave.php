@@ -7,14 +7,20 @@
  */
 
 namespace app\index\controller;
+use app\index\model\Blog\Tag;
 use think\Controller;
 use think\Request;
 use app\index\model\Blog\MyBlog as MyBlogModel;
+use think\View;
+
 class BlogSave extends Controller
 {
     public function showType()
     {
-        return $this->fetch();
+        $view = new View("blog_save/showType");
+        $tag = Tag::all();
+        $view->tags = $tag;
+        return $view->fetch();
     }
 
     public function getImageUpload(Request $request)

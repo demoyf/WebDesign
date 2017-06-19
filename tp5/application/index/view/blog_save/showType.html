@@ -12,6 +12,7 @@
     <script type="application/javascript">
         $(document).ready(function () {
             var which_background = 1;
+            var current_tag = "";
             $('#editer_content').bind('focus', function (e) {
                 if ($('.showChooseSize').is(':visible')) {
                     $('.showChooseSize').animate({height: "0px"}, 300)
@@ -134,7 +135,6 @@
                 var getText = $('#editer_content').text();
                 var title = $('.one_enter_content .blog_title_input').val();
                 var description = $('.one_enter_content .blog_description_input').val();
-
                 if (title==""){
                     layer.tips('博客标题不能为空',
                         $('.one_enter_content .blog_title_input'), {
@@ -194,6 +194,66 @@
                         $(this).css({border: "none"});
                     }
                 });
+            });
+            $('.choose_tag_button').on("click", function () {
+                current_tag = "";
+                $('.blog_tag_div span').each(function () {
+                    if ($(this).hasClass("has_click")) {
+                        current_tag += $(this).attr("data-role") + ",";
+                    }
+                });
+                var tag_layer = layer.open({
+                    type: 1,
+                    skin: 'layui-layer-demo', //样式类名//不显示关闭按钮
+                    anim: 2,
+                    shadeClose: true, //开启遮罩关闭
+                    title: "选择标签",
+                    content: $('.blog_tag_div'),
+                    btn:['确认','取消'],
+                    btn1:function () {
+                        var result = "";
+                        $('.blog_tag_div span').each(function () {
+                            if ($(this).hasClass("has_click")) {
+                                result += $(this).text() + ",";
+                            }
+                        });
+                        $('.one_enter_content .tag_result').html(result);
+                        layer.close(tag_layer);
+                    }
+                    ,
+                    btn2:function () {
+                        var arr = current_tag.split(",");
+                        var temp = 0;
+                        $('.blog_tag_div span').each(function () {
+                            var data = $(this).attr("data-role");
+                            if (data==arr[temp]){
+                                $(this).addClass("has_clcik");
+                                temp++;
+                            }else {
+                                $(this).removeClass("has_click");
+                            }
+                        });
+                    },cancel: function(){
+                        var arr = current_tag.split(",");
+                        var temp = 0;
+                        $('.blog_tag_div span').each(function () {
+                            var data = $(this).attr("data-role");
+                            if (data==arr[temp]){
+                                $(this).addClass("has_clcik");
+                                temp++;
+                            }else {
+                                $(this).removeClass("has_click");
+                            }
+                        });
+                    }
+                });
+            });
+            $('.blog_tag_div span').click(function () {
+                if ($(this).hasClass("has_click")) {
+                    $(this).removeClass("has_click");
+                }else {
+                    $(this).addClass("has_click");
+                }
             });
         });
         var app = angular.module("myNoteApp", []);
@@ -315,6 +375,38 @@
             margin: 2px;
             box-sizing: border-box;
         }
+        .blog_tag_div {
+            display: flex;
+            width: 300px;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .blog_tag_div span {
+            display: inline-block;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid rgba(0,0,0,0.3);
+        }
+        .blog_tag_div span:hover {
+            cursor: pointer;
+        }
+        .blog_tag_div span.has_click{
+            background-color: #00b19e;
+            color: rgba(255,255,255,0.8);
+            border: 1px solid transparent;
+        }
+        .blog_tag_div .add_tag_and_cancel {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-top: 30px;
+        }
+        .blog_tag_div .add_tag_and_cancel button {
+            text-align: center;
+            margin: auto;
+        }
     </style>
 </head>
 <body ng-app="myNoteApp">
@@ -337,6 +429,8 @@
     <div class="one_enter_content">
         <span>标签：</span>
         <button class="choose_tag_button">点击选择标签</button>
+        <span style="margin-left: 20px;font-size: 15px"
+              class="tag_result">JavaScript,CSS</span>
     </div>
 </div>
 <div class="editer">
@@ -457,6 +551,18 @@
     <img src="img/blog_background/10.jpg" class="10" width="30%">
     <img src="img/blog_background/11.jpg" class="11" width="30%">
     <img src="img/blog_background/12.jpg" class="12" width="30%">
+</div>
+<div class="blog_tag_div" style="display: none">
+    {volist name="tags" id="tag"}
+    <span data-role={$tag.id}>{$tag.tag}</span>
+    {/volist}
+    <div class="add_tag_and_cancel">
+        <div class="add_tag_div">
+            <button class="add_tag_button">添加标签</button>
+            <input class="tag_content" type="text">
+        </div>
+        <button class="cancel_choose_tag">取消全选</button>
+    </div>
 </div>
 </body>
 </html>
