@@ -31,4 +31,5 @@ return [
     'toLogin'=>'index/Login/TologinPage',
     'personalPage'=>'index/Personal/showPersonalPage',
     'showBlogDetail' =>"index/BlogDetail/showBlogDetail",
+    'showMusicPage'=>'index/Music/showMusicPage',
 ];
