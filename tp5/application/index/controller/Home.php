@@ -32,7 +32,7 @@ class Home extends Controller
             }
         }
         $view = new View("home/home");
-        $blogs = MyBlog::where('id', '>', 0)->paginate(9);
+        $blogs = MyBlog::where('id', '>', 0)->order("istop",'desc')->paginate(9);
         $view->blogs = $blogs;
         $temp = json_encode($blogs);
         $view->total = json_decode($temp)->total;
@@ -55,7 +55,7 @@ class Home extends Controller
         if (!($page > 0)) {
             $page = 1;
         }
-        $blogs = MyBlog::where('id', '>', 0)->paginate(9);
+        $blogs = MyBlog::where('id', '>', 0)->order("istop",'desc')->paginate(9);
         try {
             $result = array('code'=>200,'blogs'=>$blogs);
             echo json_encode($result);

@@ -33,7 +33,7 @@ class Login extends Controller
             echo 404;
         }else{
             if ($checkUser['password'] == $md_pas) {
-                Cookie::set("phone", $user_name,7*24*3600);
+                Cookie::set("phone", $user_name,24*3600);
                 echo 200;
             } else {
                 echo $md_pas;
@@ -71,7 +71,7 @@ class Login extends Controller
         if ($isSuccess) {
             $arr = array("code"=>200);
             Cookie::delete("phone");
-            Cookie::set("phone", $email,7*24*3600);
+            Cookie::set("phone", $email,24*3600);
             echo json_encode($arr);
         } else {
             $arr = array("code"=>500);

@@ -24,4 +24,5 @@ class Manage extends Controller
         $view = new View("manage/showManage");
         return $view->fetch();
     }
+
 }

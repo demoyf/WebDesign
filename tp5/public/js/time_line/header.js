@@ -256,4 +256,5 @@ $(function () {
         clearTimeout(delete_timeout);
         clearTimeout(type_timeout);
     }
+
 });
