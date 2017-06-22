@@ -34,7 +34,7 @@ body,html {
 .next_button {
     position: absolute;
     top: 90%;
-    left: 86%;
+    left: calc(80% - 60px);
     padding: 10px;
     font-size: 20px;
     font-family: cursive;
@@ -46,7 +46,7 @@ body,html {
 .prev_button {
     position: absolute;
     top: 90%;
-    left: 80%;
+    left: calc(80% - 130px);
     padding: 10px;
     font-size: 20px;
     font-family: cursive;
