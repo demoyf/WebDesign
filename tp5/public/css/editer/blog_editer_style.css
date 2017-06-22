@@ -31,7 +31,7 @@ div.choose_image_icon:hover {
     box-shadow: 0 0 12px #5ba1cf;
 }
 .editer {
-    width: 60%;
+    width: 70%;
     margin: 20px auto;
     display: flex;
     flex-direction: column;
@@ -208,4 +208,208 @@ span.icon_list_ul {
 
 p {
     margin: 0.3em;
+}
+body {
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.1) 40%, rgba(0, 177, 169, 0.3) 100%);
+}
+.enter_info_div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 15%;
+    box-sizing: border-box;
+}
+.enter_info_div .one_enter_content {
+    display: flex;
+    flex-direction: row;
+    font-family: cursive, "FangSong";
+    margin-bottom: 10px;
+}
+.enter_info_div .one_enter_content span {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #494949;
+}
+
+.enter_info_div .one_enter_content input {
+    width: 275px;
+    border-radius: 10px;
+    padding: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border: 1px solid slateblue;
+    margin: 10px 0;
+    color: #494949;
+}
+
+.enter_info_div .one_enter_content .blog_description_input {
+    height: 110px;
+    width: 275px;
+    resize: none;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #494949;
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid slateblue;
+}
+
+.enter_info_div .one_enter_content span.small_span {
+    font-size: 14px;
+    margin-top: 85px;
+    flex-shrink: 0;
+}
+
+.enter_info_div .one_enter_content span.first_small_span {
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+.enter_info_div .one_enter_content .input_small_span {
+    margin-top: 18px;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.enter_info_div .one_enter_content span.input_first_small_span {
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+.one_enter_content .choose_background_button {
+    background-color: rgba(0, 177, 169, 0.6);
+    margin-left: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.one_enter_content .choose_tag_button {
+    background-color: rgba(0, 177, 169, 0.6);
+    margin-left: 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.submit_button_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.submit_button_div .submit_button {
+    background-color: #00b19e;
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    padding: 4px 10px;
+}
+
+.submit_button_div .submit_button:hover, .one_enter_content .choose_tag_button:hover,
+.one_enter_content .choose_background_button:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+    z-index: 300;
+}
+
+.background_img_div {
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.background_img_div img {
+    margin: 2px;
+    box-sizing: border-box;
+}
+
+.blog_tag_div {
+    display: flex;
+    width: 300px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.blog_tag_div span {
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.blog_tag_div span:hover {
+    cursor: pointer;
+}
+
+.blog_tag_div span.has_click {
+    background-color: #00b19e;
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid transparent;
+}
+
+.blog_tag_div .add_tag_and_cancel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.blog_tag_div .add_tag_and_cancel .cancel_choose_tag_button {
+    padding: 5px 8px;
+    border: none;
+    font-size: 16px;
+    color: white;
+    background-color: #00b19e;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.blog_tag_div .add_tag_and_cancel .cancel_choose_tag_button:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.blog_tag_div .add_tag_and_cancel .add_tag_div .add_tag_button {
+    padding: 5px;
+    border: none;
+    font-size: 16px;
+    color: white;
+    background-color: #00b19e;
+    margin: 10px auto;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-right: 5px;
+    -webkit-transition: all ease 0.8s;
+    -moz-transition: all ease 0.8s;
+    -ms-transition: all ease 0.8s;
+    -o-transition: all ease 0.8s;
+    transition: all ease 0.8s;
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    -ms-transform: rotateX(0deg);
+    -o-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+}
+
+.blog_tag_div .add_tag_and_cancel .add_tag_div .add_tag_button:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.blog_tag_div .add_tag_and_cancel .add_tag_div .tag_content {
+    padding: 3px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6);
+    border: 1px solid slateblue;
+    border-radius: 5px;
+    display: none;
+    width: 0px;
 }

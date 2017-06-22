@@ -32,4 +32,7 @@ return [
     'personalPage'=>'index/Personal/showPersonalPage',
     'showBlogDetail' =>"index/BlogDetail/showBlogDetail",
     'showMusicPage'=>'index/Music/showMusicPage',
+    'showMainPage'=>'index/Manage/showMainPage',
+    'showManage' => 'index/Manage/showManage',
+
 ];
