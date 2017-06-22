@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+//            上传音乐文件的代码
+            $('#demo').change(function () {
+                var formData = new FormData();
+                formData.append("music", $(this)[0].files[0]);
+                $.ajax({
+                    url:"index/Music/uploadMusic",
+                    type:"post",
+                    data:formData,
+                    processData:false,
+                    contentType:false,
+                    success:function (data) {
+/*                        data = data.replace("\"","");
+                        $('.myaudio').children().attr("src", data);*/
+                    }
+                });
+            });
+            $('.next_music').on("click", function () {
+                $('.myaudio').children().
+                src("music\\20170620\\f4c25a0191821ec7483a85bbe812cd3f.mp3");
+                $('.myaudio').play();
+            });
+        });
+    </script>
+    <style>
+        .myaudio {
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+<form enctype="multipart/form-data">
+    <input type="file" id="demo">
+</form>
+<audio controls class="myaudio" autoplay loop>
+    <source src="music\\20170620\\c8469ded05579ec6fb3c451222acba55.mp3">
+</audio>
+<embed></embed>
+<button class="next_music">next</button>
+</body>
+</html>

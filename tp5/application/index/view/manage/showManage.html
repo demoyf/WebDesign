@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的管理</title>
+    <link rel="icon" href="img/page_icon.png">
+    <script src="js/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            var isClick = false;
+            var height_array = new Array();
+            $('.manager .manager_nav .one_nav .second_div').each(function (i) {
+                height_array[i] = $(this).css('height');
+            });
+            $('.manager .manager_nav .one_nav .first_li').on("click", function () {
+                var second_div = $(this).siblings(".second_div");
+                var index = $('.manager .manager_nav .one_nav .second_div').index(second_div);
+                var isShow = second_div.is(":visible");
+                if (!isShow) {
+                    second_div.css({height: 0});
+                    second_div.show(0);
+                    second_div.animate({height: height_array[index]}, 600);
+                } else {
+                    second_div.animate({height: "0"}, 600);
+                    second_div.hide(0);
+                }
+            });
+            $('.manager_nav .one_nav .second_div li').on("click", function () {
+                var dataRole = $(this).attr("data-role");
+                if (dataRole==undefined) {
+                    return false;
+                }
+                else {
+                    $('.manager_nav .one_nav .second_div .click_li').removeClass("click_li");
+                    $(this).addClass("click_li");
+                    $('.manager_content iframe').attr("src", dataRole);
+                }
+            });
+        });
+    </script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            display: block;
+            height: 100%;
+            /*6666*/
+            overflow-y: hidden;
+        }
+
+        .manager {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .manager_nav {
+            display: flex;
+            flex-direction: column;
+            width: 15%;
+            background-color: #494949;
+            font-family: cursive, "FangSong";
+            min-width: 130px;
+        }
+
+        .manager_nav .one_nav {
+            width: 100%;
+            text-align: center;
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+        }
+
+        .manager_nav .first_li {
+            padding-top: 30px;
+            padding-bottom: 8px;
+            list-style: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+            flex-shrink: 0;
+        }
+
+        .manager_nav .first_li:hover {
+            cursor: pointer;
+        }
+
+        .manager_nav .one_nav .second_div {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            font-size: 20px;
+            display: none;
+        }
+
+        .manager_nav .one_nav .second_div li {
+            list-style: none;
+            margin-top: 8px;
+        }
+
+        .manager_content {
+            width: 85%;
+            display: block;
+        }
+
+        .manager_content iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .one_nav .second_div li:hover {
+            cursor: pointer;
+        }
+
+        .one_nav .second_div li.click_li {
+            color: #00b19e;
+        }
+
+    </style>
+</head>
+<body>
+<div class="manager">
+    <div class="manager_nav">
+        <div class="one_nav">
+            <li class="first_li click_bu">博客</li>
+            <div class="second_div click">
+                <li data-role="showBlogType">发表博客</li>
+                <li data-role="showManageBlog">管理博客</li>
+                <li data-role="showManageComment">管理评论</li>
+                <li data-role="showManageTag">管理标签</li>
+            </div>
+        </div>
+        <div class="one_nav">
+            <li class="first_li">音乐</li>
+            <div class="second_div">
+                <li data-role="showPublishMusic">发表音乐</li>
+                <li data-role="showAddAdulm">添加歌单</li>
+                <li data-role="showManageMusic">管理音乐</li>
+            </div>
+        </div>
+        <div class="one_nav">
+            <li class="first_li">相册</li>
+            <div class="second_div">
+                <li>发表相片</li>
+                <li>管理相片</li>
+                <li>添加相册</li>
+            </div>
+        </div>
+        <div class="one_nav">
+            <li class="first_li">关于我</li>
+        </div>
+    </div>
+    <div class="manager_content">
+        <iframe id="myFrame" frameborder="0" name="type_blog"
+                seamless src="showMainPage"></iframe>
+    </div>
+</div>
+</body>
+</html>
