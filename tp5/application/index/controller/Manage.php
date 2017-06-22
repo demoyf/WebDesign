@@ -25,4 +25,9 @@ class Manage extends Controller
         return $view->fetch();
     }
 
+    public function showManageBlog()
+    {
+        $view = new View("manage/showManageBlog");
+        return $view->fetch();
+    }
 }

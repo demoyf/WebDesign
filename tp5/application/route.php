@@ -34,5 +34,6 @@ return [
     'showMusicPage'=>'index/Music/showMusicPage',
     'showMainPage'=>'index/Manage/showMainPage',
     'showManage' => 'index/Manage/showManage',
+    'showManageBlog' => 'index/Manage/showManageBlog',
 
 ];

@@ -14,7 +14,7 @@
     <script>
         $(function () {
             $('.header_content .top_nav_content .left_nav .to_my_email,.small_left_nav .to_my_email').on("click", function () {
-               var emial_layer =  layer.open({
+                var emial_layer = layer.open({
                     type: 1,
                     skin: 'layui-layer-demo', //样式类名//不显示关闭按钮
                     anim: 2,
@@ -41,18 +41,21 @@
             padding: 2px;
             position: absolute;
         }
+
         .my_email_info {
             display: flex;
             flex-direction: column;
             width: 320px;
             background-color: white;
         }
+
         .my_email_info .my_email_title {
             display: flex;
             flex-direction: row;
             padding: 10px;
             height: 3em;
         }
+
         #copy_info {
             resize: none;
             background-color: transparent;
@@ -61,6 +64,7 @@
             font-family: cursive;
             color: #494949;
         }
+
         .my_email_info .copy_email_button {
             width: 40%;
             margin-top: 20px;
@@ -72,9 +76,10 @@
             border: none;
             border-radius: 5px;
         }
+
         .my_email_info .copy_email_button:hover {
             cursor: pointer;
-            box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -148,18 +153,18 @@
             {/if}
         </div>
         {/volist}
-        </div>
     </div>
-    <div class="pagination_div">
-        <li class="to_prev">Prev</li>
-        <div class="number_li_div">
-            <li class="current">1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-        </div>
-        <li class="to_next">Next</li>
+</div>
+<div class="pagination_div">
+    <li class="to_prev">Prev</li>
+    <div class="number_li_div">
+        <li class="current">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
     </div>
+    <li class="to_next">Next</li>
+</div>
 </div>
 <div class="tag_nav">
     <div class="left_menu_icon">
