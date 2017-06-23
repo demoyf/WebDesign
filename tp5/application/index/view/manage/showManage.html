@@ -36,6 +36,16 @@
                     $('.manager_content iframe').attr("src", dataRole);
                 }
             });
+            $('.manager .manager_nav .one_nav .second_div .logout_li').on("click", function () {
+                $.ajax({
+                    url: "index/Manage/logout",
+                    data: {myself: 1},
+                    type: "post",
+                    success: function () {
+                        window.location.replace("home");
+                    }
+                });
+            });
         });
     </script>
     <style>
@@ -150,7 +160,7 @@
         <div class="one_nav">
             <li class="first_li">关于我</li>
             <div class="second_div">
-                <li>退出登陆</li>
+                <li class="logout_li">退出登陆</li>
             </div>
         </div>
         <div class="one_nav">
