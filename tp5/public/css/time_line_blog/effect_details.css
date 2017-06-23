@@ -108,7 +108,8 @@ figure.effect_1 figcaption p {
     -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     padding: 0% 4%;
-    width: 90%;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 figure.effect_1:hover figcaption p {
@@ -157,6 +158,8 @@ figure.effect_2 p {
     -ms-transform: translate3d(0, 0, 0);
     -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
+    width: 90%;
+    box-sizing: border-box;
 }
 
 figure.effect_2:hover p {
@@ -244,6 +247,8 @@ figure.effect_3 figcaption p {
     -ms-transform: translate3d(0, 0, 0);
     -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
+    width: 90%;
+    box-sizing: border-box;
 }
 
 figure.effect_3 figcaption:hover p {
@@ -316,11 +321,13 @@ figure.effect_4 figcaption p {
     -ms-transform: translate3d(0,0,0);
     -o-transform: translate3d(0,0,0);
     transform: translate3d(0,0,0);
+    width: 90%;
+    box-sizing: border-box;
 }
 figure.effect_4:hover figcaption p {
-    -webkit-transform: translate3d(0,-450%,0);
-    -moz-transform: translate3d(0,-450%,0);
-    -ms-transform: translate3d(0,-450%,0);
-    -o-transform: translate3d(0,-450%,0);
-    transform: translate3d(0,-450%,0);
+    -webkit-transform: translate3d(0,-500%,0);
+    -moz-transform: translate3d(0,-500%,0);
+    -ms-transform: translate3d(0,-500%,0);
+    -o-transform: translate3d(0,-500%,0);
+    transform: translate3d(0,-500%,0);
 }

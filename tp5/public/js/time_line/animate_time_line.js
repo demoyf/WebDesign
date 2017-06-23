@@ -7,7 +7,7 @@ $(function () {
     var isFail = true;
     initPage();
     var defereds = [];
-    $("img").each(function () {
+    $(".timeline_content img").each(function () {
         var dfd = $.Deferred();
         $(this).load(dfd.resolve);
         defereds.push(dfd);
@@ -21,16 +21,17 @@ $(function () {
             });
         });
     });
-
     var loadTime = setTimeout(function () {
         if (isFail) {
-            $('.header_content').show(0);
-            $('#loading').animate({opacity: 0}, 300, function () {
-                $('#loading').hide(0);
-                clearTimeout(loadTime);
+            $('#loading-center-absolute').animate({left: "-20%", "opacity": 0}, 2000, function () {
+                $('.header_content').show(0);
+                $('#loading').animate({opacity: 0}, 300, function () {
+                    $('#loading').hide(0);
+                    clearTimeout(loadTime);
+                });
             });
         }
-    }, 4000);
+    }, 1500);
 //            滚动显示回到顶部按钮
     var isMove = false;
     $(window).scroll(function () {
