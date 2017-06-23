@@ -178,6 +178,7 @@ class Manage extends Controller
         return $view->fetch();
     }
 
+
     public function getTagsNext(Request $request)
     {
         $page = $request->post('page');
@@ -215,5 +216,16 @@ class Manage extends Controller
         } else {
             echo 500;
         }
+    }
+
+    public function logout(Request $request)
+    {
+        $mySelf = $request->post('myself');
+        if ($mySelf == 1) {
+            if (Cookie::has('phone', 'xyf_')) {
+                Cookie::delete("phone");
+            }
+        }
+        echo 200;
     }
 }
