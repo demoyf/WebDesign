@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/layer.js"></script>
     <script>
         $(function () {
             initPage();
             bindPageClick();
+            bindDeleteAndTopClick();
             function initPage() {
-                var total = 12;
-                var per_page = 2;
+                var total = parseInt($('.table_blog_info').attr("data-role"));
+                var per_page = parseInt($('.table_blog_info table').attr("data-role"));
                 var pageSum = 1;
                 if (total == 0) {
                     pageSum = 1;
@@ -94,6 +96,7 @@
                     changeTable();
                 });
             }
+
             function bindPageClick() {
                 $('.pagination_div .number_li_div li').click(function () {
                     $('.pagination_div .number_li_div li.current').removeClass("current");
@@ -101,47 +104,115 @@
                     changeTable();
                 });
             }
+
             function changeTable() {
+                var load = layer.load(3);
                 var page = $('.pagination_div .number_li_div li.current').html();
+                var per_page = parseInt($('.table_blog_info table').attr("data-role"));
                 $.ajax({
-                    url:"",
-                    type:"post",
-                    data:{page:page},
-                    dataType:"json",
-                    success:function (data) {
-                        if (data.code==200) {
-                            var blogs = data.blogs;
-                            var result = "<tr class='table_head'><th>#</th> <th>博客名</th> <th>发表时间</th> <th>标签</th> <th>删除</th> <th>置顶</th> </tr>";
-                            for(i=0;i<blogs.length;i++){
-                                var blog = blogs[i];
-                                result += "<tr class='table_item' data-role='"+blog.id+"'>" +
-                                    "<td class='blog_id'>"+(i+1)+"</td><td class='blog_title'>"+
-                                    blog.title+"</td><td class='publish_time'>"+blog.my_time+
-                                    "</td><td class='blog_tag'>" +blog.tags+"</td><td class='delete_button'>"+
-                                    "<button>删除</button></td>" +
-                                    "<td class='to_top_button'><button>置顶</button></td></tr>";
-                            }
-                            $('.table_blog_info table').html(result);
-                        }else {
-
+                    url: "index/Manage/getManageNext",
+                    type: "post",
+                    data: {page: page},
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.code == 500) {
+                            layer.close(load);
+                            layer.msg('加载失败', {icon: 5});
+                            return false;
                         }
+                        var blogs = data.data;
+                        var result = "<tr class='table_head'><th>#</th> <th>博客名</th> <th>发表时间</th> <th>标签</th> <th>删除</th> <th>置顶</th> </tr>";
+                        for (i = 0; i < blogs.length; i++) {
+                            var blog = blogs[i];
+                            result += "<tr class='table_item' data-role='" + blog.id + "'>" +
+                                "<td class='blog_id'>" + (per_page * (page - 1) + (i + 1)) + "</td><td class='blog_title'>" +
+                                "<a target='_blank' href='showBlogDetail?blog_id=" + blog.id + "'>" +
+                                blog.title + "</a></td><td class='publish_time'>" + blog.my_time +
+                                "</td><td class='blog_tag'>" + blog.my_tag + "</td><td class='delete_button'>" +
+                                "<button>删除</button></td>"
+                            if (blog.istop == 1) {
+                                result += "<td class='to_top_button'><button data-role='1'>取消置顶</button></td></tr>";
+                            } else {
+                                result += "<td class='to_top_button'><button data-role='0'>置顶</button></td></tr>";
+                            }
+                        }
+                        $('.table_blog_info table').html(result);
+                        layer.close(load);
+                        bindDeleteAndTopClick();
                     },
-                    error:function () {
-
+                    error: function () {
+                        layer.close(load);
+                        layer.msg('发生了不可知的错误', {icon: 5});
                     }
                 });
             }
+
             function bindDeleteAndTopClick() {
                 $('.table_item .delete_button button').on("click", function () {
                     var dataRole = $(this).parent().parent().attr("data-role");
-
+                    var title = $(this).parent().siblings(".blog_title").text();
+                    var which = $(this).parent().parent();
+                    layer.confirm('确定删除:《' + title + '》?', {
+                        btn: ['嗯,删了', '留着吧'] //按钮
+                    }, function () {
+                        $.ajax({
+                            url: "index/Manage/deleteBlog",
+                            data: {id: dataRole},
+                            type: "post",
+                            success: function (data) {
+                                if (data == 200) {
+                                    which.remove();
+                                } else {
+                                    layer.msg("删除失败", {icon: 5});
+                                }
+                            },
+                            error: function () {
+                                layer.msg("删除失败", {icon: 5});
+                            }
+                        });
+                        layer.closeAll();
+                    });
                 });
                 $('.table_item .to_top_button button').on("click", function () {
                     var dataRole = $(this).parent().parent().attr("data-role");
-
+                    var upOrDown = $(this).attr("data-role");
+                    var button = $(this);
+                    var msg = "";
+                    var which = 0;
+                    if (upOrDown == 1) {
+                        msg = '确定取消置顶?';
+                        which = 0;
+                    } else {
+                        msg = '确定将它置顶?';
+                        which = 1;
+                    }
+                    layer.confirm(msg, {
+                        btn: ['嗯', '算了'] //按钮
+                    }, function () {
+                        $.ajax({
+                            url: "index/Manage/upOrDown",
+                            type: "post",
+                            data: {id: dataRole, which: which},
+                            success: function (data) {
+                                if (data == 200) {
+                                    if (which == 0) {
+                                        button.html("置顶");
+                                    } else {
+                                        button.html("取消置顶");
+                                    }
+                                    button.attr("data-role", which);
+                                } else {
+                                    layer.msg("修改失败", {icon: 5});
+                                }
+                            },
+                            error: function () {
+                                layer.msg("修改失败", {icon: 5});
+                            }
+                        });
+                        layer.closeAll();
+                    });
                 });
             }
-
         });
     </script>
     <style>
@@ -150,47 +221,68 @@
             margin: auto;
             margin-top: 5%;
             padding: 30px;
-            background-color:rgba(202,202,202,0.3);
+            background-color: rgba(202, 202, 202, 0.3);
             box-sizing: border-box;
             border-radius: 10px;
         }
+
         .table_blog_info table {
             width: 100%;
             text-align: center;
             border-radius: 10px;
-            box-shadow: 0 0 5px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 0 5px 8px rgba(0, 0, 0, 0.1);
             z-index: 1000;
         }
+
         .table_blog_info table tr td {
             padding: 5px;
         }
+
         .table_blog_info table tr td.blog_id {
             width: 10%;
         }
+
         .table_blog_info table tr td.blog_title {
             width: 30%;
         }
+
+        .table_blog_info table tr td.blog_title a {
+            text-decoration: none;
+            color: #494949;
+        }
+
+        .table_blog_info table tr td.blog_title a:hover {
+            color: #00b19e;
+        }
+
         .table_blog_info table tr td.publish_time {
             width: 20%;
         }
+
         .table_blog_info table tr td.blog_tag {
             width: 20%;
         }
+
         .table_blog_info table tr td.delete_button {
             width: 10%;
         }
+
         .table_blog_info table tr td.to_top_button {
             width: 10%;
         }
+
         .table_blog_info table .table_head {
             height: 80px;
         }
+
         .table_blog_info table .table_head th:first-child {
             border-radius: 10px 0 0 0;
         }
+
         .table_blog_info table .table_head th:last-child {
-            border-radius: 0 10px 0 0 ;
+            border-radius: 0 10px 0 0;
         }
+
         .table_blog_info table .table_head th {
             background-color: #cccccc;
             color: #494949;
@@ -198,39 +290,48 @@
             font-size: 20px;
             font-weight: 800;
         }
+
         .table_blog_info table .table_head th:first-child {
         }
+
         .table_blog_info table .table_head th:last-child {
         }
+
         .table_blog_info table .table_item:nth-child(2n) {
             background-color: white;
         }
+
         .table_blog_info table .table_item:nth-child(2n+1) {
-            background-color: rgba(204,204,204,0.2);
+            background-color: rgba(204, 204, 204, 0.2);
         }
+
         .table_blog_info table .table_item {
             height: 100px;
             color: #494949;
-            font-family: "SimSun","FangSong";
+            font-family: "SimSun", "FangSong";
             font-size: 16.5px;
         }
+
         .table_blog_info table .table_item td {
-            border: 1px solid rgba(204,204,204,0.2);
+            border: 1px solid rgba(204, 204, 204, 0.2);
         }
+
         .table_blog_info table .table_item .to_top_button button,
         .table_blog_info table .table_item .delete_button button {
             padding: 6px;
             border-radius: 3px;
             background-color: #00b19e;
-            background: linear-gradient(45deg,#00b19e,yellowgreen);
+            background: linear-gradient(45deg, #00b19e, yellowgreen);
             border: none;
             font-size: 15px;
             color: white;
         }
+
         .table_blog_info table .table_item .to_top_button button:hover,
         .table_blog_info table .table_item .delete_button button:hover {
             cursor: pointer;
         }
+
         .pagination_div {
             display: flex;
             flex-direction: row;
@@ -310,53 +411,35 @@
     </style>
 </head>
 <body>
-<div class="table_blog_info">
-    <table cellspacing="0">
-        <tr class="table_item" data-role="1">
-            <td class="blog_id">1</td>
-            <td class="blog_title">这是一篇博客，哈哈哈哈打撒挨打打撒
-                这是一篇博客，哈哈哈哈打撒挨打打的撒的撒撒</td>
-            <td class="publish_time">2017-04-02 22:22:22</td>
-            <td class="blog_tag">Andorid,Canvas,JavaScript,demo</td>
-            <td class="delete_button"><button>删除</button></td>
-            <td class="to_top_button"><button>置顶</button></td>
+<div class="table_blog_info" data-role={$total}>
+    <table cellspacing="0" data-role={$per_page}>
+        <tr class='table_head'>
+            <th>#</th>
+            <th>博客名</th>
+            <th>发表时间</th>
+            <th>标签</th>
+            <th>删除</th>
+            <th>置顶</th>
         </tr>
-        <tr class="table_item" data-role="2">
-            <td class="blog_id">1</td>
-            <td class="blog_title">这是一篇博客，哈哈哈哈打撒挨打打撒
-                这是一篇博客，哈哈哈哈打撒挨打打的撒的撒撒</td>
-            <td class="publish_time">2017-04-02 22:22:22</td>
-            <td class="blog_tag">Andorid,Canvas,JavaScript,demo</td>
-            <td class="delete_button"><button>删除</button></td>
-            <td class="to_top_button"><button>置顶</button></td>
+        {volist name="blogs" id="blog" key="i"}
+        <tr class="table_item" data-role={$blog.id}>
+            <td class="blog_id">{$i}</td>
+            <td class="blog_title"><a target="_blank" href="showBlogDetail?blog_id={$blog.id}">{$blog.title}</a>
+            </td>
+            <td class="publish_time">{$blog.my_time}</td>
+            <td class="blog_tag">{$blog.my_tag}</td>
+            <td class="delete_button">
+                <button>删除</button>
+            </td>
+            <td class="to_top_button">
+                {if($blog.istop==0)}
+                <button data-role="0">置顶</button>
+                {else}
+                <button data-role="1">取消置顶</button>
+                {/if}
+            </td>
         </tr>
-        <tr class="table_item" data-role="3">
-            <td class="blog_id">1</td>
-            <td class="blog_title">这是一篇博客，哈哈哈哈打撒挨打打撒
-                这是一篇博客，哈哈哈哈打撒挨打打的撒的撒撒</td>
-            <td class="publish_time">2017-04-02 22:22:22</td>
-            <td class="blog_tag">Andorid,Canvas,JavaScript,demo</td>
-            <td class="delete_button"><button>删除</button></td>
-            <td class="to_top_button"><button>置顶</button></td>
-        </tr>
-        <tr class="table_item" data-role="4">
-            <td class="blog_id">1</td>
-            <td class="blog_title">这是一篇博客，哈哈哈哈打撒挨打打撒
-                这是一篇博客，哈哈哈哈打撒挨打打的撒的撒撒</td>
-            <td class="publish_time">2017-04-02 22:22:22</td>
-            <td class="blog_tag">Andorid,Canvas,JavaScript,demo</td>
-            <td class="delete_button"><button>删除</button></td>
-            <td class="to_top_button"><button>置顶</button></td>
-        </tr>
-        <tr class="table_item" data-role="5">
-            <td class="blog_id">1</td>
-            <td class="blog_title">这是一篇博客，哈哈哈哈打撒挨打打撒
-                这是一篇博客，哈哈哈哈打撒挨打打的撒的撒撒</td>
-            <td class="publish_time">2017-04-02 22:22:22</td>
-            <td class="blog_tag">Andorid,Canvas,JavaScript,demo</td>
-            <td class="delete_button"><button>删除</button></td>
-            <td class="to_top_button"><button>置顶</button></td>
-        </tr>
+        {/volist}
     </table>
     <div class="pagination_div">
         <li class="to_prev">Prev</li>
