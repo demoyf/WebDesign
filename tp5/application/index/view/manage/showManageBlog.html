@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/manage/manage_blogs.css">
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/layer.js"></script>
+    <script src="js/manage/manage_blogs.js"></script>
+</head>
+<body>
+<div class="table_blog_info" data-role={$total}>
+    <table cellspacing="0" data-role={$per_page}>
+        <tr class='table_head'>
+            <th>#</th>
+            <th>博客名</th>
+            <th>发表时间</th>
+            <th>标签</th>
+            <th>删除</th>
+            <th>置顶</th>
+        </tr>
+        {volist name="blogs" id="blog" key="i"}
+        <tr class="table_item" data-role={$blog.id}>
+            <td class="blog_id">{$i}</td>
+            <td class="blog_title"><a target="_blank" href="showBlogDetail?blog_id={$blog.id}">{$blog.title}</a>
+            </td>
+            <td class="publish_time">{$blog.my_time}</td>
+            <td class="blog_tag">{$blog.my_tag}</td>
+            <td class="delete_button">
+                <button>删除</button>
+            </td>
+            <td class="to_top_button">
+                {if($blog.istop==0)}
+                <button data-role="0">置顶</button>
+                {else}
+                <button data-role="1">取消置顶</button>
+                {/if}
+            </td>
+        </tr>
+        {/volist}
+    </table>
+    <div class="pagination_div">
+        <li class="to_prev">Prev</li>
+        <div class="number_li_div">
+            <li class="current">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </div>
+        <li class="to_next">Next</li>
+    </div>
+</div>
+</body>
+</html>

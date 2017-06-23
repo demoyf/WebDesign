@@ -93,10 +93,9 @@ a.btn:hover {
     list-style: none;
     padding-left: 5px;
     width: 60px;
-    height: 150px;
-    left: 25%;
-    top: 145px;
     height: 0px;
+    margin-top: 45px;
+    margin-left: 75px;
 }
 
 .showChooseSize li a {
@@ -115,8 +114,8 @@ a.btn:hover {
     width: 180px;
     height: 0px;
     display: none;
-    left: 23%;
-    top: 145px;
+    left: 18%;
+    margin-top: 45px;
 }
 
 .showChooseColor table {

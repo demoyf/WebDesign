@@ -94,10 +94,71 @@
                     });
                 }
             }
+            $('.header_content .top_nav_content .left_nav #to_my_email,.small_left_nav .to_my_email')
+                .on("click", function () {
+                var emial_layer =  layer.open({
+                    type: 1,
+                    skin: 'layui-layer-demo', //样式类名//不显示关闭按钮
+                    anim: 2,
+                    title: "我的邮箱",
+                    shadeClose: true, //开启遮罩关闭
+                    content: $('.my_email_info')
+                });
+                $('.copy_email_button').on("click", function () {
+                    var info = document.getElementById("copy_info");
+                    info.select();
+                    document.execCommand("Copy");
+                    layer.close(emial_layer);
+                });
+            });
         });
     </script>
+    <style>
+        .my_email_info {
+            display: flex;
+            flex-direction: column;
+            width: 320px;
+            background-color: white;
+        }
+        .my_email_info .my_email_title {
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            height: 3em;
+        }
+        #copy_info {
+            resize: none;
+            background-color: transparent;
+            border: none;
+            font-size: 20px;
+            font-family: cursive;
+            color: #494949;
+        }
+        .my_email_info .copy_email_button {
+            width: 40%;
+            margin-top: 20px;
+            margin-left: 30%;
+            margin-bottom: 20px;
+            background-color: #00b19e;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 6px;
+            border: none;
+            border-radius: 5px;
+        }
+        .my_email_info .copy_email_button:hover {
+            cursor: pointer;
+            box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+        }
+    </style>
 </head>
 <body>
+<div class="my_email_info" style="display: none">
+    <div class="my_email_title">
+        <img src="img/emial.jpg" height="30px">
+        <textarea id="copy_info" maxlength="16">425746853@qq.com</textarea>
+    </div>
+    <button class="copy_email_button">复制到剪切板</button>
+</div>
 <div class="dialog_content" style="display: none">
     <form action="index/BlogDetail/replyComment" method="post">
         <input type="hidden" name="blog_id" value={$blog.id}>
@@ -127,7 +188,7 @@
             <li><a class="to_blog_link" href="home">博客</a></li>
             <li><a class="to_image_link">图片</a></li>
             <li><a class="to_music_link">音乐</a></li>
-            <li><a class="to_collection_link">收藏</a></li>
+            <li><a id="to_my_email" style="font-size: 22px!important;">联系我</a></li>
         </nav>
         <div class="right_nav">
             <div class="background">
@@ -254,154 +315,9 @@
                         <button class="delete_button">删除</button>
                     </div>
                     {/volist}
-                    <!--<div class="a_comment">-->
-                    <!--<img src="page_icon.png" width="60px">-->
-                    <!--<div class="comment_detail">-->
-                    <!--<div class="who_reply">-->
-                    <!--<a href="">XYF</a> 回复：<a href="">DDD</a>-->
-                    <!--</div>-->
-                    <!--<div class="reply_time">-->
-                    <!--2017-04-07 22:22:22-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--<button class="reply_button">回复</button>-->
-                    <!--</div>-->
                 </div>
             </div>
             {/volist}
-            <!--            <div class="blog_comment_time_content">
-                            <div class="comment_time">
-                                <span>2016-04-12</span>
-                                <span>22:22:22</span>
-                            </div>
-                            <div class="comment_content">
-                                <div class="a_comment root_comment">
-                                    <img src="page_icon.png" width="60px">
-                                    <div class="comment_detail">
-                                        <div class="who_reply">
-                                            <a href="">XYF</a> 回复：<a href="">DDD</a>
-                                        </div>
-                                        <div class="reply_time">
-                                            2017-04-07 22:22:22
-                                        </div>
-                                    </div>
-                                    <button class="reply_button">回复</button>
-                                </div>
-                                <div class="a_comment">
-                                    <img src="page_icon.png" width="60px">
-                                    <div class="comment_detail">
-                                        <div class="who_reply">
-                                            <a href="">XYF</a> 回复：<a href="">DDD</a>
-                                        </div>
-                                        <div class="reply_time">
-                                            2017-04-07 22:22:22
-                                        </div>
-                                    </div>
-                                    <button class="reply_button">回复</button>
-                                </div>
-                                <div class="a_comment">
-                                    <img src="page_icon.png" width="60px">
-                                    <div class="comment_detail">
-                                        <div class="who_reply">
-                                            <a href="">XYF</a> 回复：<a href="">DDD</a>
-                                        </div>
-                                        <div class="reply_time">
-                                            2017-04-07 22:22:22
-                                        </div>
-                                    </div>
-                                    <button class="reply_button">回复</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="blog_comment_time_content">
-                            <div class="comment_time">
-                                <span>2016-04-12</span>
-                                <span>22:22:22</span>
-                            </div>
-                            <div class="comment_content">
-                                <div class="a_comment">
-                                    <img src="page_icon.png" width="60px">
-                                    <div class="comment_detail">
-                                        <div class="who_reply">
-                                            <a href="">XYF</a> 回复：<a href="">DDD</a>
-                                        </div>
-                                        <div class="reply_time">
-                                            2017-04-07 22:22:22
-                                        </div>
-                                    </div>
-                                    <button class="reply_button">回复</button>
-                                </div>
-                                <div class="a_comment">
-                                    <img src="page_icon.png" width="60px">
-                                    <div class="comment_detail">
-                                        <div class="who_reply">
-                                            <a href="">XYF</a> 回复：<a href="">DDD</a>
-                                        </div>
-                                        <div class="reply_time">
-                                            2017-04-07 22:22:22
-                                        </div>
-                                    </div>
-                                    <button class="reply_button">回复</button>
-                                </div>
-                                <div class="a_comment">
-                                    <img src="page_icon.png" width="60px">
-                                    <div class="comment_detail">
-                                        <div class="who_reply">
-                                            <a href="">XYF</a> 回复：<a href="">DDD</a>
-                                        </div>
-                                        <div class="reply_time">
-                                            2017-04-07 22:22:22
-                                        </div>
-                                    </div>
-                                    <button class="reply_button">回复</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="blog_comment_time_content">
-                            <div class="comment_time">
-                                <span>2016-04-12</span>
-                                <span>22:22:22</span>
-                            </div>
-                            <div class="comment_content">
-                                <div class="a_comment root_comment">
-                                    <img src="page_icon.png" width="60px">
-                                    <div class="comment_detail">
-                                        <div class="who_reply">
-                                            <a href="">XYF</a> 回复：<a href="">DDD</a>
-                                        </div>
-                                        <div class="reply_time">
-                                            2017-04-07 22:22:22
-                                        </div>
-                                    </div>
-                                    <button class="reply_button">回复</button>
-                                </div>
-                                <div class="a_comment">
-                                    <img src="page_icon.png" width="60px">
-                                    <div class="comment_detail">
-                                        <div class="who_reply">
-                                            <a href="">XYF</a> 回复：<a href="">DDD</a>
-                                        </div>
-                                        <div class="reply_time">
-                                            2017-04-07 22:22:22
-                                        </div>
-                                    </div>
-                                    <button class="reply_button">回复</button>
-                                </div>
-                                <div class="a_comment">
-                                    <img src="page_icon.png" width="60px">
-                                    <div class="comment_detail">
-                                        <div class="who_reply">
-                                            <a href="">XYF</a> 回复：<a href="">DDD</a>
-                                        </div>
-                                        <div class="reply_time">
-                                            2017-04-07 22:22:22
-                                        </div>
-                                    </div>
-                                    <button class="reply_button">回复</button>
-                                </div>
-                            </div>
-                        </div>-->
-
             <div class="blog_comment_time_content">
                 <div class="comment_time">
                 </div>
@@ -431,10 +347,14 @@
     <li><span>博客</span></li>
     <li><span>图片</span></li>
     <li><span>音乐</span></li>
-    <li><span>收藏</span></li>
+    <li><span class="to_my_email" style="font-size: 20px!important;">联系我</span></li>
     <li class="to_sign_in">Sign in,up</li>
+    {if($phone=="404")}
     <li><a href="toLogin">Sign in</a></li>
     <li><a href="toLogin">Sign up</a></li>
+    {else}
+    <li class="user_name_small_left"><a href="showManage">{$nickname}</a></li>
+    {/if}
     <li class="about_li">About</li>
     <li class="github_li">
         <a class="to_github" href="https://github.com/demoyf/" target="_blank"><img

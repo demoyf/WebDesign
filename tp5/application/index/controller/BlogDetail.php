@@ -77,7 +77,11 @@ class BlogDetail extends Controller
         $tag_arr = explode(",", $myBlog['tag']);
         $result_tag = array();
         foreach ($tag_arr as $tag) {
-            $result_tag[] = TagModel::get(['id' => $tag])['tag'];
+            $myTag = TagModel::get(['id' => $tag]);
+            if ($myBlog == null) {
+                continue;
+            }
+            $result_tag[] = $myTag['tag'];
         }
         $myBlog->tags = $result_tag;
         $view->assign("blog", $myBlog);
