@@ -244,12 +244,12 @@ body, html {
 
 .test_hidden {
     width: 532px;
-    height: 290px;
+    height: 360px;
     overflow: hidden;
     z-index: 90;
     display: block;
     position: absolute;
-    top: calc(100% - 390px);
+    top: calc(100% - 450px);
     left: calc(20% + 190px);
     display: none;
 }

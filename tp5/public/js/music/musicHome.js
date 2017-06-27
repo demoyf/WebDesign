@@ -312,6 +312,7 @@ $(function () {
                 var src = $(this).attr("music-src");
                 initMusic(src);
                 $(this).addClass("current_play");
+                changePlayMusicInfo();
             }
         });
     }

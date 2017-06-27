@@ -108,7 +108,7 @@
         <nav class="left_nav">
             <li><a class="to_blog_link" href="home">博客</a></li>
             <li><a class="to_image_link">图片</a></li>
-            <li><a class="to_music_link">音乐</a></li>
+            <li><a class="to_music_link" href="musicHome">音乐</a></li>
             <li><a id="to_my_email" style="font-size: 22px!important;">联系我</a></li>
         </nav>
         <div class="right_nav">
@@ -152,7 +152,6 @@
         <div style="display: none">
             {$effect = ("effect_".($i%4+1));$src = "img/blog_background/".($blog.background_id).".jpg"}
         </div>
-
         {if($i%2==0)}
         <div class="left_blog" data-role ={$blog.id}>
             <div class="content">
@@ -223,7 +222,7 @@
     <li class="to_li">To</li>
     <li><span>博客</span></li>
     <li><span>图片</span></li>
-    <li><span>音乐</span></li>
+    <li><a href="musicHome">音乐</a></li>
     <li><span class="to_my_email" style="font-size: 20px!important;">联系我</span></li>
     {if($phone=="404")}
     <li class="to_sign_in">Sign in,up</li>

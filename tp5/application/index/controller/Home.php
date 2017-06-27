@@ -18,7 +18,7 @@ use app\index\model\Blog\Tag as TagModel;
 use app\index\model\Personal\Info as InfoModel;
 class Home extends Controller
 {
-    public function home()
+    public function home(Request $request)
     {
         $isHas = false;
         $phone = "";
@@ -32,19 +32,50 @@ class Home extends Controller
             }
         }
         $view = new View("home/home");
-        $blogs = MyBlog::where('id', '>', 0)->order("istop",'desc')->paginate(9);
-        $view->blogs = $blogs;
-        $temp = json_encode($blogs);
-        $view->total = json_decode($temp)->total;
-        $view->per_page = json_decode($temp)->per_page;
-        $tag = TagModel::all();
-        $view->tags = $tag;
-        if ($isHas) {
-            $view->phone = $phone;
-            $view->nickname = $info['nickname'];
+        $tag_id = $request->param('tag_id');
+        if ($tag_id == null || $tag_id == 0) {
+            $blogs = MyBlog::where('id', '>', 0)->order("istop",'desc')->paginate(9);
+            $view->blogs = $blogs;
+            $temp = json_encode($blogs);
+            $view->total = json_decode($temp)->total;
+            $view->per_page = json_decode($temp)->per_page;
+            $tag = TagModel::all();
+            $view->tags = $tag;
+            if ($isHas) {
+                $view->phone = $phone;
+                $view->nickname = $info['nickname'];
+            }else{
+                $view->phone = "404";
+                $view->nickname = "404";
+            }
         }else{
-            $view->phone = "404";
-            $view->nickname = "404";
+            $blogs = MyBlog::where('id', '>', 0)->
+            whereLike('tag','%'.$tag_id.'%')->order("istop",'desc')->paginate(9);
+            $array = array();
+            $temp = 0;
+            foreach ($blogs as $blog) {
+                $tags = explode(",",$blog['tag']);
+                foreach ($tags as $demo) {
+                    if ($demo == $tag_id) {
+                        $array[$temp] = $blog;
+                        $temp++;
+                        break;
+                    }
+                }
+            }
+            $view->blogs = $array;
+            $temp = json_encode($blogs);
+            $view->total = json_decode($temp)->total;
+            $view->per_page = json_decode($temp)->per_page;
+            $tag = TagModel::all();
+            $view->tags = $tag;
+            if ($isHas) {
+                $view->phone = $phone;
+                $view->nickname = $info['nickname'];
+            }else{
+                $view->phone = "404";
+                $view->nickname = "404";
+            }
         }
         return $view->fetch();
     }
@@ -64,4 +95,5 @@ class Home extends Controller
             echo json_decode($result);
         }
     }
+
 }

@@ -40,5 +40,4 @@ return [
     'aldumPage'=>'index/music/aldumPage',
     'aldumDetailPage' => 'index/music/aldumDetailPage',
     'showPublishAldum' => 'index/music/showPublishAldum',
-
 ];
