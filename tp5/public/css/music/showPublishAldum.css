@@ -1,0 +1,95 @@
+body,html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+
+}
+.publish_content_div {
+    width: 60%;
+    height: 100%;
+    min-width: 900px;
+    margin-left: 15%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    padding-left: 5%;
+    padding-right: 5%;
+    box-sizing: border-box;
+}
+.publish_content_div .publish_one_input_div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-top: 20px;
+    font-family: cursive,"FangSong";
+}
+.publish_content_div .publish_one_input_div .one_title {
+    width: 15%;
+    font-size: 22px;
+}
+.publish_content_div .publish_one_input_div .one_input {
+    width: 70%;
+}
+.publish_content_div .publish_one_input_div .one_input .aldum_title_input {
+    width: 50%;
+    border: 1px solid slateblue;
+    border-radius: 5px;
+    font-size: 17px;
+    padding: 5px;
+    color: #494949;
+}
+.publish_content_div .publish_one_input_div .one_input .aldum_description_input {
+    width: 50%;
+    height: 180px;
+    border: 1px solid slateblue;
+    border-radius: 5px;
+    font-size: 17px;
+    padding: 5px;
+    color: #494949;
+    resize: none;
+}
+.publis_button {
+    margin-left: 25%;
+    margin-top: 50px;
+    padding: 10px 20px;
+    background-color: slateblue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+.publis_button:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 5px #ccc;
+}
+.publish_content_div .publish_one_input_div .one_input .choose_cover_div {
+    width: 13%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 71px;
+}
+.publish_content_div .publish_one_input_div .one_input .choose_cover_div img {
+    width: 100%;
+    position: absolute;
+}
+.publish_content_div .publish_one_input_div .one_input .choose_cover_div input {
+    width: 100%;
+    height: 71px;
+    position: absolute;
+    left: 0;
+    top:0;
+    z-index: 100;
+    opacity: 0;
+}
+.publish_content_div .publish_one_input_div .one_input .choose_cover_div input:hover {
+    cursor: pointer;
+}
+.temp_img_div {
+    position: absolute;
+    width: 200px;
+    top: 320px;
+    left: 55%;
+    display: none;
+}

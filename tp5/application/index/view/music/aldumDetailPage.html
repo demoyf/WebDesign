@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body, html {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(224, 224, 224, 0.1);
+        }
+        .detail_top_content {
+            width: 60%;
+            min-height: 100%;
+            background-color: white;
+            margin-left: 20%;
+            border: 1px solid #cccccc;
+            box-shadow: 1px 1px 10px rgba(224, 224, 224, 0.3);
+            display: flex;
+            flex-direction: row;
+        }
+        .detail_top_content .aldum_detail_all {
+            width: 72%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 5%;
+            padding-top: 50px;
+            box-sizing: border-box;
+            border-right: 1px solid #cccccc;
+        }
+        .detail_top_content .lastest_aldum {
+            width: 28%;
+            display: flex;
+            flex-direction: column;
+            padding: 3%;
+            box-sizing: border-box;
+        }
+        .detail_top_content .aldum_detail_all .aldum_detail_info {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+        .detail_top_content .aldum_detail_all .aldum_detail_info  .aldum_img {
+            width: 30%;
+        }
+        .detail_top_content .aldum_detail_all .aldum_detail_info  .aldum_img img {
+            width: 100%;
+        }
+
+        .detail_top_content .aldum_detail_all .aldum_detail_info .aldum_info {
+            width: 68%;
+            display: flex;
+            margin-left: 2%;
+            flex-direction: column;
+        }
+        .detail_top_content .aldum_detail_all .aldum_detail_info .aldum_info .aldum_title{
+            font-size: 21px;
+            color: #494949;
+        }
+        .detail_top_content .aldum_detail_all .aldum_detail_info .aldum_info .aldum_time {
+            font-size: 13px;
+            color: #bbbbbb;
+            margin-top: 10px;
+            margin-left: 5%;
+        }
+        .detail_top_content .aldum_detail_all .aldum_detail_info .aldum_info .aldum_description {
+            font-size: 15px;
+            margin-top: 25px;
+            color: #494949;
+        }
+        .detail_top_content .aldum_detail_all .aldum_detail_info .aldum_info .play_and_add {
+            margin-left: 5%;
+            margin-top: 40px;
+            display: flex;
+            flex-direction: row;
+        }
+        .detail_top_content .aldum_detail_all .aldum_detail_info .aldum_info .play_and_add .play_icon {
+            padding: 5px 10px;
+            background-color: slateblue;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 1px 1px 5px #ccc;
+            opacity: 0.8;
+        }
+        .detail_top_content .aldum_detail_all .aldum_detail_info .aldum_info .play_and_add .play_icon:hover {
+            cursor: pointer;
+            opacity: 1;
+        }
+        .detail_top_content .aldum_detail_all .aldum_detail_info .aldum_info .play_and_add .add_div {
+            background-color: slateblue;
+            width: 30px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            margin-left: 3px;
+            box-shadow: 1px 1px 5px #ccc;
+            opacity: 0.8;
+        }
+        .detail_top_content .aldum_detail_all .aldum_detail_info .aldum_info .play_and_add .add_div:hover {
+            cursor: pointer;
+            opacity: 1;
+        }
+        .detail_top_content .aldum_detail_all .aldum_detail_info .aldum_info .play_and_add .add_icon {
+            position: relative;
+            width: 0.15em;
+            height: 0.8em;
+            background: white;
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
+            font-size: 22px;
+            display: block;
+            left: 13.5px;
+            top: 8px;
+        }
+        .detail_top_content .aldum_detail_all .aldum_detail_info .aldum_info .play_and_add .add_icon:after{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width:0.15em;
+            height:0.8em;
+            background: white;
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        }
+        .detail_top_content .aldum_music_list {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+        }
+        .detail_top_content .aldum_music_list .music_info .music_sum {
+            font-size: 13px;
+            color: #bbbbbb;
+            margin-left: 15px;
+        }
+        .aldum_music_list table {
+            margin-top: 20px;
+            width: 100%;
+            color: #797979;
+            font-size: 13px;
+            font-weight: 100;
+            border-top: 2px solid #c20c0c;
+            padding-top: 10px;
+            text-align: left;
+        }
+        .aldum_music_list table tr th {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-right: 1px solid #cccccc;
+            border-bottom: 1px solid #cccccc;
+            background-color: rgba(255,255,255,0.3);
+            padding-left: 10px;
+        }
+        .aldum_music_list table tr td:nth-child(1) {
+            width: 5%;
+        }
+        .aldum_music_list table tr td:nth-child(2) {
+            width: 5%;
+        }
+        .aldum_music_list table tr td:nth-child(3) {
+            width: 45%;
+        }
+        .aldum_music_list table tr td:nth-child(4) {
+            width: 15%;
+        }
+        .aldum_music_list table tr td:nth-child(5) {
+            width: 15%;
+        }
+        .aldum_music_list table tr td:nth-child(6) {
+            width: 15%;
+        }
+        .aldum_music_list table tr:nth-child(2n) {
+            background-color: #eeeeee;
+        }
+        .aldum_music_list table tr td {
+            padding-left: 5px;
+        }
+        .aldum_music_list table tr td {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        .aldum_music_list table tr td .td_play_icon {
+            display: block;
+            margin-top: 5px;
+            opacity: 0.6;
+        }
+        .aldum_music_list table tr td .td_play_icon:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+        .aldum_music_list table tr td {
+            margin-top: 5px;
+        }
+
+        .aldum_music_list table tr td .td_aldum_name {
+            display: block;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 9em;
+        }
+        .aldum_music_list table tr td .td_aldum_name:hover {
+            cursor: pointer;
+        }
+        .aldum_music_list table tr td .td_music_title{
+            display: block;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 16em;
+        }
+        .aldum_music_list table tr td .td_music_title:hover{
+            cursor: pointer;
+        }
+
+        .aldum_music_list table tr td .td_music_artist{
+            display: block;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 7em;
+        }
+        .aldum_music_list table tr td .td_music_artist:hover{
+            cursor: pointer;
+        }
+        .lastest_aldum .lastest_title {
+            margin-top: 50px;
+            font-size: 16px;
+            color: #494949;
+            border-bottom: 1px solid #494949;
+            padding-bottom: 10px;
+        }
+        .lastest_aldum .lastest_a_content {
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+            margin-top: 20px;
+        }
+        .lastest_aldum .lastest_a_content .lastest_img {
+            width: 30%;
+            display: flex;
+            flex-direction: row;
+        }
+        .lastest_aldum .lastest_a_content .lastest_img img {
+            width: 100%;
+        }
+        .lastest_aldum .lastest_a_content .lastest_info {
+            display: flex;
+            flex-direction: column;
+            width: 65%;
+            margin-left: 5%;
+        }
+        .lastest_aldum .lastest_a_content .lastest_info a {
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .lastest_aldum .lastest_a_content .lastest_info a:hover {
+            cursor: pointer;
+            border-bottom: 1px solid #cccccc;
+        }
+        .lastest_aldum .lastest_a_content .lastest_info span {
+            font-size: 13px;
+            font-family: cursive;
+        }
+    </style>
+</head>
+<body>
+<!--顶部-->
+<div class="detail_top_content">
+    <!--左侧歌单所有信息-->
+    <div class="aldum_detail_all">
+        <!--上，歌单信息-->
+        <div class="aldum_detail_info">
+            <div class="aldum_img"><img src="{$aldum.cover_path}"></div>
+            <div class="aldum_info">
+                <span class="aldum_title">{$aldum.title}</span>
+                <span class="aldum_time">{$aldum.publish_time}创建</span>
+                <div class="play_and_add">
+                    <span class="play_icon">播放</span>
+                    <div class="add_div"><span class="add_icon"></span></div>
+                </div>
+                <span class="aldum_description">简介：{$aldum.description}</span>
+            </div>
+        </div>
+        <!--下，歌单列表-->
+        <div class="aldum_music_list">
+            <div class="music_info">
+                <span style="font-size: 19px;color: #494949">歌曲列表</span>
+                <span class="music_sum">{$aldum.length}首歌</span>
+                <span style="font-size: 13px;color: #494949;margin-left: 50%">播放：</span>
+                <span style="font-size: 13px;color: #c20c0c;font-weight: 800">{$aldum.play_count}</span>
+                <span style="font-size: 13px;color: #494949;">次</span>
+            </div>
+            <table cellspacing="0">
+                <tr>
+                    <th colspan="2"></th>
+                    <th>歌曲标题</th>
+                    <th>时长</th>
+                    <th>歌手</th>
+                    <th>专辑</th>
+                </tr>
+                {volist name="aldum.musics" id = "music" key = "i"}
+                <tr>
+                    <td>{$i}</td>
+                    <td><span class="td_play_icon"><img src="img/menu_icon/play.png"></span></td>
+                    <td><a class="td_music_title" title={$music.title}>
+                        {$music.title}</a></td>
+                    <td>{$music.duration}</td>
+                    <td><a class="td_music_artist" title={$music.artist}>{$music.artist}</a></td>
+                    <td><a class="td_aldum_name" title={$music.aldum}>{$music.aldum}</a></td>
+                </tr>
+                {/volist}
+            </table>
+        </div>
+    </div>
+    <!--右侧，最新的歌单-->
+    <div class="lastest_aldum">
+        <div class="lastest_title">最新歌单</div>
+        <div class="lastest_a_content">
+            <div class="lastest_img">
+                <img src="demo.jpeg">
+            </div>
+            <div class="lastest_info">
+                <a title="语言的选择丨荒唐假象还是温暖力量">语言的选择丨荒唐假象还是温暖力量</a>
+                <span>by:</span>
+            </div>
+        </div>
+        <div class="lastest_a_content">
+            <div class="lastest_img">
+                <img src="demo.jpeg">
+            </div>
+            <div class="lastest_info">
+                <a title="语言的选择丨荒唐假象还是温暖力量">语言的选择丨荒唐假象还是温暖力量</a>
+                <span>by:</span>
+            </div>
+        </div>
+        <div class="lastest_a_content">
+            <div class="lastest_img">
+                <img src="demo.jpeg">
+            </div>
+            <div class="lastest_info">
+                <a title="语言的选择丨荒唐假象还是温暖力量">语言的选择丨荒唐假象还是温暖力量</a>
+                <span>by:</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
