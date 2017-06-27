@@ -120,9 +120,11 @@ class Music extends Controller
         $aldum_id = $request->param("aldum_id");
         $aldum = AldumModel::get($aldum_id);
         $musics = MusicModel::where(['aldum_id' => $aldum_id])->select();
+        $lastest = AldumModel::where('id', ">", 0)->limit(5)->select();
         $aldum->musics = $musics;
         $aldum->length = sizeof($musics);
         $view->aldum = $aldum;
+        $view->lastests = $lastest;
         return $view->fetch();
     }
 
@@ -137,6 +139,19 @@ class Music extends Controller
             $play_count++;
             $aldum->play_count = $play_count;
             $aldum->isUpdate(true)->save();
+            echo json_encode($array);
+        } catch (Exception $exception) {
+            $array = array("code" => 500);
+            echo json_encode($array);
+        }
+    }
+
+    public function getSingleMusic(Request $request)
+    {
+        try {
+            $id = $request->post('id');
+            $music = MusicModel::get($id);
+            $array = array("code" => 200, "music" => $music);
             echo json_encode($array);
         } catch (Exception $exception) {
             $array = array("code" => 500);
