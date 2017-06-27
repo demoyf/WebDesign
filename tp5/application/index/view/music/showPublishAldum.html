@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/music/showPublishAldum.css">
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/layer.js"></script>
+    <script>
+        $(function () {
+            $('.one_input .choose_cover_div .aldum_cover_input').change(function () {
+                var src = getObjectURL($(this)[0].files[0]);
+                $('.temp_img_div img').attr("src", src);
+                $('.temp_img_div').show(500);
+            });
+
+            $('.publish_one_input_div .publis_button').on("click", function () {
+                var titleInput = $('.publish_one_input_div .one_input .aldum_title_input');
+                var title = titleInput.val();
+                if (title=="") {
+                    layer.tips('歌单名不能为空',titleInput);
+                    return false;
+                }
+                var descriptionInput = $('.publish_one_input_div .one_input .aldum_description_input');
+                var description = descriptionInput.val();
+                if (description==""){
+                    layer.tips('简介不能为空',descriptionInput);
+                    return false;
+                }
+                var file = $('.one_input .choose_cover_div .aldum_cover_input')[0].files[0];
+                if (file==null) {
+                    layer.tips('请选择背景图片',$('.one_input .choose_cover_div .aldum_cover_input'));
+                    return false;
+                }
+                var formData = new FormData();
+                formData.append("background",file);
+                formData.append("title", title);
+                formData.append("description",description);
+                $.ajax({
+                    url:"index/Music/uploadAldum",
+                    type:"post",
+                    data:formData,
+                    processData:false,
+                    contentType:false,
+                    dataType:"json",
+                    success:function (data) {
+                        if (data.code==200) {
+                            layer.msg('发表成功');
+                            setTimeout(function () {
+                                window.location.href="showPublishAldum";
+                            }, 1000);
+                        }else {
+                            layer.msg('发表失败',{icon:5});
+                        }
+                    },
+                    error:function () {
+                        layer.msg('发表失败',{icon:5});
+                    }
+                });
+            });
+
+            function getObjectURL(file) {
+                var url = null;
+                if (window.createObjectURL != undefined) { // basic
+                    url = window.createObjectURL(file);
+                } else if (window.URL != undefined) { // mozilla(firefox)
+                    url = window.URL.createObjectURL(file);
+                } else if (window.webkitURL != undefined) { // webkit or chrome
+                    url = window.webkitURL.createObjectURL(file);
+                }
+                return url;
+            }
+        });
+    </script>
+</head>
+<body>
+<div class="temp_img_div">
+    <img src="img/13.jpg" class="current_choose_img" width="100%">
+</div>
+<div class="publish_content_div">
+    <div class="publish_one_input_div">
+        <div class="one_title">
+            歌单名：
+        </div>
+        <div class="one_input">
+            <input type="text" maxlength="25" class="aldum_title_input">
+        </div>
+    </div>
+    <div class="publish_one_input_div">
+        <div class="one_title">
+            简介：
+        </div>
+        <div class="one_input">
+            <textarea maxlength="90" class="aldum_description_input"></textarea>
+        </div>
+    </div>
+    <div class="publish_one_input_div">
+        <div class="one_title">
+            封面图片：
+        </div>
+        <div class="one_input">
+            <div class="choose_cover_div">
+                <input type="file" class="aldum_cover_input">
+                <img src="img/add_upload_icon.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="publish_one_input_div">
+        <button class="publis_button">发表</button>
+    </div>
+</div>
+</body>
+</html>

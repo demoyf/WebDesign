@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/music/aldumDetailPage.css">
+    <title>Title</title>
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/layer.js"></script>
+    <script>
+        $(function () {
+            $(' .aldum_detail_info .aldum_info .play_and_add .play_icon').on("click",function () {
+                var data = $(this).parent().attr("data-role");
+                window.parent.loadMusic(data,2);
+            });
+            $('.aldum_detail_info .aldum_info .play_and_add .add_div').on("click",function () {
+                var data = $(this).parent().attr("data-role");
+                window.parent.addMusic(data);
+            });
+            $('html').on("click", function () {
+                window.parent.hideVolume();
+            });
+            $('td .td_play_icon').on("click", function () {
+                var data = $(this).attr("data-role");
+                window.parent.loadSingleMusic(data);
+            });
+        });
+        function addPlayCount(src) {
+            $(function () {
+                var span = $('.aldum_music_list .music_info .play_count');
+                var count = parseInt(span.html());
+                span.html(++count);
+                return false;
+            });
+        }
+    </script>
+</head>
+<body>
+<!--顶部-->
+<div class="detail_top_content">
+    <!--左侧歌单所有信息-->
+    <div class="aldum_detail_all">
+        <!--上，歌单信息-->
+        <div class="aldum_detail_info">
+            <div class="aldum_img"><img src="{$aldum.cover_path}"></div>
+            <div class="aldum_info">
+                <span class="aldum_title">{$aldum.title}</span>
+                <span class="aldum_time">{$aldum.publish_time}创建</span>
+                <div class="play_and_add" data-role={$aldum.id}>
+                    <span class="play_icon">播放</span>
+                    <div class="add_div"><span class="add_icon"></span></div>
+                </div>
+                <span class="aldum_description">简介：{$aldum.description}</span>
+            </div>
+        </div>
+        <!--下，歌单列表-->
+        <div class="aldum_music_list">
+            <div class="music_info">
+                <span style="font-size: 19px;color: #494949">歌曲列表</span>
+                <span class="music_sum">{$aldum.length}首歌</span>
+                <span style="font-size: 13px;color: #494949;margin-left: 50%">播放：</span>
+                <span style="font-size: 13px;color: #c20c0c;font-weight: 800" class="play_count">{$aldum.play_count}</span>
+                <span style="font-size: 13px;color: #494949;">次</span>
+            </div>
+            <table cellspacing="0">
+                <tr>
+                    <th colspan="2"></th>
+                    <th>歌曲标题</th>
+                    <th>时长</th>
+                    <th>歌手</th>
+                    <th>专辑</th>
+                </tr>
+                {volist name="aldum.musics" id = "music" key = "i"}
+                <tr>
+                    <td>{$i}</td>
+                    <td><span class="td_play_icon" data-role={$music.id}><img src="img/menu_icon/play.png"></span></td>
+                    <td><a class="td_music_title" title={$music.title}>
+                        {$music.title}</a></td>
+                    <td>{$music.duration}</td>
+                    <td><a class="td_music_artist" title={$music.artist}>{$music.artist}</a></td>
+                    <td><a class="td_aldum_name" title={$music.aldum}>{$music.aldum}</a></td>
+                </tr>
+                {/volist}
+            </table>
+        </div>
+    </div>
+    <!--右侧，最新的歌单-->
+    <div class="lastest_aldum">
+        <div class="lastest_title">最新歌单</div>
+        {volist name="lastests" id="lastest"}
+        <div class="lastest_a_content">
+            <div class="lastest_img">
+                <img src={$lastest.cover_path}>
+            </div>
+            <div class="lastest_info">
+                <a title={$lastest.title} href="aldumDetailPage?aldum_id={$lastest.id}">{$lastest.title}</a>
+                <span>by:</span>
+            </div>
+        </div>
+        {/volist}
+    </div>
+</div>
+</body>
+</html>

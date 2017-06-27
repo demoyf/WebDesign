@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的音乐</title>
+    <link rel="icon" href="img/page_icon.png">
+    <link rel="stylesheet" href="css/music/musicHome.css">
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/layer.js"></script>
+    <script src="js/music/musicHome.js"></script>
+</head>
+<body>
+<iframe src="aldumPage"
+        width="100%" height="90%" name="aldumPage"></iframe>
+<div class="play_controller">
+    <div class="music_loader"></div>
+    <div class="next_or_prev_controller">
+        <span class="prev_music"><img src="img/menu_icon/rewind.png" width="70%"></span>
+        <span class="play_or_pause" data-role="1"><img src="img/menu_icon/pause.png" width="70%"></span>
+        <span class="next_music"><img src="img/menu_icon/fastforward.png" width="70%"></span>
+    </div>
+    <div class="a_music_info">
+        <span class="current_music_title">卡尔加里路</span>
+        <span class="current_music_aldum">游歌</span>
+    </div>
+    <div class="music_slider">
+        <div class="bottom_slider"></div>
+        <div class="top_slider">
+            <div class="music_line"></div>
+            <div class="circle_control"></div>
+        </div>
+    </div>
+    <div class="volume_slider">
+        <div class="volume_bottom"></div>
+        <div class="volume_top">
+            <div class="volume_control"></div>
+            <div class="volume_line"></div>
+        </div>
+    </div>
+    <div class="menu_and_volume_controller">
+        <span class="volume_icon">
+            <img src="img/menu_icon/volume.png" width="100%"></span>
+        <div class="music_list_icon"></div>
+        <span class="number_icon">0</span>
+    </div>
+</div>
+<div class="test_hidden">
+    <div class="music_list_info">
+        <span>播放列表</span>
+        <span class="clear_music_list">清除</span>
+    </div>
+    <div class="music_list_div" data-role="0">
+
+    </div>
+</div>
+</body>
+</html>

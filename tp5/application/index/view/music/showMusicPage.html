@@ -3,46 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="css/music/showMusicPage.css">
     <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/layer.js"></script>
     <script>
         $(function () {
 //            上传音乐文件的代码
-            $('#demo').change(function () {
-                var formData = new FormData();
-                formData.append("music", $(this)[0].files[0]);
+            $('.one_publish_content .choose_music_div .choose_music_input').change(function () {
+                var name = $(this)[0].files[0].name;
+                $('.one_publish_content .show_which_muisc').html(name);
+            });
+            $('.publish_muisc_button').on("click",function () {
+                var aldum_id = $('.publish_music_content .one_publish_content .my_aldum_select').val();
+               var formData = new FormData();
+                var file = $('.one_publish_content .choose_music_div .choose_music_input')[0].files[0];
+                if (file==null) {
+                    layer.tips('请选择背景图片', $('.one_publish_content .show_which_muisc'));
+                    return false;
+                }
+                formData.append("music",file);
+                formData.append("aldum_id", aldum_id);
                 $.ajax({
-                    url:"index/Music/uploadMusic",
-                    type:"post",
-                    data:formData,
-                    processData:false,
-                    contentType:false,
-                    success:function (data) {
-/*                        data = data.replace("\"","");
-                        $('.myaudio').children().attr("src", data);*/
+                    url: "index/Music/uploadMusic",
+                    type: "post",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    dataType:"json",
+                    success: function (data) {
+                        if (data.code==200) {
+                            layer.msg('发表成功');
+                            setTimeout(function () {
+                                window.location.href="showMusicPage";
+                            }, 1000);
+                        }else {
+                            layer.msg('发表失败',{icon:5});
+                        }
+                    },
+                    error:function () {
+                        layer.msg('发表失败',{icon:5});
                     }
                 });
             });
-            $('.next_music').on("click", function () {
-                $('.myaudio').children().
-                src("music\\20170620\\f4c25a0191821ec7483a85bbe812cd3f.mp3");
-                $('.myaudio').play();
-            });
         });
     </script>
-    <style>
-        .myaudio {
-            width: 500px;
-        }
-    </style>
 </head>
 <body>
-<form enctype="multipart/form-data">
-    <input type="file" id="demo">
-</form>
-<audio controls class="myaudio" autoplay loop>
-    <source src="music\\20170620\\c8469ded05579ec6fb3c451222acba55.mp3">
-</audio>
-<embed></embed>
-<button class="next_music">next</button>
+<div class="publish_music_content">
+    <div class="one_publish_content">
+        <span class="content_first">选择歌曲：</span>
+        <div class="choose_music_div">
+            <span class="choose_music_span">点击上传歌曲</span>
+            <input type="file" class="choose_music_input">
+        </div>
+        <span class="show_which_muisc"></span>
+    </div>
+    <div class="one_publish_content">
+        <span class="content_first">所在歌单：</span>
+        <select class="my_aldum_select">
+            {volist name="aldums" id="aldum" key="i"}
+            {if($i==1)}
+            <option value={$aldum.id} selected>{$aldum.title}</option>
+            {else}
+            <option value={$aldum.id}>{$aldum.title}</option>
+            {/if}
+            {/volist}
+        </select>
+    </div>
+    <div class="one_publish_content">
+       <button class="publish_muisc_button">发表</button>
+   </div>
+</div>
 </body>
 </html>

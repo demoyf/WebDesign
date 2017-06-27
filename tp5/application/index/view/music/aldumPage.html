@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="css/music/aldumPage.css">
+    <script>
+        $(function () {
+            $('html').on("click", function () {
+                window.parent.hideVolume();
+            });
+            $('.aldum_list .a_aldum .cover_div .cover_img').on("click", function (event) {
+                var data = $(this).attr("data-role");
+                window.location.href = "aldumDetailPage?aldum_id="+data;
+            });
+            $('.aldum_list .a_aldum .cover_div .play_icon_div .play_img_span')
+                .on("click", function () {
+                    var data = $(this).attr("data-role");
+                    window.parent.loadMusic(data,1);
+            });
+        });
+        function addPlayCount(src) {
+            $(function () {
+                $('.cover_div .play_icon_div .play_info').each(function () {
+                    if ($(this).attr("data-role")==src) {
+                        var span = $(this).children(".play_count");
+                        var count = parseInt(span.html());
+                        span.html(++count);
+                        return false;
+                    }
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="aldum_top_content">
+    <div class="go_back" style="padding-top: 20px"><a href="home" target="_blank">To Blog</a></div>
+    <div class="aldum_list">
+        {volist name="aldums" id="aldum"}
+        <div class="a_aldum">
+            <div class="cover_div">
+                <img src={$aldum.cover_path} class="cover_img" data-role={$aldum.id}>
+                <div class="play_icon_div">
+                    <div class="play_info" data-role={$aldum.id}>
+                        <div class="headphones">
+                        </div>
+                        <span class="play_count">{$aldum.play_count}</span>
+                    </div>
+                    <span class="play_img_span" data-role={$aldum.id}>
+                        <img src="img/menu_icon/play.png" width="70%">
+                    </span>
+                </div>
+            </div>
+            <a class="aldum_title" title={$aldum.title}>{$aldum.title}</a>
+        </div>
+        {/volist}
+    </div>
+</div>
+</body>
+</html>

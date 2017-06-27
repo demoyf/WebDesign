@@ -36,5 +36,9 @@ return [
     'showManage' => 'index/Manage/showManage',
     'showManageBlog' => 'index/Manage/showManageBlog',
     'showManageTag' => 'index/Manage/manageTags',
+    'musicHome'=>'index/music/musicHome',
+    'aldumPage'=>'index/music/aldumPage',
+    'aldumDetailPage' => 'index/music/aldumDetailPage',
+    'showPublishAldum' => 'index/music/showPublishAldum',
 
 ];
