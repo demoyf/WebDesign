@@ -33,6 +33,10 @@
                     layer.close(emial_layer);
                 });
             });
+            $('.tag_nav .tag_content a').on("click", function () {
+                var data = $(this).attr("data-role");
+                window.location.href = "home?tag_id="+data;
+            });
         });
     </script>
     <style>
@@ -174,7 +178,7 @@
     <div class="left_menu_icon">
     </div>
     <div class="tag_content">
-        <a class="all">All</a>
+        <a class="all" data-role="0">All</a>
         {volist name="tags" id = "tag"}
         <a data-role={$tag.id}>{$tag.tag}</a>
         {/volist}
