@@ -246,6 +246,7 @@ body, html {
 }
 .lastest_aldum .lastest_a_content .lastest_img img {
     width: 100%;
+    height: 65px;
 }
 .lastest_aldum .lastest_a_content .lastest_info {
     display: flex;
