@@ -157,6 +157,7 @@ $(function () {
             audio.removeEventListener("canplaythrough", musicCanplay, false);
             $('audio').remove();
         }
+        changePlayMusicInfo();
         audio = null;
         isDown = false;
         isStop = false;
