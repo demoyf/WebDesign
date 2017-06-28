@@ -8,7 +8,12 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
-
+.stage {
+    perspective: 80000px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 /*媒体查询，修改大小*/
 @media (max-height: 1000px) {
     .content {
@@ -105,12 +110,7 @@ body {
         transform-origin: 50% 50% -150px;
     }
 }
-.stage {
-    perspective: 80000px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
+
 /*注意，要实现3D翻转，需要指定绝对位置，然后将几张图片都叠在一起，之后再进行相应的翻转和移动*/
 .login {
     position: absolute;
