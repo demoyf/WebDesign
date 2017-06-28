@@ -44,6 +44,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        position: relative;
     }
 
     .blog_content .a_blog .blog_title_div .blog_title {
@@ -180,6 +181,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        position: relative;
     }
 
     .blog_content .a_blog .blog_title_div .blog_title {
