@@ -4,6 +4,7 @@
 var isInit = false;
 var isEnd = true;
 var isNeedNext = false;
+var tempBrow = window.navigator.userAgent.toLowerCase();
 $(function () {
     var per_setp = 0;
     var isDown = false;
@@ -165,7 +166,11 @@ $(function () {
         per_setp = 0;
         $('.circle_control').css({left: 0});
         $('.top_slider .music_line').css({"width": 0});
-        audio = document.createElement("audio");
+        if (tempBrow.indexOf("ie") >= 0) {
+            audio = document.createElement("embed");
+        } else {
+            audio = document.createElement("audio");
+        }
         audio.src = src;
         audio.volume = 0.5;
         audio.addEventListener("canplaythrough", musicCanplay, false);
