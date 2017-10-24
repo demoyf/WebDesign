@@ -39,7 +39,6 @@ class Login extends Controller
                 echo $md_pas;
             }
         }
-
     }
 
     public function checkNickName(Request $request)

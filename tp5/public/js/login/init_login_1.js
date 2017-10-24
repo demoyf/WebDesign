@@ -7,40 +7,61 @@ $(function () {
     $('.enter_password').hide(0);
     $('.flip_to_register').bind('click', function () {
         $('.enter_password').show(500);
-        css3Transform(document.getElementsByClassName('content')[0], "rotateY(-90deg)");
+        css3Transform(document.getElementsByClassName('login')[0], "translateZ(150px) rotateY(-90deg)");
+        css3Transform(document.getElementsByClassName('register_page')[0], "rotateY(0deg)");
+        css3Transform(document.getElementsByClassName('enter_password')[0], "translateZ(-150px) rotateY(90deg)");
+        css3Transform(document.getElementsByClassName('forget_password')[0], "rotateY(-180deg)");
         $('.forget_password').hide(500);
     });
     $('.go_to_forget').bind('click', function () {
         $('.enter_password').show(500);
-        css3Transform(document.getElementsByClassName('content')[0], "rotateY(90deg)");
+        css3Transform(document.getElementsByClassName('login')[0], "translateZ(-150px) rotateY(90deg)");
+        css3Transform(document.getElementsByClassName('register_page')[0], "rotateY(-180deg)");
+        css3Transform(document.getElementsByClassName('enter_password')[0], "translateZ(150px) rotateY(-90deg)");
+        css3Transform(document.getElementsByClassName('forget_password')[0], "rotateY(0deg)");
         $('.register_page').hide(500);
     });
 
     $('.go_back_login_from_forget').bind('click', function () {
         $('.enter_password').hide(500);
-        css3Transform(document.getElementsByClassName('content')[0], "rotateY(0deg)");
+        css3Transform(document.getElementsByClassName('login')[0], "translateZ(-150px) rotateY(0deg)");
+        css3Transform(document.getElementsByClassName('register_page')[0], "rotateY(90deg)");
+        css3Transform(document.getElementsByClassName('enter_password')[0], "translateZ(150px) rotateY(180deg)");
+        css3Transform(document.getElementsByClassName('forget_password')[0], "rotateY(-90deg)");
         $('.register_page').show(500);
     });
     $('a.go_back_login').bind('click', function () {
         $('.forget_password').show(500);
-        css3Transform(document.getElementsByClassName('content')[0], "rotateY(0deg)");
+        css3Transform(document.getElementsByClassName('login')[0], "translateZ(-150px) rotateY(0deg)");
+        css3Transform(document.getElementsByClassName('register_page')[0], "rotateY(90deg)");
+        css3Transform(document.getElementsByClassName('enter_password')[0], "translateZ(150px) rotateY(180deg)");
+        css3Transform(document.getElementsByClassName('forget_password')[0], "rotateY(-90deg)");
         $('.enter_password').hide(500);
     });
     $('.forget_password_button').bind('click',function () {
         from_which = 2;
         $('.register_page').show(1000);
-        css3Transform(document.getElementsByClassName('content')[0], "rotateY(180deg)");
+        css3Transform(document.getElementsByClassName('login')[0], "translateZ(-150px) rotateY(180deg)");
+        css3Transform(document.getElementsByClassName('register_page')[0], "rotateY(-90deg)");
+        css3Transform(document.getElementsByClassName('enter_password')[0], "translateZ(150px) rotateY(00deg)");
+        css3Transform(document.getElementsByClassName('forget_password')[0], "rotateY(90deg)");
         $('.login').hide(1000);
         $('.confirm_register_button').html('Reset password');
     });
     $('.go_back_up').bind('click',function () {
         if(from_which==1) {
             $('.login').show(1000);
-            css3Transform(document.getElementsByClassName('content')[0], "rotateY(-90deg)");
+            css3Transform(document.getElementsByClassName('login')[0], "translateZ(-150px) rotateY(-90deg)");
+            css3Transform(document.getElementsByClassName('register_page')[0], "rotateY(0deg)");
+            css3Transform(document.getElementsByClassName('enter_password')[0], "translateZ(150px) rotateY(90deg)");
+            css3Transform(document.getElementsByClassName('forget_password')[0], "rotateY(180deg)");
             $('.forget_password').hide(1000);
         }else  if(from_which==2) {
             $('.login').show(1000);
-            css3Transform(document.getElementsByClassName('content')[0], "rotateY(90deg)");
+            css3Transform(document.getElementsByClassName('login')[0], "translateZ(-150px) rotateY(90deg)");
+            css3Transform(document.getElementsByClassName('register_page')[0], "rotateY(180deg)");
+            css3Transform(document.getElementsByClassName('enter_password')[0], "translateZ(150px) rotateY(-90deg)");
+            css3Transform(document.getElementsByClassName('forget_password')[0], "rotateY(0deg)");
             $('.register_page').hide(1000);
         }
     });

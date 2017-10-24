@@ -8,116 +8,68 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+.content_to_left {
+    -webkit-transform:translateZ(150px) rotateY(-90deg)!important;
+    -moz-transform:translateZ(150px) rotateY(-90deg)!important;
+    -ms-transform:translateZ(150px) rotateY(-90deg)!important;
+    -o-transform:translateZ(150px) rotateY(-90deg)!important;
+    transform:translateZ(150px) rotateY(-90deg)!important;
+}
+.content_to_before {
+    -webkit-transform:rotateY(0deg)!important;
+    -moz-transform:rotateY(0deg)!important;
+    -ms-transform:rotateY(0deg)!important;
+    -o-transform:rotateY(0deg)!important;
+    transform:rotateY(0deg)!important;
+}
+.content_to_right {
+    -webkit-transform:translateZ(-150px) rotateY(90deg)!important;
+    -moz-transform:translateZ(-150px) rotateY(90deg)!important;
+    -ms-transform:translateZ(-150px) rotateY(90deg)!important;
+    -o-transform:translateZ(-150px) rotateY(90deg)!important;
+    transform:translateZ(-150px) rotateY(90deg)!important;
+}
+.content_to_back {
+    -webkit-transform:rotateY(-180deg)!important;
+    -moz-transform:rotateY(-180deg)!important;
+    -ms-transform:rotateY(-180deg)!important;
+    -o-transform:rotateY(-180deg)!important;
+    transform:rotateY(-180deg)!important;
+}
 .stage {
-    perspective: 80000px;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
     justify-content: center;
+    -webkit-justify-content: center;
 }
-/*媒体查询，修改大小*/
-@media (max-height: 1000px) {
-    .content {
-        width: 300px;
-        height: 550px;
-        position: absolute;
-        -webkit-transform-style:preserve-3d;
-        transform-style: preserve-3d;
-        -webkit-transition: transform 1s;
-        -moz-transition: transform 1s;
-        -o-transition: transform 1s;
-        transition: transform 1s;
-        -webkit-transform-origin:50% 50% -150px;
-        transform-origin: 50% 50% -150px;
-    }
+.content,.login,.register_page,.forget_password,.enter_password{
+    -webkit-transition: transform 1s;
+    -moz-transition: transform 1s;
+    -o-transition: transform 1s;
+    transition: transform 1s;
+    -webkit-transform-origin: 50% 50% -150px;
+    transform-origin: 50% 50% -150px;
+    -ms-transform-origin: 50% 50% -150px;
+    -moz-transform-origin: 50% 50% -150px;
+    -o-transform-origin: 50% 50% -150px;
+    perspective: 80000px;
+    -webkit-perspective: 80000px;
+    -moz-perspective: 80000px;
+    width: 300px;
+    height: 550px;
 }
-
-@media (max-width: 800px) {
-    .content {
-        width: 270px;
-        height: 495px;
-        position: absolute;
-        -webkit-transform-style:preserve-3d;
-        transform-style: preserve-3d;
-        -webkit-transition: transform 1s;
-        -moz-transition: transform 1s;
-        -o-transition: transform 1s;
-        transition: transform 1s;
-        -webkit-transform-origin:50% 50% -150px;
-        transform-origin: 50% 50% -150px;
-    }
-}
-
-@media (max-width: 500px) {
-    .content {
-        width: 240px;
-        height: 440px;
-        position: absolute;
-        -webkit-transform-style:preserve-3d;
-        transform-style: preserve-3d;
-        -webkit-transition: transform 1s;
-        -moz-transition: transform 1s;
-        -o-transition: transform 1s;
-        transition: transform 1s;
-        -webkit-transform-origin:50% 50% -150px;
-        transform-origin: 50% 50% -150px;
-    }
-}
-
-@media (max-height: 650px) {
-    .content {
-        width: 270px;
-        height: 495px;
-        position: absolute;
-        -webkit-transform-style:preserve-3d;
-        transform-style: preserve-3d;
-        -webkit-transition: transform 1s;
-        -moz-transition: transform 1s;
-        -o-transition: transform 1s;
-        transition: transform 1s;
-        -webkit-transform-origin:50% 50% -150px;
-        transform-origin: 50% 50% -150px;
-    }
-}
-
-@media (max-height: 520px) {
-    .content {
-        width: 240px;
-        height: 440px;
-        position: absolute;
-        -webkit-transform-style:preserve-3d;
-        transform-style: preserve-3d;
-        -webkit-transition: transform 1s;
-        -moz-transition: transform 1s;
-        -o-transition: transform 1s;
-        transition: transform 1s;
-        -webkit-transform-origin:50% 50% -150px;
-        transform-origin: 50% 50% -150px;
-    }
-}
-
-@media (max-height: 470px) {
-    .content {
-        width: 210px;
-        height: 385px;
-        position: absolute;
-        -webkit-transform-style:preserve-3d;
-        transform-style: preserve-3d;
-        -webkit-transition: transform 1s;
-        -moz-transition: transform 1s;
-        -o-transition: transform 1s;
-        transition: transform 1s;
-        -webkit-transform-origin:50% 50% -150px;
-        transform-origin: 50% 50% -150px;
-    }
-}
-
 /*注意，要实现3D翻转，需要指定绝对位置，然后将几张图片都叠在一起，之后再进行相应的翻转和移动*/
 .login {
     position: absolute;
     left: 0;
     top: 10%;
-    width: 100%;
-    height: 100%;
+    width: 300px;
+    height: 550px;
+    background-color: rgba(0,0,0,0.3);
     background: -webkit-linear-gradient(top, rgba(146, 135, 187, 0.8) 0%, rgba(0, 0, 0, 0.5) 100%); /* Safari 5.1 - 6.0 */
     background: -o-linear-gradient(top, rgba(146, 135, 187, 0.8) 0%, rgba(0, 0, 0, 0.5) 100%); /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient(top, rgba(146, 135, 187, 0.8) 0%, rgba(0, 0, 0, 0.5) 100%); /* Firefox 3.6 - 15 */
@@ -126,6 +78,7 @@ body {
 a:hover {
     cursor: pointer;
 }
+
 .check_mark {
     width: 100%;
     height: 50%;
@@ -133,26 +86,35 @@ a:hover {
 }
 
 .left_mark {
-    position: absolute;
+    position: relative;
     width: 22%;
     height: 10%;
+    background-color: rgba(255, 164, 190, 0.5);
     background: -webkit-linear-gradient(left, white, rgba(12, 6, 6, 0.05)); /* Safari 5.1 - 6.0 */
     background: -o-linear-gradient(left, white, rgba(12, 6, 6, 0.05)); /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient(left, white, rgba(12, 6, 6, 0.05)); /* Firefox 3.6 - 15 */
     background: linear-gradient(left, white, rgba(12, 6, 6, 0.05)); /* 标准的语法（必须放在最后） */
     left: 26%;
-    top: 52%;
+    top: 62%;
+    -webkit-transform: rotate(57grad);
+    -moz-transform: rotate(57grad);
+    -ms-transform: rotate(57grad);
+    -o-transform: rotate(57grad);
     transform: rotate(57grad);
 }
 
 .right_mark {
-    position: absolute;
+    position:relative;
     width: 50%;
     height: 10%;
     background-color: white;
     left: 33%;
     top: 45%;
-    transform: rotate(-45grad);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
 }
 
 .login_form {
@@ -246,6 +208,7 @@ input.input_password {
 .login_button:active {
     border: none;
 }
+
 div.go_forget_password {
     margin-top: 5%;
     margin-left: 4%;
@@ -254,10 +217,12 @@ div.go_forget_password {
     height: 14%;
     text-align: right;
 }
-a.go_to_forget{
+
+a.go_to_forget {
     color: white;
     text-decoration: none;
 }
+
 .register_info {
     margin-left: 4%;
     width: 100%;
@@ -265,7 +230,7 @@ a.go_to_forget{
     text-align: center;
     margin-top: 8%;
     font-size: 16px;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .register_info a {
@@ -284,15 +249,19 @@ button {
 button:hover {
     cursor: pointer;
 }
+
 ::-moz-placeholder {
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
 }
+
 ::-webkit-input-placeholder {
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
 }
+
 :-ms-input-placeholder {
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
 }
+
 :-moz-placeholder {
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
 }
